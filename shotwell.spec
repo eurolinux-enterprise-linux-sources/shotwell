@@ -1,6 +1,6 @@
 Name:           shotwell
 Version:        0.24.5
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        A photo organizer for the GNOME desktop
 
 # LGPLv2+ for the code
@@ -136,6 +136,10 @@ gtk-update-icon-cache --quiet %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Tue Oct 10 2017 Debarshi Ray <rishi@fedoraproject.org> - 0.24.5-2
+- Rebuild against new libgphoto2 soname
+- Resolves: #1500282
+
 * Tue Jan 31 2017 Kalev Lember <klember@redhat.com> - 0.24.5-1
 - Update to 0.24.5
 - Resolves: #1387046
@@ -255,7 +259,7 @@ gtk-update-icon-cache --quiet %{_datadir}/icons/hicolor &>/dev/null || :
 * Mon Mar 28 2011 Michel Salim <salimma@fedoraproject.org> - 0.9.0-2
 - Look for plugins in correct directory on 64-bit systems (# 690927)
 
-* Thu Mar 25 2011 Matthias Clasen <mclasen@redhat.com> - 0.9.0-1
+* Fri Mar 25 2011 Matthias Clasen <mclasen@redhat.com> - 0.9.0-1
 - Update to 0.9.0
 - Add hi-res icons (#690596)
 
@@ -290,7 +294,7 @@ gtk-update-icon-cache --quiet %{_datadir}/icons/hicolor &>/dev/null || :
 * Wed Sep  1 2010 Matthias Clasen <mclasen@redhat.com> - 0.7.1-1
 - Update to 0.7.1
 
-* Fri Jul 13 2010 Mike McGrath <mmcgrath@redhat.com> - 0.6.1-1.1
+* Tue Jul 13 2010 Mike McGrath <mmcgrath@redhat.com> - 0.6.1-1.1
 - Rebuilt to fix broken libwebkit-1.0.so.2 dep
 
 * Fri Jul  9 2010 Matthias Clasen <mclasen@redhat.com> - 0.6.1-1
@@ -325,7 +329,7 @@ gtk-update-icon-cache --quiet %{_datadir}/icons/hicolor &>/dev/null || :
 * Thu Aug 20 2009 Michel Salim <salimma@fedoraproject.org> - 0.2.0-3
 - Rebuild against new libgee
 
-* Sun Aug 12 2009  Matthias Clasen <mclasen@redhat.com> - 0.2.0-2.fc12
+* Wed Aug 12 2009  Matthias Clasen <mclasen@redhat.com> - 0.2.0-2.fc12
 - Bring icon cache handling in sync with current guidelines
 
 * Sun Aug  9 2009  Matthias Clasen <mclasen@redhat.com> - 0.2.0-1.fc12
