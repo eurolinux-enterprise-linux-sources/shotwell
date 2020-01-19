@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" type="guide" id="share-print" xml:lang="lv">
+
+    <info>
+        <link type="guide" xref="index#share"/>
+        <desc>Spiediet <guiseq><gui>Datne</gui><gui>Drukāt...</gui></guiseq>. Lai piekļūtu papildu drukāšanas opcijām, dialoglodziņā <gui>Drukāt</gui> izvēlieties cilni <gui>Lappuses iestatīšana</gui>.</desc>
+        
+        <link type="next" xref="share-upload"/>
+    </info>
+
+	<title>Drukāšana</title>
+
+    <p>Lai izdrukātu fotogrāfiju, atlasiet to un izvēlieties <guiseq><gui>Datne</gui><gui>Drukāt...</gui></guiseq>.</p>
+     
+    <p>Shotwell var arī izdrukāt vairākus attēlus vienā lappusē. Lai to izdarītu, izvēlieties vairākus attēlus, izvēlieties <guiseq><gui>Datne</gui><gui>Drukāt...</gui></guiseq>, un dialoglodziņā <gui>Drukāt</gui> izvēlieties <gui>Attēla iestatījumi</gui> cilni. Šajā cilnē sadaļā <gui>Automātiskais izmērs</gui> izvēlieties kādu no vairāku attēlu izkārtošanas opcijām.</p>
+
+    <p>Ja vēlaties iestatīt formatējumu, papīra izmēru un orientācijas opcijas, pirms drukāšanas dialoglodziņā <gui>Drukāt</gui> izvēlieties cilni<gui>Lappuses iestatīšana</gui>.</p>
+</page>

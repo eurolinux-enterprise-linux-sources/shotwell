@@ -35,7 +35,14 @@
 </list>
 </item>
 <item><p>Bildkvaliteten för export (låg, mellan, hög eller maximal)</p></item>
-<item><p>En skalningsbegränsning (vilket betyder hur Shotwell bestämmer hur bilderna ska skalas) och önskad bildpunktsstorlek.</p></item>
+<item><p>En skalningsbegränsning (vilket betyder hur Shotwell bestämmer hur bilderna ska skalas) och önskad bildpunktsstorlek.</p>
+<terms>
+<item><title>Original size</title><p>Image will be exported without any scaling applied</p></item>
+<item><title>Longest edge</title><p>Image will be exported by having its longest edge scaled to <gui>Pixels</gui> and the other according to the aspect ratio</p></item>
+<item><title>Width</title><p>The image width will have its width scaled to the given pixel size and its height according to the aspect ratio. This is equivalent to <gui>Longest Edge</gui> for landscape pictures.</p></item>
+<item><title>Height</title><p>The image height will have its height scaled to the given pixel size and its width according to the aspect ratio. This is equivalent to <gui>Longest Edge</gui> for portrait pictures.</p></item>
+</terms>
+</item>
 <item><p>Huruvida du vill exportera metadata som taggar eller betyg. Detta kan skydda din sekretess om du har geoplats-taggar eller taggar ingen bör se.</p></item>
 </list>
 

@@ -3,14 +3,14 @@
 
     <info>
         <link type="guide" xref="index#share"/>
-        <desc>Eine Bildvorführung Ihrer Fotos ansehen</desc>
+        <desc>Eine Bildvorführung Ihrer Fotos ansehen.</desc>
         
         <link type="next" xref="share-export"/>
     
     <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
       <mal:name>Mario Blättermann</mal:name>
       <mal:email>mario.blaettermann@gmail.com</mal:email>
-      <mal:years>2009, 2016</mal:years>
+      <mal:years>2009, 2016-2017</mal:years>
     </mal:credit>
   
     <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
@@ -22,7 +22,7 @@
     <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
       <mal:name>Christian Kirbach</mal:name>
       <mal:email>christian.kirbach@gmail.com</mal:email>
-      <mal:years>2014, 2106</mal:years>
+      <mal:years>2014, 2016, 2017</mal:years>
     </mal:credit>
   </info>
 

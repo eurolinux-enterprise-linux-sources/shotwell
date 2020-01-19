@@ -44,7 +44,7 @@
  </item>
 </steps>
 
-<section>
+<section id="rule-of-thirds">
  <title>Vad är tredelningsregeln?</title>
  <p><em>Tredelningsregeln</em> hjälper dig att välja en angenäm sammansättning för en bild.</p>
  <p>Föreställ dig att en scen delas upp i ett 3x3-rutnät med två vertikala linjer och två horisontella linjer, alla med samma avstånd sinsemellan. Enligt regeln får du en bättre sammansättning om du justerar större egenskaper (som horisonten eller en persons kropp) med en av linjerna. Att observera sättet egenskaper flödar från en del av rutnätet till ett annat kan också hjälpa.</p>

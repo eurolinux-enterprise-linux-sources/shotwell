@@ -5,7 +5,7 @@
         <link type="guide" xref="index#import"/>
         <desc>Importera bilder som redan är sparade på din dator.</desc>
         
-        <link type="next" xref="import-f-spot"/>
+        <link type="next" xref="import-camera"/>
     
     <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
       <mal:name>Josef Andersson</mal:name>
@@ -24,7 +24,7 @@
 
     <p>För att importera bildfiler från din hårddisk till Shotwell, dra dem från din filhanterare till Shotwell-fönstret.</p>
     
-    <p>Alternativt, klicka <guiseq><gui>Arkiv</gui><gui>Importera från mapp…</gui></guiseq> och markera mappen som innehåller de bilder du vill importera.</p>
+    <p>Alternativt, klicka <guiseq><gui>Arkiv</gui><gui>Importera från mapp…</gui></guiseq> och markera mappen som innehåller de bilder du vill importera. Om du inte vill att Shotwell rekursivt ska gå in i undermappar under import kan du avmarkera kryssrutan <gui>Gå rekursivt in i undermappar</gui> längst ner i fildialogen.</p>
     
     <p>Shotwell kommer att fråga huruvida du vill kopiera bildfiler till din biblioteksmapp (vanligtvis mappen <file>Bilder</file> i din hemkatalog) eller importera dem direkt utan att kopiera filerna.</p>
     

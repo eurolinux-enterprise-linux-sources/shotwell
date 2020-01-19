@@ -22,12 +22,16 @@
 
 <p>Após ajustar as cores e o contraste da foto, clique em <gui>OK</gui> para salvar as alterações. O botão <gui>Reiniciar</gui> irá retornar a imagem ao seu estado original. O botão <gui>Cancelar</gui> descarta todas as mudanças que você fez.</p>
 
-<section>
+<section id="color-adjustments">
  <title>O que os ajustes fazem?</title>
  <terms>
   <item>
    <title>Exposição</title>
    <p>Altera o brilho para fazer parecer que a foto foi exposta por um tempo maior ou menor. Utilize este ajuste para corrigir fotografias sub ou sobre-expostas.</p>
+  </item>
+  <item>
+   <title>Contrast</title>
+   <p>Changes the contrast of a photo. Use it to correct flat-looking photos or photos where the difference between bright and dark spots seems to big.</p>
   </item>
   <item>
    <title>Saturação</title>

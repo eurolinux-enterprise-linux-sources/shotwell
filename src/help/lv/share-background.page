@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" type="guide" id="share-background" xml:lang="lv">
+
+    <info>
+        <link type="guide" xref="index#share"/>
+        <desc>Iestatīt darbvirsmas fonā fotogrāfiju vai fotogrāfiju slaidrādi.</desc>
+        
+        <link type="next" xref="share-slideshow"/>
+    </info>
+
+	<title>Iestatīt darbvirsmas fonu vai slaidrādi</title>
+
+    <p>Lai iestatītu vienu fotogrāfiju kā fona attēlu, izvēlieties fotogrāfiju un izvēlieties <guiseq><gui>Datne</gui><gui>Iestatīt kā darbvirsmas fonu</gui></guiseq>.</p>
+    
+    <p>Jūs varat arī iestatīt fonu kā fotogrāfiju slaidrādi. Lai to izdarītu, izvēlieties fotogrāfijas slaidrādei un izvēlieties <guiseq><gui>Datne</gui><gui>Iestatīt kā darbvirsmas slaidrādi...</gui></guiseq>. Shotwell vaicās, cik ilgai ir jābūt slaidrādes aizturei, kas var būt līdz vienai dienai. Fona slaidrāde strādās arī tad, kad Shotwell nav palaists.</p>
+    
+</page>

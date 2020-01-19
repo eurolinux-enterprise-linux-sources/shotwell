@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" type="guide" id="running" xml:lang="lv">
+
+    <info>
+        <link type="guide" xref="index"/>
+        <desc>Atrodiet Shotwell lietotņu izvēlnē, vai arī palaidiet to, pievienojot kameru.</desc>
+        
+        <link type="seealso" xref="other-multiple"/>
+        
+        <link type="next" xref="formats"/>
+    </info>
+
+	<title>Shotwell darbināšana</title>
+
+<p>Kad Shotwell ir uzinstalēts, tas ir pieejams izvēlnē <gui>Lietotnes</gui> zem <gui>Grafika</gui> vai <gui>Fotogrāfija</gui>.</p>
+
+<p>Shotwell var tikt palaist automātiski, kad kamera ir pievienota datoram. Lai pārbaudītu, vai sistēma palaidīs Shotwell, kad ir atklāta kamera, ejiet uz <guiseq><gui>Rediģēt</gui><gui>Iestatījumi</gui></guiseq> jebkurā Nautilus (datņu pārlūka) logā un izvēlieties cilni <gui>Datu nesēji</gui>. Tur būs redzams izkrītošais saraksts ar nosaukumu <gui>Fotogrāfijas:</gui>, kas ļauj izvēlēties Shotwell kā lietotni, kas apstrādā fotogrāfijas.</p>
+
+<note style="advanced">
+ <p>Shotwell var arī palaist no tās būvēšanas direktorijas, lai gan to iesaka darīt tikai Shotwell testēšanai vai izstrādāšanai.</p>
+</note>
+   
+</page>

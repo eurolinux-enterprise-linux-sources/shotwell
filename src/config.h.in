@@ -7,15 +7,6 @@
 /* GETTEXT package name */
 #undef GETTEXT_PACKAGE
 
-/* Define if debugging is enabled */
-#undef G_DISABLE_ASSERT
-
-/* Define if debugging is enabled */
-#undef G_DISABLE_CAST_CHECKS
-
-/* Define if debugging is enabled */
-#undef G_DISABLE_CHECKS
-
 /* Define to 1 if you have the Mac OS X function CFLocaleCopyCurrent in the
    CoreFoundation framework. */
 #undef HAVE_CFLOCALECOPYCURRENT
@@ -66,9 +57,6 @@
 
 /* Define to the sub-directory where libtool stores uninstalled libraries. */
 #undef LT_OBJDIR
-
-/* Define if debugging is disabled */
-#undef NDEBUG
 
 /* Name of package */
 #undef PACKAGE

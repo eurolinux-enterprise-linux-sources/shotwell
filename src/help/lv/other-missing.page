@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" type="guide" id="other-missing" xml:lang="lv">
+
+    <info>
+        <link type="guide" xref="index#other"/>
+        <desc>Ja Shotwell nevar atrast fotogrāfiju bibliotēkā, tā tiek atzīmēta kā trūkstoša.</desc>
+        
+        <link type="next" xref="other-multiple"/>
+    </info>
+
+	<title>Trūkstošās fotogrāfijas</title>
+
+<p>Katru reizi, kad Shotwell tiek palaists, tas skenē jūsu fotogrāfiju bibliotēku, lai pārliecinātos, ka fotogrāfijas vēl aizvien atrodas uz cietā diska. Ja Shotwell konstatē, ka kāda fotogrāfija trūkst, tā nebūs redzama parasto fotogrāfiju, notikumu un tagu skatos, bet tiks parādīta atsevišķā “Iztrūkstošās datnes” skatā, kas parādīsies sānu joslā.</p>
+
+<p>Ja vairs nevēlaties redzēt trūkstošās fotogrāfijas savā Shotwell kolekcijā (iespējams, tāpēc, ka esat tās izdzēsis), ejiet uz skatu “Iztrūkstošās datnes”, izvēlieties fotogrāfijas un spiediet <gui>Izņemt no bibliotēkas</gui>.</p>
+
+<p>Ja jūsu fotogrāfijas ir uz noņemamiem datu nesējiem, piemēram, CD vai USB zibatmiņām, un esat tās <link xref="index#import">importējis</link> Shotwell tās <em>nekopējot</em> uz savu datoru, tās parādīsies kā trūkstošas datnes, ja atvienojāt noņemamo disku. Skatiet <link xref="import-file"/>, lai uzzinātu, kā kopēt datnes no noņemamiem diskiem uz savu datoru.</p>
+
+<p>Ja kāda no trūkstošajām fotogrāfijām atkal kļūs pieejama, Shotwell to pamanīs nākamajā startēšanās reizē. Šīs fotogrāfijas atkal parādīsies fotogrāfiju, notikumu un tagu skatos.</p>
+
+</page>

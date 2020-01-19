@@ -28,7 +28,7 @@
     
     <p>Att flagga är användbart eftersom du kan jobba med alla flaggade bilder som en samling. Till exempel kan du markera vyn <gui>Flaggade</gui> och sedan skicka upp alla flaggade bilder till en publiceringstjänst.</p>
     
-    <section>
+    <section id="flag-unflag">
     <title>Att flagga eller flagga av en bild</title>
     <p>För att flagga eller flagga av en bild, högerklicka på bilden och välj <gui>Flagga</gui> eller <gui>Flagga av</gui> från snabbmenyn. Eller, använd snabbtangenterna <keyseq><key>Ctrl</key><key>G</key></keyseq> eller <key>/</key>.</p>
     </section>

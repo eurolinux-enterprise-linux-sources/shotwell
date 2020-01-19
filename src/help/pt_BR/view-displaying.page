@@ -24,7 +24,7 @@
 
 <p>O Shotwell oferece um modo de tela cheia para visualizar fotos. Use o menu <guiseq><gui>Ver</gui><gui>Tela cheia</gui></guiseq> ou pressione a tecla <key>F11</key>. Para ver a barra de ferramentas da visualização da tela cheia, mova o cursor do mouse para a parte inferior da tela. Essa barra de ferramentas oferece botões para percorrer a coleção, para fixar a barra de ferramentas (para que ela não fique oculta quando você tirar o cursor do mouse dela), e para sair dessa visualização.</p>
 
-<section>
+<section id="viewing-videos">
 <title>Assistindo vídeos</title>
 <p>Ao dar duplo clique num vídeo, o Shotwell irá iniciar um reprodutor externo para exibi-lo. Não é possível, atualmente, mostrar o vídeo na janela toda no Shotwell ou reproduzir o vídeo no próprio Shotwell.</p>
 </section>

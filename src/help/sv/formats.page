@@ -22,11 +22,11 @@
 
 	<title>Bild- och videoformat som stöds</title>
 
-   <p>Shotwell stödjer JPEG, PNG, TIFF, BMP och <link type="guide" xref="other-raw">RAW</link>-bildfiler. Shotwell stödjer inte ännu andra grafikformat som GIF.</p>
+   <p>Shotwell stödjer JPEG, PNG, TIFF, BMP och <link xref="other-raw">RAW</link>-bildfiler. Shotwell stödjer inte ännu andra grafikformat som GIF.</p>
 
 <p>Shotwells RAW-formatstöd är för tillfället begränsat. När du visar en RAW-bild visar du egentligen en JPEG som härstammar från RAW-bilden, inte själva RAW-bilden. Dessutom är RAW-redigeringsflödet inte helt 16-bitars - du kan bara exportera redigerade bilder som 8-bitars filer. Alla format som stöds kan användas för export (JPEG, PNG, TIFF, BMP).</p>
 
-<p>För mer information om RAW-formatbilder i Shotwell, se avsnittet <link type="guide" xref="other-raw">RAW</link>.</p>
+<p>För mer information om RAW-formatbilder i Shotwell, se avsnittet <link xref="other-raw">RAW</link>.</p>
 
 <p>Shotwell stödjer också filmfiler i format som GStreamer mediabibliotek stödjer, på systemet där Shotwell körs. Normalt inkluderar det följande format, bland andra:</p>
 <list>

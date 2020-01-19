@@ -54,7 +54,10 @@
             </tbody>
         </table>
 
-        <p>Existem outros símbolos disponíveis; por favor, verifique o manual do "strftime", com o comando <cmd>man strftime</cmd> se você precisa de um que não esteja aqui.</p>
+        <p>
+            There are other symbols available; please check the <link href="man:strftime">manual for strftime</link> by running
+            the command <cmd>man strftime</cmd> if you need one that isn't listed here.
+        </p>
     </section>
 
     <section id="automatic-import">

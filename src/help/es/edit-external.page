@@ -28,13 +28,7 @@
 
     <title>Editar las fotos con un programa externo</title>
 
-    <p>
-        You might want to use an external editor to do additional work on a photo.
-        If installed, GIMP and UFRaw are the default external editors for photo and RAW editing, 
-        respectively.  If these programs are not installed, you must select your preferred 
-        editors by choosing <guiseq><gui>Edit</gui><gui>Preferences</gui></guiseq> and selecting
-        editors from drop-down menus of installed applications.
-    </p>
+    <p>Quizás quiera utilizar un editor externo para trabajar adicionalmente en una foto. Si están instalados, GIMP y UFRaw son los editores externos predeterminados para editar una foto o RAW, respectivamente. Si estos programas no están instalados, tiene que seleccionar sus editores preferidos eligiendo <guiseq><gui>Editar</gui><gui>Preferencias</gui></guiseq> y seleccionar los editores del menú desplegable de las aplicaciones instaladas.</p>
 
     <p>Una vez que los editores se han establecido, seleccione una foto y elija <guiseq><gui>Fotos</gui> <gui>Abrir con un editor externo</gui></guiseq> para abrir la foto con un editor externo. De la misma manera, si la foto original es un archivo RAW, seleccione <guiseq><gui>Fotos</gui><gui>Abrir con un editor RAW</gui></guiseq> para editar el archivo RAW directamente con un editor RAW establecido.</p>
 

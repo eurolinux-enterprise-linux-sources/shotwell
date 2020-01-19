@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" type="guide" id="title" xml:lang="lv">
+
+    <info>
+        <link type="guide" xref="index#organize"/>
+        <desc>Dodiet nosaukumus savām fotogrāfijām.</desc>
+        
+        <link type="next" xref="event"/>
+    </info>
+
+	<title>Nosaukumi</title>
+
+<p><guiseq><gui>Skats</gui><gui>Nosaukumi</gui></guiseq> izvēles rūtiņa pārslēdz nosaukumu rādīšanu zem katras fotogrāfijas. Pēc noklusējuma, fotogrāfijas nosaukums ir tās datnes nosaukums.</p>
+
+<p>Lai mainītu fotogrāfijas nosaukumu, izvēlieties fotogrāfiju un spiediet <guiseq><gui>Fotogrāfijas</gui><gui>Rediģēt nosaukumu...</gui></guiseq>, vai spiediet <key>F2</key>.</p>
+
+</page>

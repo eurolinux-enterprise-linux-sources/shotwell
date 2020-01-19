@@ -10,7 +10,7 @@
     <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
       <mal:name>Mario Blättermann</mal:name>
       <mal:email>mario.blaettermann@gmail.com</mal:email>
-      <mal:years>2009, 2016</mal:years>
+      <mal:years>2009, 2016-2017</mal:years>
     </mal:credit>
   
     <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
@@ -22,7 +22,7 @@
     <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
       <mal:name>Christian Kirbach</mal:name>
       <mal:email>christian.kirbach@gmail.com</mal:email>
-      <mal:years>2014, 2106</mal:years>
+      <mal:years>2014, 2016, 2017</mal:years>
     </mal:credit>
   </info>
 
@@ -38,12 +38,12 @@
      <p>Wählen Sie die Kamera in der Seitenleiste aus. Vorschaubilder werden für jedes der in der Kamera befindlichen Fotos angezeigt.</p>
     </item>
     <item>
-     <p>If you like, you can choose a set of specific photos to import. To do this, hold down the <key>Ctrl</key> key and click to select individual photos. You can hold down <key>Shift</key> and click to select a range of photos too.</p>
+     <p>Auf Wunsch können Sie eine Gruppe bestimmter Fotos zum Importieren auswählen. Halten Sie dazu die <key>Strg</key>-Taste gedrückt und wählen Sie anschließend die einzelnen Fotos aus. Halten Sie die <key>Umschalttaste</key> gedrückt, um eine Reihe aufeinander folgender Fotos auszuwählen.</p>
     </item>
     <item>
-     <p>Click either <gui>Import Selected</gui> or <gui>Import All</gui>. The photos will be copied from the camera and saved on your computer.</p>
+     <p>Klicken Sie auf <gui>Auswahl importieren</gui> oder <gui>Alles importieren</gui>. Die Fotos werden daraufhin aus der Kamera kopiert und auf Ihrem Rechner gespeichert.</p>
     </item>
    </steps>
    
-    <p>Once the import is complete, you can open the <gui>Last Import</gui> view (in the sidebar) to see all photos that were imported. The Events list (also in the sidebar) will also show the new photos, organized by date.</p>
+    <p>Sobald der Import abgeschlossen ist, öffnen Sie in der Seitenleiste die Ansicht <gui>Letzter Import</gui>, um alle importierten Fotos zu sehen. Die Ereignisliste in der Seitenleiste zeigt daraufhin auch alle neuen Fotos nach Datum kategorisiert.</p>
 </page>

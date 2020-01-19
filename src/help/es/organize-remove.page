@@ -29,7 +29,7 @@
 	<title>Quitar y eliminar fotos</title>
 
     <p>Puede eliminar las fotos de su biblioteca y también puede eliminarlas de su disco duro.</p>
-<media type="image" src="figures/trash_process.png">Proceso de eliminado</media>
+<media type="image" src="figures/trash_process.png"><p>Proceso de eliminado</p></media>
 <p>Este diagrama muestra cómo, cuando se elimina una foto, se pone primero en la papelera de Shotwell. Si la elimina de la papelera de Shotwell, se mueve a la papelera de su equipo. Si la elimina de la papelera del equipo, se eliminará permanentemente.</p>
 <section id="delete-remove">
 	<title>Quitar fotos de la biblioteca</title>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" type="guide" id="other-multiple" xml:lang="lv">
+
+    <info>
+        <link type="guide" xref="index#other"/>
+        <desc>Jūs varat atvērt Shotwell ar citu fotogrāfiju bibliotēku, izmantojot komandrindu.</desc>
+        
+        <link type="next" xref="other-files"/>
+    </info>
+
+	<title>Vairākas bibliotēkas</title>
+
+<p>Shotwell parasti saglabā savu datubāzi un fotogrāfiju sīktēlus direktorijā <file>~/.shotwell</file> . Šajā direktorijā nav fotogrāfiju, bet tajā esošā datubāze satur sarakstu ar visām fotogrāfijām Shotwell bibliotēkā.</p>
+
+<p>Šī iespēja ir domāta lietpratējiem — ir iespējams uzturēt vairākas Shotwell bibliotēkas, kur katrai no tām ir sava fotogrāfiju kopa. Katrai bibliotēkai ir vajadzīga sava datubāzes direktorija. Lai palaistu Shotwell ar citu bibliotēku, norādiet tās datubāzes direktoriju komandrindā šādi:</p>
+
+<screen>
+shotwell -d [bibliotēkas-direktorija]
+</screen>
+
+</page>

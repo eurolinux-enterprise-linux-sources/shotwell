@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" type="guide" id="share-export" xml:lang="lv">
+
+    <info>
+        <link type="guide" xref="index#share"/>
+        <desc>Kopēt fotogrāfijas ārā no Shotwell, lai tās varētu novietot kur citur.</desc>
+        
+        <link type="next" xref="share-print"/>
+    </info>
+
+	<title>Fotogrāfiju eksportēšana</title>
+
+<p>Lai eksportētu fotogrāfijas no Shotwell ar vilkšanas-nomešanas metodi, velciet fotogrāfijas no Shotwell uz datņu pārvaldnieka logu savā darbvirsmā. Jaunās datnes būs pilna izmēra kopijas fotogrāfijām bibliotēkā.</p>
+
+<p>Varat arī izvēlēties noteiktas fotogrāfijas un izvēlēties <guiseq><gui>Datne</gui><gui>Eksportēt...</gui></guiseq> komandu vai spiest <keyseq><key>Shift</key><key>Ctrl</key><key>E</key></keyseq>,  kas eksportē fotogrāfijas, ļaujot precizēt foto datņu izmērus un dimensijas. Parādīsies logs, kas ļauj veikt vairākas izvēles:</p>
+
+<list>
+<item><p>Formāts, uz kuru eksportēt.</p>
+<list>
+<item><p>Izvēlieties <gui>Nemainīts</gui>, lai eksportētu fotogrāfijas to sākotnējā formātā, bez izmaiņām, kas veiktas ar Shotwell. RAW fotogrāfijas tiks eksportētas RAW formātā.</p></item>
+<item><p>Izvēlieties <gui>Pašreizējais</gui> lai eksportētu fotogrāfijas ar izmaiņām, kas veiktas Shotwell. RAW fotogrāfijas tiks eksportētas JPEG formātā, ja esat tās rediģējuši ar Shotwell, citādi tās paliks sākotnējā RAW formātā.</p></item>
+<item><p>Jūs varat izvēlēties noteiktu attēlu formātu (JPEG, PNG, TIFF, BMP), ko izmantot eksportēšanā. Tiks iekļautas visas izmaiņas, kas ir veiktas ar Shotwell un fotogrāfijas tiks konvertētas uz mērķa formātu.</p></item>
+</list>
+</item>
+<item><p>Attēlu kvalitāte eksportējot (zema, vidēja, augsta vai maksimāla).</p></item>
+<item><p>Mēroga ierobežojums (kas norāda, kā Shotwell izlems samazināt fotogrāfijas) un vēlamais pikseļu izmērs.</p>
+<terms>
+<item><title>Original size</title><p>Image will be exported without any scaling applied</p></item>
+<item><title>Longest edge</title><p>Image will be exported by having its longest edge scaled to <gui>Pixels</gui> and the other according to the aspect ratio</p></item>
+<item><title>Width</title><p>The image width will have its width scaled to the given pixel size and its height according to the aspect ratio. This is equivalent to <gui>Longest Edge</gui> for landscape pictures.</p></item>
+<item><title>Height</title><p>The image height will have its height scaled to the given pixel size and its width according to the aspect ratio. This is equivalent to <gui>Longest Edge</gui> for portrait pictures.</p></item>
+</terms>
+</item>
+<item><p>Opcija, vai vēlaties eksportēt metadatus, piemēram, tagus un vērtējumus. Tas var palīdzēt saglabāt privātumu, ja jums ir ģeolokācijas tagi vai tādi tagi, ko citiem nevajadzētu redzēt.</p></item>
+</list>
+
+<p>Ja ir izvēlēts, Shotwell ierakstīs tagus, nosaukumus un citus metadatus jaunajās datnēs.</p>
+
+</page>

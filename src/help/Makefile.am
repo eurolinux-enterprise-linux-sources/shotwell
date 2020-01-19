@@ -28,7 +28,6 @@ HELP_FILES = \
 	formats.page \
 	import-camera.page \
 	import-file.page \
-	import-f-spot.page \
 	import-memorycard.page \
 	index.page \
 	organize-event.page \
@@ -54,6 +53,6 @@ HELP_FILES = \
 	view-information.page \
 	view-sidebar.page
 
-HELP_LINGUAS = cs de el es hu pt_BR sv
+HELP_LINGUAS = cs de el es hu lv pt_BR sv
 
 -include $(top_srcdir)/git.mk

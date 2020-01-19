@@ -16,32 +16,32 @@
     
     <p>V případě, že fotografie nemá vložené informace o datu/času, nemůže ji Shotwell automaticky umístit do některé z událostí. Takováto fotografie se pak objeví v zobrazení <gui>Žádná událost</gui> přístupném v postranním panelu. Fotografii si pak můžete podle postupu uvedeného dále přesunou do libovolné události.</p>
     
-    <section>
+    <section id="renaming">
     <title>Přejmenování události</title>
 
     <p>Pokud si nějakou událost chcete raději pojmenovat namísto toho, aby byla označena datem, vyberte ji, klikněte na <guiseq><gui>Události</gui><gui>Přejmenovat událost…</gui></guiseq> a zadejte nový název. Jiný možný postup je dvojitě kliknout na název události v postranním panelu, napsat nový název a zmáčknout <key>Enter</key>.</p>
     </section>
 
-    <section>
+    <section id="moving-photos">
     <title>Přesouvání fotografií mezi událostmi</title>
 
     <p>Ačkoliv jsou fotografie na začátku seskupeny do událostí podle data, můžete si je mezi událostmi libovolně přesouvat. Uděláte to jednoduše přetažením fotografie do postranního panelu a upuštěním na požadovanou událost.</p>
     </section>
 
-    <section>
+    <section id="creating-events">
     <title>Vytváření a slučování událostí</title>
     <p>Pokud chcete vytvořit novou událost, vyberte fotografie, které do ní chcete zahrnout a klikněte na <guiseq><gui>Události</gui><gui>Nová událost</gui></guiseq>.</p>
     <p>Když chcete události sloučit, vyberte v postranním panelu <guiseq><gui>Události</gui></guiseq> a pak za současného držení klávesy <key>Ctrl</key> klikejte v hlavní části okna na události, které chcete sloučit. Nakonec zvolte <guiseq><gui>Události</gui><gui>Sloučit události</gui></guiseq>.</p>
     </section>
 
-    <section>
+    <section id="sorting-events">
     <title>Řazení událostí</title>
 
     <p>Události se zobrazují ve stromové struktuře v postranním panelu, roztříděné podle roku a měsíce nejstarší fotografie v události. Pokud chcete změnit pořadí řazení, klikněte na <guiseq><gui>Zbrazit</gui><gui>Seřadit události</gui></guiseq> a vyberte, jestli vzestupně nebo sestupně.</p>
     
     </section>
     
-    <section>
+    <section id="change-photo">
     <title>Změna fotografie, která událost reprezentuje</title>
 
     <p>Když v postranním panelu vyberete <gui>Události</gui>, uvidíte jednotlivé fotografie reprezentující jednotlivé události. Tyto fotografie se nazývají klíčové.</p>

@@ -30,7 +30,7 @@
 
 <p>Shotwell erbjuder ett helskärmsläge för att visa bilden. Välj <guiseq><gui>Visa</gui><gui>Helskärm</gui></guiseq> eller tryck <key>F11</key>. För att se verktygsfältet i helskärmsläge, flytta din mus till nedre delen av skärmen. Verktygsfältet har knappar för att flytta genom samlingen, att fästa verktygsfältet (så att det inte döljs när du flyttar musen) och för att lämna helskärmsvyn.</p>
 
-<section>
+<section id="viewing-videos">
 <title>Visa filmer</title>
 <p>När du dubbelklickar på en film kommer Shotwell att starta en extern videospelare för att spela filmen. Det är för närvarande inte möjligt att visa en film i helskärmsläge i Shotwell, eller att spela upp en film i själva Shotwell.</p>
 </section>

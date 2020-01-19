@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" type="guide" id="tag" xml:lang="lv">
+
+    <info>
+        <link type="guide" xref="index#organize"/>
+        <desc>Organizēt fotogrāfijas, piešķirot tām etiķetes.</desc>
+        
+        <link type="seealso" xref="event"/>
+        
+        <link type="next" xref="title"/>
+    </info>
+
+	<title>Fotogrāfiju tagošana</title>
+
+    <p>Jūs varat izvēlētajām fotogrāfijām piešķirt vienu vai vairākus tagus. Tags var būt viens vai vairāki vārdi, kurus varat saistīt ar šīm fotogrāfijām.</p>
+    
+    <p>Lai pievienotu jaunu tagu fotogrāfijām, izvēlieties attiecīgās fotogrāfijas un veiciet vienu no šīm darbībām:</p>
+    
+    <list>
+		<item><p>Izvēlieties <guiseq><gui>Tagi</gui><gui>Pievienot tagus...</gui></guiseq>.</p></item>
+		<item><p>Spiediet <keyseq><key>Ctrl</key><key>T</key></keyseq>.</p></item>
+		<item><p>Velciet un nometiet izvēlētās fotogrāfijas uz vēlamā taga.</p></item>
+    </list>
+     
+    <p>Ja izmantojat <keyseq><key>Ctrl</key><key>T</key></keyseq> vai <guiseq><gui>Tagi</gui><gui>Pievienot tagus...</gui></guiseq>, varat ierakstīt vienu vai vairāku tagu nosaukumus, atdalot tos ar komatiem. Kad tags ir izveidots, varat to pārdēvēt, izvēloties to tagu sānu joslā un izvēloties <guiseq><gui>Tagi</gui><gui>Pārdēvēt tagu "[nosaukums]"...</gui></guiseq>, veicot labo klikšķi un izvēloties <gui>Pārdēvēt...</gui> vai dubultklikšķinot tagu sānu joslā.</p>
+    
+    <p>Lai mainītu, kuri tagi ir saistīti ar kurām fotogrāfijām, izvēlieties attiecīgo fotogrāfiju , izvēlieties <guiseq><gui>Tagi</gui><gui>Modificēt tagus...</gui></guiseq> vai spiediet labo peles pogu uz fotogrāfijas un izvēlieties <gui>Modificēt tagus...</gui> un rediģējiet ar komatiem atdalīto sarakstu. Lai izņemtu tagu no vienas vai vairākām fotogrāfijām, vispirms izvēlieties attiecīgo tagu sānu joslā, tad izvēlieties fotogrāfijas, ko vēlaties izņemt un izvēlieties <guiseq><gui>Tagi</gui><gui>Izņemt tagu "[nosaukums]" no fotogrāfijām</gui></guiseq> vai spiediet labo peles pogu uz fotogrāfijām un izvēlieties <gui>Izņemt tagu "[nosaukums]" no fotogrāfijām</gui>.</p>
+    
+    <p>Lai pavisam izdzēstu tagu, izvēlieties to tagu sānu joslā un izvēlieties <guiseq><gui>Tagi</gui><gui>Dzēst tagu "[nosaukums]"</gui></guiseq> vai spiediet labo peles pogu un izvēlieties <gui>Dzēst tagu "[nosaukums]"</gui>.</p>
+
+    <p>Izveidojot tagu, tas parādīsies sānu joslā sadaļā <gui>Tagi</gui>, kas ir slēpts, ja nav neviena taga. Fotogrāfijām var būt piesaistīti vairāki tagi. Sānu joslā, uzspiežot uz taga, redzēsiet visas fotogrāfijas, kurām ir šis tags.</p>
+    
+    <section id="hierarchaicaltags">
+        <title>Hierarhiskie tagi</title>
+            <p>Shotwell atbalsta hierarhiskos tagus. Jūs varat pārkārtot tagus, velkot un nometot tos vienu otrā. Lai izveidotu jaunu apakštagu, spiediet labo peles pogu uz taga un izvēlieties <gui>Jauns</gui>.</p>
+            
+            <p>Hierarhiskie tagi jums palīdz kārtot tagu sarakstu tuvāk jūsu domāšanas veidam; piemēram, jūs varat saglabāt vietu tagus “Kalni” vai “Pludmale” zem taga “Vietas”, kas var būt zem taga “Vasaras brīvdienas”.</p>
+			
+			<p>Ņemiet vērā, ka virstaga dzēšana dzēsīs arī tā apakštagus.</p>
+    </section>
+</page>

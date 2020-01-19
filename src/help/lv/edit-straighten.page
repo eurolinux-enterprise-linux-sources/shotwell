@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" type="guide" id="edit-straighten" xml:lang="lv">
+      
+    <info>
+        <link type="guide" xref="index#edit"/>
+        <desc>Iztaisnojiet fotogrāfijas, lai to horizonts izskatītos līdzens.</desc>
+        
+   	<link type="next" xref="edit-undo"/>
+    </info>
+    
+    	<title>Iztaisnot fotogrāfijas</title>
+    	
+<p>Iztaisnošanas rīks ļauj izlīdzināt un iztaisnot fotogrāfijas. Iztaisnošanas rīks ir pieejams tikai pilna loga un pilnekrāna režīmā.</p>
+
+ <steps>
+     <item>
+      <p>Spiediet <gui>Iztaisnot</gui>. Parādīsies iztaisnošanas slīdnis. Varat izmantot arī tastatūras saīsni <keyseq><key>Ctrl</key><key>A</key></keyseq>.</p>
+     </item>
+     <item>
+      <p>Velciet slīdni, lai iegūtu vēlamo leņķi.</p>
+     </item>
+     <item>
+      <p>Kad pabeigts, spiediet <gui>Iztaisnot</gui>.</p>
+     </item>
+ </steps>
+
+</page>

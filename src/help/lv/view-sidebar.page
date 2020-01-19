@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" type="guide" id="view-sidebar" xml:lang="lv">
+
+    <info>
+        <link type="guide" xref="index#view"/>
+        <desc>Sānjosla loga kreisajā pusē parāda dažādus jūsu bibliotēkas skatus.</desc>
+        
+        <link type="seealso" xref="event"/>
+        <link type="seealso" xref="tag"/>
+        <link type="seealso" xref="flag"/>
+        <link type="seealso" xref="search#savedsearch"/>
+        <link type="seealso" xref="import-file"/>
+        <link type="seealso" xref="import-memorycard"/>
+        <link type="seealso" xref="import-camera"/>
+        
+        <link type="next" xref="view-information"/>
+    </info>
+
+	<title>Sānjosla</title>
+
+<p>Sānjosla kreisajā Shotwell loga pusē uzskaita vairākus jūsu bibliotēkas skatus. Lai gan varat redzēt vienu un to pašu fotogrāfiju dažādos skatos, cietajā diskā tā tiek saglabāta tikai vienā vietā.</p>
+
+<p>Skatā <gui>Pēdējais imports</gui> ir redzamas fotogrāfijas, kas ir importētas neatkarīgi no tā, vai tās ir importētas no F-Spot, kameras, atmiņas kartes vai cietā diska.</p>
+
+<p><gui>Ar karodziņu</gui> uzrāda visas fotogrāfijas, kas ir iepriekš atzīmētas ar karodziņu.</p>
+
+<p><gui>Saglabātie meklējumi</gui> jums ļauj kārtot bibliotēku pēc vairākiem kritērijiem.</p>
+
+<p>Mapē <gui>Notikumi</gui> ir atrodami visi notikumi jūsu bibliotēkā. Notikums ir fotogrāfiju kopums, kas ir uzņemts aptuveni vienā laikā.</p>
+
+<p>Mapē <gui>Tagi</gui> ir visi tagi, kas ir piešķirti fotogrāfijām. Fotogrāfijām var būt piešķirti vairāki tagi. Sānu joslā spiežot uz taga nosaukuma, redzēsiet visas fotogrāfijas, kurām ir šie tagi.</p>
+
+</page>

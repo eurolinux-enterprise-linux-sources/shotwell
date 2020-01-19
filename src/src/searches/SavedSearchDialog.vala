@@ -5,7 +5,8 @@
  */
 
 // This dialog displays a boolean search configuration.
-public class SavedSearchDialog {
+[GtkTemplate (ui = "/org/gnome/Shotwell/ui/saved_search_dialog.ui")]
+public class SavedSearchDialog : Gtk.Dialog {
     
     // Contains a search row, with a type selector and remove button.
     private class SearchRowContainer {
@@ -14,7 +15,6 @@ public class SavedSearchDialog {
         
         private Gtk.ComboBoxText type_combo;
         private Gtk.Box box;
-        private Gtk.Alignment align;
         private Gtk.Button remove_button;
         private SearchCondition.SearchType[] search_types;
         private Gee.HashMap<SearchCondition.SearchType, int> search_types_index;
@@ -48,16 +48,17 @@ public class SavedSearchDialog {
             set_type_combo_box(SearchCondition.SearchType.ANY_TEXT); // Sets default.
             type_combo.changed.connect(on_type_changed);
             
-            remove_button = new Gtk.Button.from_icon_name("list-remove-symbolic", Gtk.IconSize.BUTTON);
-            remove_button.button_press_event.connect(on_removed);
+            remove_button = new Gtk.Button.from_icon_name("window-close-symbolic", Gtk.IconSize.BUTTON);
+            remove_button.set_relief(Gtk.ReliefStyle.NONE);
+            remove_button.clicked.connect(on_removed);
             
-            align = new Gtk.Alignment(0,0,0,0);
-        
-            box = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 3);
+            box = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 6);
             box.pack_start(type_combo, false, false, 0);
-            box.pack_start(align, false, false, 0);
-            box.pack_start(new Gtk.Alignment(0,0,0,0), true, true, 0); // Fill space.
-            box.pack_start(remove_button, false, false, 0);
+            box.pack_end(remove_button, false, false, 0);
+            box.margin_top = 2;
+            box.margin_bottom = 2;
+            box.margin_start = 8;
+            box.margin_end = 8;
             box.show_all();
         }
         
@@ -72,7 +73,7 @@ public class SavedSearchDialog {
         
         private void set_type(SearchCondition.SearchType type) {
             if (my_row != null)
-                align.remove(my_row.get_widget());
+                box.remove(my_row.get_widget());
             
             switch (type) {
                 case SearchCondition.SearchType.ANY_TEXT:
@@ -105,20 +106,18 @@ public class SavedSearchDialog {
                     break;
                 
                 default:
-                    assert(false);
-                    break;
+                    assert_not_reached ();
             }
             
-            align.add(my_row.get_widget());
+            box.pack_start (my_row.get_widget());
         }
         
         public SearchCondition.SearchType get_search_type() {
             return search_types[type_combo.get_active()];
         }
         
-        private bool on_removed(Gdk.EventButton event) {
+        private void on_removed() {
             remove(this);
-            return false;
         }
         
         public void allow_removal(bool allow) {
@@ -640,18 +639,23 @@ public class SavedSearchDialog {
         }
     }
     
-    private Gtk.Builder builder;
-    private Gtk.Dialog dialog;
+    [GtkChild]
     private Gtk.Button add_criteria;
+    [GtkChild]
     private Gtk.ComboBoxText operator;
-    private Gtk.Box row_box;
+    [GtkChild]
     private Gtk.Entry search_title;
+    [GtkChild]
+    private Gtk.ListBox row_listbox;
+
     private Gee.ArrayList<SearchRowContainer> row_list = new Gee.ArrayList<SearchRowContainer>();
     private bool edit_mode = false;
     private SavedSearch? previous_search = null;
     private bool valid = false;
     
     public SavedSearchDialog() {
+        Object (use_header_bar : Resources.use_header_bar());
+
         setup_dialog();
         
         // Default name.
@@ -662,16 +666,18 @@ public class SavedSearchDialog {
         add_text_search();
         row_list.get(0).allow_removal(false);
 
-        dialog.show_all();
+        show_all();
         set_valid(false);
     }
     
     public SavedSearchDialog.edit_existing(SavedSearch saved_search) {
+        Object (use_header_bar : Resources.use_header_bar());
+
         previous_search = saved_search;
         edit_mode = true;
         setup_dialog();
         
-        dialog.show_all();
+        show_all();
         
         // Load existing search into dialog.
         operator.set_active((SearchOperator) saved_search.get_operator());
@@ -686,54 +692,25 @@ public class SavedSearchDialog {
         set_valid(true);
     }
     
-    ~SavedSearchDialog() {
-        search_title.changed.disconnect(on_title_changed);
-    }
-    
     // Builds the dialog UI.  Doesn't add buttons to the dialog or call dialog.show().
     private void setup_dialog() {
-        builder = AppWindow.create_builder();
+        set_transient_for(AppWindow.get_instance());
+        response.connect(on_response);
 
-        dialog = new Gtk.Dialog.with_buttons(_("Search"),
-                                         (Gtk.Window) AppWindow.get_instance().get_parent_window(),
-                                         Gtk.DialogFlags.MODAL |
-                                         Gtk.DialogFlags.DESTROY_WITH_PARENT |
-                                         Gtk.DialogFlags.USE_HEADER_BAR,
-                                         _("Cancel"), Gtk.ResponseType.CANCEL,
-                                         _("OK"), Gtk.ResponseType.OK,
-                                         null);
-        dialog.set_resizable(false);
-        dialog.set_transient_for(AppWindow.get_instance());
-        dialog.set_default_response(Gtk.ResponseType.OK);
-        dialog.response.connect(on_response);
-        dialog.get_content_area().add(builder.get_object("criteria") as Gtk.Widget);
-
-        add_criteria = builder.get_object("Add search button") as Gtk.Button;
-        add_criteria.button_press_event.connect(on_add_criteria);
+        add_criteria.clicked.connect(on_add_criteria);
         
-        search_title = builder.get_object("Search title") as Gtk.Entry;
-        search_title.set_activates_default(true);
         search_title.changed.connect(on_title_changed);
-        
-        row_box = builder.get_object("row_box") as Gtk.Box;
-        
-        operator = builder.get_object("Type of search criteria") as Gtk.ComboBoxText;
-        operator.append_text(_("any"));
-        operator.append_text(_("all"));
-        operator.append_text(_("none"));
-        operator.set_active(0);
     }
     
     // Displays the dialog.
-    public void show() {
-        dialog.run();
-        dialog.destroy();
+    public new void show() {
+        run();
+        destroy();
     }
     
     // Adds a row of search criteria.
-    private bool on_add_criteria(Gdk.EventButton event) {
+    private void on_add_criteria() {
         add_text_search();
-        return false;
     }
     
     private void add_text_search() {
@@ -745,7 +722,7 @@ public class SavedSearchDialog {
     private void add_row(SearchRowContainer row) {
         if (row_list.size == 1)
             row_list.get(0).allow_removal(true);
-        row_box.add(row.get_widget());
+        row_listbox.add(row.get_widget());
         row_list.add(row);
         row.remove.connect(on_remove_row);
         row.changed.connect(on_row_changed);
@@ -756,7 +733,7 @@ public class SavedSearchDialog {
     private void on_remove_row(SearchRowContainer row) {
         row.remove.disconnect(on_remove_row);
         row.changed.disconnect(on_row_changed);
-        row_box.remove(row.get_widget());
+        row_listbox.remove(row.get_widget().get_parent());
         row_list.remove(row);
         if (row_list.size == 1)
             row_list.get(0).allow_removal(false);
@@ -825,6 +802,6 @@ public class SavedSearchDialog {
             }
         }
         
-        dialog.set_response_sensitive(Gtk.ResponseType.OK, valid);
+        set_response_sensitive(Gtk.ResponseType.OK, valid);
     }
 }

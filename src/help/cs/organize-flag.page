@@ -16,7 +16,7 @@
     
     <p>U označování je užitečné, že s označenými fotografiemi můžete pracovat se všemi naráz jako sadou. Například můžete vybrat zobrazení <gui>Označeno</gui> a následně všechny označené fotografie odeslat na sdílecí server.</p>
     
-    <section>
+    <section id="flag-unflag">
     <title>Označení nebo zrušení označení fotografie</title>
     <p>Když chcete fotografii označit nebo zrušit její označení, klikněte na ni pravým tlačítkem a zvolte <gui>Označit</gui> nebo <gui>Zrušit označení</gui> v kontextové nabídce. Nebo můžete použít klávesovou zkratku <keyseq><key>Ctrl</key><key>G</key></keyseq> nebo <key>/</key>.</p>
     </section>

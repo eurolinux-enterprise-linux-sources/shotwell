@@ -11,7 +11,7 @@
 // a replacement for totem-video-thumbnailer
 class ShotwellThumbnailer {
     const string caps_string = """video/x-raw,format=RGB,pixel-aspect-ratio=1/1""";
-    
+
     public static int main(string[] args) {
         Gst.Element pipeline, sink;
         string descr;
@@ -19,20 +19,20 @@ class ShotwellThumbnailer {
         uint8[]? pngdata;
         int64 duration, position;
         Gst.StateChangeReturn ret;
-        
+
+        if (Posix.nice (19) < 0) {
+            debug ("Failed to reduce thumbnailer nice level. Continuing anyway");
+        }
+
         Gst.init(ref args);
 
         var registry = Gst.Registry.@get ();
+        var features = registry.feature_filter ((f) => {
+            return f.get_name ().has_prefix ("vaapi");
+        }, false);
 
-        var feature = registry.find_feature ("vaapidecodebin",
-                                             typeof (Gst.ElementFactory));
-        if (feature != null) {
-            registry.remove_feature (feature);
-        }
-
-        feature = registry.find_feature ("vaapidecode",
-                                             typeof (Gst.ElementFactory));
-        if (feature != null) {
+        foreach (var feature in features) {
+            debug ("Removing registry feature %s", feature.get_name ());
             registry.remove_feature (feature);
         }
 

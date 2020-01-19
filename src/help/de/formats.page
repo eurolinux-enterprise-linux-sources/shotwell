@@ -10,7 +10,7 @@
     <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
       <mal:name>Mario Blättermann</mal:name>
       <mal:email>mario.blaettermann@gmail.com</mal:email>
-      <mal:years>2009, 2016</mal:years>
+      <mal:years>2009, 2016-2017</mal:years>
     </mal:credit>
   
     <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
@@ -22,29 +22,24 @@
     <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
       <mal:name>Christian Kirbach</mal:name>
       <mal:email>christian.kirbach@gmail.com</mal:email>
-      <mal:years>2014, 2106</mal:years>
+      <mal:years>2014, 2016, 2017</mal:years>
     </mal:credit>
   </info>
 
 	<title>Unterstützte Foto- und Video-Formate</title>
 
-   <p>Shotwell supports JPEG, PNG, TIFF, BMP and <link type="guide" xref="other-raw">RAW</link> photo files. Shotwell does not yet support other graphics format such as GIF.</p>
+   <p>Shotwell unterstützt JPEG, PNG, TIFF, BMP und <link xref="other-raw">RAW</link>-Fotodateien. Andere Grafikformate, wie beispielsweise GIF, unterstützt Shotwell noch nicht.</p>
 
-<p>Shotwell's RAW format support is currently limited. When you view a RAW photo, you are actually viewing a JPEG derived from the RAW photo, not the RAW image itself. Additionally, the RAW editing pipeline is not fully 16-bit - you can only export edited photos as 8-bit files. All supported formats can be used for export (JPEG, PNG, TIFF, BMP).</p>
+<p>Die Unterstützung des RAW-Formats in Shotwell ist derzeit eingeschränkt. Wenn Sie ein RAW-Foto betrachten, sehen Sie tatsächlich ein JPEG-Bild, das aus dem RAW-Foto abgeleitet wurde, und nicht das tatsächliche RAW-Bild. Darüber hinaus sind die Bearbeitungsschritte nicht vollständig in 16 Bit. Bearbeitete Fotos werden nur als 8-Bit-Dateien exportiert. Alle unterstützten Formate können exportiert werden (JPEG, PNG, TIFF, BMP).</p>
 
-<p>For more information about RAW-format photos in Shotwell, please see
-the <link type="guide" xref="other-raw">RAW</link> section.
-</p>
+<p>Für weiterführende Informationen über Fotos im RAW-Format in Shotwell lesen Sie bitte den Abschnitt <link xref="other-raw">RAW</link>.</p>
 
-<p>Shotwell also supports video files in any format supported by the GStreamer media library on the system where
-Shotwell is running.  This typically includes the following formats among others:</p>
+<p>Shotwell unterstützt Video-Dateien in jedem Format, das auch von der GStreamer Medienbibliothek auf dem System unterstützt wird, auf dem Shotwell ausgeführt wird. Typischerweise zählen dazu unter anderen folgende Formate:</p>
 <list>
 <item><p>Containerformate: Ogg, QuickTime, MP4, AVI.</p></item>
 <item><p>Codecs: Theora, Quicktime, MPEG-4 und Motion JPEG. <em>Beachten Sie, dass einige Betriebssysteme aufgrund von gesetzlichen oder Lizenzbestimmungen eventuell nicht alle hier aufgeführten Codecs unterstützen.</em></p></item>
 </list>
 
-<p>Shotwell supports both photos and videos, but for simplicity, this documentation uses just the term "photos"
-in most places.  Many operations in Shotwell apply to both photos and videos, however.  In particular, events,
-flagging, rating, tagging, and publishing work both for photos and for videos.</p>
+<p>Shotwell unterstützt sowohl Fotos als auch Videos. Zur Vereinfachung verwendet dieses Handbuch überwiegend nur den Begriff »Foto« für beides. Viele Vorgänge in Shotwell funktionieren sowohl mit Fotos als auch mit Videos. Ereignisse, Markierungen, Bewertungen und Veröffentlichung funktionieren sowohl mit Fotos als auch mit Videos.</p>
 
 </page>

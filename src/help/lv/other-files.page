@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" type="guide" id="other-files" xml:lang="lv">
+
+    <info>
+        <link type="guide" xref="index#other"/>
+        <desc>Saglabāt Shotwell bibliotēku sinhronu ar datnēm diskā.</desc>
+        
+        <link type="next" xref="other-plugins"/>
+    </info>
+
+   <title>Fotogrāfiju datnes</title>
+
+    <p>Katra fotogrāfija Shotwell bibliotēkā atbilst datnei jūsu cietajā diskā. Shotwell ir vairākas iespējas, kas palīdz saglabāt sinhroni Shotwell bibliotēku un datnes diskā.</p>
+    <links type="section"/>
+    
+    <section id="dirpattern">
+        <title>Pielāgota direktoriju šablona izmantošana</title>
+        <p>Shotwell jums ļauj norādīt, kā saglabāt direktorijas jūsu bibliotēkā. Jūs to varat izdarīt, mainot iestatījumus <gui>Direktoriju struktūra</gui> un <gui>Šablons</gui> dialoglodziņā <gui>Iestatījumi</gui>. Jūs varat izmantot iepriekš izveidotus šablonus vai izvēlēties <gui>Pielāgots</gui> un ievadīt paši savu.</p>
+
+        <p>Pieejamie simboli direktoriju šablonam sākas ar % (procentu zīme). Vērtības, ko šie simboli veido, ir atkarīgi no lokalizācijas, tāpēc iegūtie rezultāti uz jūsu datoriem var atšķirties no piemēriem zemāk.</p>
+
+        <table frame="all" rules="rowgroups">
+            <tbody>
+                <tr>
+                    <td><p> </p></td> <td><p><em>Simbols</em></p></td> <td><p><em>Nozīme</em></p></td> <td><p><em>Piemērs</em></p></td>
+                </tr>
+            </tbody>
+            <tbody>
+            <tr>
+                <td><p> </p></td><td><p>%Y</p></td><td><p>Gads: pilns</p></td><td><p>2011</p></td>
+            </tr>
+            <tr>
+                <td><p> </p></td><td><p>%y</p></td><td><p>Gads: divi cipari</p></td><td><p>11</p></td>
+            </tr>
+            <tr>
+                <td><p> </p></td><td><p>%d</p></td><td><p>Mēneša diena, vienmēr divi cipari</p></td><td><p>03</p></td>
+            </tr>
+            <tr>
+                <td><p> </p></td><td><p>%A</p></td><td><p>Dienas nosaukums: pilns</p></td><td><p>Trešdiena</p></td>
+            </tr>
+            <tr>
+                <td><p> </p></td><td><p>%a</p></td><td><p>Dienas nosaukums: saīsināts</p></td><td><p>Tr</p></td>
+            </tr>
+            <tr>
+                <td><p> </p></td><td><p>%m</p></td><td><p>Mēneša numurs, vienmēr divi cipari</p></td><td><p>02</p></td>
+            </tr>
+            <tr><td><p> </p></td><td><p>%b</p></td><td><p>Mēneša nosaukums: saīsināts</p></td><td><p>Feb</p></td></tr><tr><td><p> </p></td><td><p>%B</p></td><td><p>Mēneša nosaukums: pilns</p></td><td><p>Februāris</p></td></tr><tr><td><p> </p></td><td><p>%I</p></td><td><p>Stunda: 12 stundu formāts</p></td><td><p>05</p></td></tr><tr><td><p> </p></td><td><p>%H</p></td><td><p>Stunda: 24 stundu formāts</p></td><td><p>17</p></td></tr><tr><td><p> </p></td><td><p>%M</p></td><td><p>Minūte</p></td><td><p>16</p></td></tr><tr><td><p> </p></td><td><p>%S</p></td><td><p>Sekunde</p></td><td><p>30</p></td></tr><tr><td><p> </p></td><td><p>%p</p></td><td><p>AM vai PM</p></td><td><p>PM</p></td></tr>
+            </tbody>
+        </table>
+
+        <p>
+            There are other symbols available; please check the <link href="man:strftime">manual for strftime</link> by running
+            the command <cmd>man strftime</cmd> if you need one that isn't listed here.
+        </p>
+    </section>
+
+    <section id="automatic-import">
+       <title>Automātiskā fotogrāfiju importēšana</title>
+       
+       <p>Shotwell var automātiski importēt jaunās fotogrāfijas, kas parādās bibliotēkas direktorijā. Bibliotēkas direktorija parasti ir <file>Attēli</file> direktorija mājas mapē; jūs varat mainīt tās atrašanās vietu logā <gui>Iestatījumi</gui>.</p>
+       
+       <p>Lai ieslēgtu automātisko importēšanu, ieķeksējiet lodziņu <gui>Sekot līdzi jaunām datnēm manā bibliotēkā</gui> logā <gui>Iestatījumi</gui>.</p>
+       
+       <note style="advanced"><p>Shotwell var arī sekot simboliskajām saitēm automātiski importētajās direktorijās.</p></note>
+
+    </section>
+
+    <section id="automatic-rename">
+       <title>Automātiskā importēto fotogrāfiju pārdēvēšana uz mazo burtu reģistru</title>
+       
+       <p>Shotwell var automātiski mainīt importēto fotogrāfiju datņu nosaukumus uz mazo burtu reģistru. Lai to ieslēgtu, izvēlieties <guiseq><gui>Rediģēt</gui><gui>Iestatījumi</gui></guiseq>, logā <gui>Iestatījumi</gui> izvēlieties kasti <gui>Pārdēvēt importētās datnes uz mazajiem burtiem</gui>.</p>
+    
+    </section>
+    
+    <section id="writing-metadata">
+       <title>Metadatu tūlītēja rakstīšana</title>
+       
+       <p>Pēc noklusējuma Shotwell nemaina fotogrāfiju datnes, pat rediģējot fotogrāfijas vai mainot to tagus vai nosaukumus. Shotwell ieraksta šīs izmaiņas tikai savā datubāzē.</p>
+       
+       <p>Lai mainītu šo uzvedību, varat ieslēgt izvēles rūtiņu <gui>Rakstīt tagus, nosaukumus un citus metadatus fotogrāfiju datnēs</gui> dialoglodziņā <gui>Iestatījumi</gui>. Kad šī opcija ir ieslēgta, veicot izmaiņas fotogrāfijā, Shotwell ierakstīs sekojošos metadatus vairumā fotogrāfiju datēs:</p>
+       
+       <list>
+       <item><p>nosaukumi</p></item>
+       <item><p>tagi</p></item>
+       <item><p>vērtējumi</p></item>
+       <item><p>rotācijas informācija</p></item>
+       <item><p>laiks/datums</p></item>
+       </list>
+       
+       <p>Shotwell saglabā šo informāciju fotogrāfiju datnēs EXIF, IPTC un / vai XMP formātos. Ņemiet vērā, ka Shotwell fotogrāfiju datnēs var rakstīt tikai JPEG, PNG un TIFF formātos, bet ne BMP, RAW vai video datnēs.</p>
+    
+    </section>
+    
+    <section id="runtime-monitoring">
+    <title>Izpildlaika pārraudzīšana</title>
+    
+    <p>Kamēr Shotwell ir palaists, tas pamana izmaiņas, kas no ārpuses notiek ar fotogrāfijām. Kad fotogrāfijas datnes mainās, Shotwell pārlasa datni un atjaunina jūsu fotogrāfijas skatu un metadatus.</p>
+    
+    <p>Ņemiet vērā, ka palaižoties Shotwell visās fotogrāfiju datnēs pārbauda, vai ir izmaiņas, bet pēc palaišanās tikai bibliotēkas direktorijas mape tiek uzraudzīta reālā laikā. Mēs ceram nākošajos laidienos šo ierobežojumu noņemt.</p>
+
+    </section>
+    
+</page>

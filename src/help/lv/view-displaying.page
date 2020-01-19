@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" type="guide" id="view-view" xml:lang="lv">
+
+    <info>
+        <link type="guide" xref="index#view"/>
+        <desc>Uzziniet par dažādiem veidiem, kā skatīt fotogrāfijas — režģī, aizpildot galveno logu vai aizpildot visu ekrānu.</desc>
+        
+        <link type="next" xref="view-sidebar"/>
+    </info>
+
+	<title>Fotogrāfiju skati</title>
+
+<p>Izvēloties kādu kolekciju sānu joslā, Shotwell attēlos visas šīs kolekcijas fotogrāfijas galvenajā loga daļā. Loga apakšējā labajā pusē ri slīdnis, ar ko var pielāgot sīktēlu izmēru. Varat sīktēlu izmēru pielāgot arī ar pluss un mīnuss taustiņiem (<key>+</key> un <key>-</key>) vai spiežot <key>Ctrl</key> un kustinot peles riteni.</p>
+
+<p>Jūs varat arī skatīt fotogrāfijas pilnekrāna režīmā, uz tām dubultklikšķinot. Šajā režīmā jūs varat pāriet starp fotogrāfijām, izmantojot bultiņu pogas. Lai atgrieztos kolekcijā, dubultklikšķiniet uz fotogrāfijas vai spiediet <key>Esc</key>.</p>
+
+<p>Kad attēls tiek skatīts pilnekrāna režīmā, rīkjoslā esošais slīdnis nosaka tuvinājumu. Jūs varat panoramēt, sagrābjot un velkot jebkuru vietu fotogrāfijā. Jūs varat arī mainīt mērogu, izmantojot peles riteni vai spiežot šīs saīsnes: <keyseq><key>Ctrl</key>0</keyseq> lai redzētu pilnekrānā, <keyseq><key>Ctrl</key>1</keyseq> 100% tuvinājumam (1 fotogrāfijas pikselis = 1 ekrāna pikseli), un <keyseq><key>Ctrl</key>2</keyseq> 200% tuvinājumam (1 fotogrāfijas pikselis = 2x2 ekrāna pikseļiem).</p>
+
+<p>Shotwell piedāvā iespēju attēlot fotogrāfijas pilnekrāna režīmā. Izvēlieties <guiseq><gui>Skats</gui><gui>Pilnekrāns</gui></guiseq> vai spiediet <key>F11</key>. Lai redzētu pilnekrāna rīkjoslu, novietojiet peli ekrāna apakšpusē. Rīkjosla piedāvā pogas, ar kurām var pārvietoties pa kolekciju, nofiksēt rīkjoslu (lai tā nepazūd, kad pārvietojat peli kur citur), un pamest pilnekrāna skatu.</p>
+
+<section id="viewing-videos">
+<title>Video atskaņošana</title>
+<p>Dubultklikšķinot uz video, Shotwell palaidīs ārējo video atskaņotāju, lai atskaņotu video. Pašlaik nevar attēlot video Shotwell pilnekrāna režīmā, vai atskaņot video pašā Shotwell.</p>
+</section>
+    
+</page>

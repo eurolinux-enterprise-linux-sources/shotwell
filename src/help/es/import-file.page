@@ -5,7 +5,7 @@
         <link type="guide" xref="index#import"/>
         <desc>Importar fotos que ya están en el equipo.</desc>
         
-        <link type="next" xref="import-f-spot"/>
+        <link type="next" xref="import-camera"/>
     
     <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
       <mal:name>Marina Prado</mal:name>
@@ -30,7 +30,7 @@
 
     <p>Para importar fotos desde su disco duro a Shotwell, solo debe arrastrarlas desde su explorador a la ventana de Shotwell.</p>
     
-    <p>Alternativamente, pulse <guiseq><gui>Archivo</gui><gui>Importar desde la carpeta...</gui></guiseq> y seleccione la carpeta que contiene las fotos que quiere importar.</p>
+    <p>Alternatively, click <guiseq><gui>File</gui><gui>Import From Folder...</gui></guiseq> and select the folder containing the photos you want to import. If you do not want Shotwell to recurse into subfolders while importing, you can uncheck the <gui>Recurse Into Subfolders</gui> checkbox on the bottom of the file dialog.</p>
     
     <p>Shotwell le preguntará si quiere copiar los archivos de fotos en su carpeta de la biblioteca (la carpeta de la biblioteca está normalmente en la carpeta <file>Imágenes</file> en su carpeta local) o importarlos en su lugar sin copiar los archivos.</p>
     

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" type="guide" id="edit-undo" xml:lang="lv">
+
+    <info>
+        <link type="guide" xref="index#edit"/>
+        <desc>Atjaunot fotogrāfiju tās sākotnējā, nerediģētā formā.</desc>
+        
+        <link type="seealso" xref="edit-nondestructive"/>
+        
+        <link type="next" xref="edit-nondestructive"/>
+    </info>
+
+	<title>Atsaukt izmaiņas</title>
+    
+    <p>Tā kā Shotwell ir nedestruktīvs fotogrāfiju redaktors, jūs varat atsaukt visas izmaiņas, kas ir veiktas ar fotogrāfiju.</p>
+    
+    <p>Ja vēlaties redzēt, kā attēls izskatījās pirs izmaiņu veikšanas, spiediet <key>Shift</key> taustiņu. Sākotnējā bilde būs redzama, kamēr vien būs piespiests taustiņš.</p>
+
+    <p>Lai pilnībā atsauktu visas fotogrāfijā veiktās izmaiņas, spiediet <guiseq><gui>Fotogrāfijas</gui><gui>Atgriezties pie oriģināla</gui></guiseq>. Vienīgais izņēmums ir laiks un datums, tie netiks atjaunoti.</p>
+
+</page>

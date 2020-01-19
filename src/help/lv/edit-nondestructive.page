@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" type="guide" id="edit-nondestructive" xml:lang="lv">
+
+    <info>
+        <link type="guide" xref="index#edit"/>
+        <desc>Shotwell ir nedestruktīvs fotogrāfiju redaktors — tas nemaina jūsu sākotnējās fotogrāfijas.</desc>
+        
+        <link type="next" xref="edit-date-time"/>
+    </info>
+
+	<title>Kas notiek ar oriģinālu, kad es rediģēju fotogrāfiju?</title>
+
+<p>Shotwell in neiznīcinošs fotogrāfiju redaktors. Tas nemaina jūsu sākotnējās fotogrāfijas. Tas nozīmē, ka, ka kadrējat attēlu vai maināt tā krāsas, fotogrāfijas datne uz diska netiek mainīta. Shotwell Saglabā jūsu veiktās izmaiņas datubāzē un tās vēlāk tiek pielietotas, kad tas ir vajadzīgs. Tas nozīmē,ka varat atsaukt jebkuras izmaiņas, ko veicāt ar fotogrāfiju.</p>
+
+<p>Ja vēlaties redzēt, kā attēls izskatījās pirs izmaiņu veikšanas, spiediet <key>Shift</key> taustiņu. Sākotnējā bilde būs redzama, kamēr vien būs piespiests taustiņš.</p>
+
+<p>Ņemiet vērā, ka Shotwell var ierakstīt metadatus (piemēram, tagus un nosaukumus) fotogrāfiju datnēs. Lai uzzinātu vairāk, skatiet nodaļu <link xref="other-files">Fotogrāfiju datnes</link>.</p>
+
+</page>

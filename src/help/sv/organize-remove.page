@@ -23,7 +23,7 @@
 	<title>Ta bort och radera bilder</title>
 
     <p>Du kan ta bort bilder från ditt bibliotek och du kan också radera dem fullständigt från din hårddisk.</p>
-<media type="image" src="figures/trash_process.png">Raderingsprocess</media>
+<media type="image" src="figures/trash_process.png"><p>Raderingsprocess</p></media>
 <p>Diagrammet visar hur en bild, när den raderas, först läggs i Shotwells papperskorg. Om du raderar den från Shotwells papperskorg läggs den i datorns papperskorg. Om du raderar den från din dators papperskorg är bilden oåterkalleligen raderat från din dator.</p>
 <section id="delete-remove">
 	<title>Ta bort bilder från biblioteket</title>

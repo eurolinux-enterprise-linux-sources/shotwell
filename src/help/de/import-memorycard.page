@@ -10,7 +10,7 @@
     <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
       <mal:name>Mario Blättermann</mal:name>
       <mal:email>mario.blaettermann@gmail.com</mal:email>
-      <mal:years>2009, 2016</mal:years>
+      <mal:years>2009, 2016-2017</mal:years>
     </mal:credit>
   
     <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
@@ -22,7 +22,7 @@
     <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
       <mal:name>Christian Kirbach</mal:name>
       <mal:email>christian.kirbach@gmail.com</mal:email>
-      <mal:years>2014, 2106</mal:years>
+      <mal:years>2014, 2016, 2017</mal:years>
     </mal:credit>
   </info>
 
@@ -38,7 +38,7 @@
   <p>Der Kartenleser und die Karte sollten automatisch erkannt werden.</p>
  </item>
  <item>
-  <p>Follow the instructions for <link xref="import-file">importing photos from your hard disk</link>. If you click <guiseq><gui>File</gui><gui>Import From Folder...</gui></guiseq>, the memory card should be visible as a folder in the side bar of the file selection window.</p>
+  <p>Folgen Sie den Anweisungen zum <link xref="import-file">Importieren von Fotos von Ihrer Festplatte</link>. Wenn Sie <guiseq><gui>Datei</gui><gui>Aus Ordner importieren …</gui></guiseq> wählen, sollte die Speicherkarte als Ordner in der Seitenleiste des Dateiauswahlfensters sichtbar sein.</p>
  </item>
 </steps>
 

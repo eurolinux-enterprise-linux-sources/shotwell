@@ -184,6 +184,11 @@ public abstract class CheckerboardItem : ThumbnailView {
             notify_view_altered();
         }
     }
+
+    public void translate_coordinates(ref int x, ref int y) {
+        x -= allocation.x + FRAME_WIDTH;
+        y -= allocation.y + FRAME_WIDTH;
+    }
     
     public void clear_title() {
         if (title == null)
@@ -336,7 +341,7 @@ public abstract class CheckerboardItem : ThumbnailView {
         this.is_cursor = is_cursor;
     }
 
-    public bool get_is_cusor() {
+    public bool get_is_cursor() {
         return is_cursor;
     }
     
@@ -563,12 +568,7 @@ public abstract class CheckerboardItem : ThumbnailView {
     }
 
     protected virtual void paint_image(Cairo.Context ctx, Gdk.Pixbuf pixbuf, Gdk.Point origin) {
-        if (pixbuf.get_has_alpha()) {
-            ctx.rectangle(origin.x, origin.y, pixbuf.get_width(), pixbuf.get_height());
-            ctx.fill();
-        }
-        Gdk.cairo_set_source_pixbuf(ctx, pixbuf, origin.x, origin.y);
-        ctx.paint();
+        paint_pixmap_with_background(ctx, pixbuf, origin.x, origin.y);
     }
 
     private int get_selection_border_width(int scale) {
@@ -594,10 +594,13 @@ public abstract class CheckerboardItem : ThumbnailView {
     
     public void paint(Cairo.Context ctx, Gdk.RGBA bg_color, Gdk.RGBA selected_color,
         Gdk.RGBA text_color, Gdk.RGBA? border_color) {
+        ctx.save();
+        ctx.translate(allocation.x + FRAME_WIDTH,
+                      allocation.y + FRAME_WIDTH);
         // calc the top-left point of the pixbuf
         Gdk.Point pixbuf_origin = Gdk.Point();
-        pixbuf_origin.x = allocation.x + FRAME_WIDTH + BORDER_WIDTH;
-        pixbuf_origin.y = allocation.y + FRAME_WIDTH + BORDER_WIDTH;
+        pixbuf_origin.x = BORDER_WIDTH;
+        pixbuf_origin.y = BORDER_WIDTH;
         
         ctx.set_line_width(FRAME_WIDTH);
         ctx.set_source_rgba(selected_color.red, selected_color.green, selected_color.blue,
@@ -651,11 +654,11 @@ public abstract class CheckerboardItem : ThumbnailView {
         ctx.set_source_rgba(text_color.red, text_color.green, text_color.blue, text_color.alpha);
         
         // title and subtitles are LABEL_PADDING below bottom of pixbuf
-        int text_y = allocation.y + FRAME_WIDTH + pixbuf_dim.height + FRAME_WIDTH + LABEL_PADDING;
+        int text_y = pixbuf_dim.height + FRAME_WIDTH + LABEL_PADDING;
         if (title != null && title_visible) {
             // get the layout sized so its with is no more than the pixbuf's
             // resize the text width to be no more than the pixbuf's
-            title.allocation.x = allocation.x + FRAME_WIDTH;
+            title.allocation.x = 0;
             title.allocation.y = text_y;
             title.allocation.width = pixbuf_dim.width;
             title.allocation.height = title.get_height();
@@ -667,7 +670,7 @@ public abstract class CheckerboardItem : ThumbnailView {
         }
         
         if (comment != null && comment_visible) {
-            comment.allocation.x = allocation.x + FRAME_WIDTH;
+            comment.allocation.x = 0;
             comment.allocation.y = text_y;
             comment.allocation.width = pixbuf_dim.width;
             comment.allocation.height = comment.get_height();
@@ -679,7 +682,7 @@ public abstract class CheckerboardItem : ThumbnailView {
         }
         
         if (subtitle != null && subtitle_visible) {
-            subtitle.allocation.x = allocation.x + FRAME_WIDTH;
+            subtitle.allocation.x = 0;
             subtitle.allocation.y = text_y;
             subtitle.allocation.width = pixbuf_dim.width;
             subtitle.allocation.height = subtitle.get_height();
@@ -733,6 +736,7 @@ public abstract class CheckerboardItem : ThumbnailView {
             ctx.rectangle(x, y, trinket.get_width(), trinket.get_height());
             ctx.fill();
         }
+        ctx.restore();
     }
     
     protected void set_horizontal_trinket_offset(int horizontal_trinket_offset) {
@@ -1272,6 +1276,9 @@ public class CheckerboardLayout : Gtk.DrawingArea {
         Pango.Layout? layout = item.get_tag_list_layout();
         if (layout == null)
             return -1;
+
+        item.translate_coordinates(ref x, ref y);
+
         Gdk.Rectangle rect = item.get_subtitle_allocation();
         int index, trailing;
         int px = (x - rect.x) * Pango.SCALE;
@@ -2015,6 +2022,7 @@ public class CheckerboardLayout : Gtk.DrawingArea {
     }
     
     private void on_colors_changed() {
+        invalidate_transparent_background();
         override_background_color(Gtk.StateFlags.NORMAL, Config.Facade.get_instance().get_bg_color());
         set_colors();
     }

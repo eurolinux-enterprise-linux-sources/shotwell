@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" type="guide" id="share-upload" xml:lang="lv">
+
+    <info>
+        <link type="guide" xref="index#share"/>
+        <desc>Publicēt fotogrāfijas Facebook, Flickr, Picasa Web Albums un citās vietnēs.</desc>
+        
+        <link type="next" xref="share-send"/>
+    </info>
+
+	<title>Publicēšana tīmeklī</title>
+
+    <p>Izmantojot <link xref="other-plugins">spraudņus</link>, Shotwell var publicēt fotogrāfijas un video uz sekojošajiem pakalpojumiem, kur katram ir nepieciešams konts:</p>
+    
+    <list>
+    <item><p><link href="https://facebook.com">Facebook</link></p></item>
+    <item><p><link href="https://flickr.com">Flickr</link></p></item>
+    <item><p><link href="https://picasaweb.google.com">Picasa Web Albums</link> and <link href="http://plus.google.com">Google+</link></p></item>
+    <item><p><link href="https://youtube.com">YouTube</link> (videos only)</p></item>
+    <item><p><link href="https://tumblr.com">Tumblr</link> (videos only)</p></item>
+    <item><p>Jebkura vietne, kas izmanto <link href="http://piwigo.org">Piwigo</link> fotogrāfiju galerijas programmatūru (tikai fotogrāfijas)</p></item>
+    </list>
+    
+    <p>To publish selected photos in a collection, choose <guiseq><gui>Edit</gui><gui>Preferences</gui></guiseq> and
+    click on the <gui>Plugins</gui> tab to enable the plugin for the service you want to publish to.  Next, choose,
+     <guiseq><gui>File</gui><gui>Publish</gui></guiseq>, press the <gui>Publish</gui> toolbar button or use <keyseq><key>Ctrl</key><key>Shift</key><key>P</key></keyseq>.
+    You will see a dialog that lets you select a publishing service.  You will then need to log in or create an account.</p>
+    
+    <p>Lai publicētu Facebook vietnē Shotwell Facebook lietotnei vajag īpašas atļaujas. Šīs atļaujas ir jādod tikai vienreiz, kad asociējat Shotwell ar savu Facebook kontu.</p>
+    <note style="advanced"><p>Jūs varēsiet publicēt attēlus ar tām tiesībām, kādas sniedzāt Shotwell Facebook lietotnei</p></note>
+    
+    <p>Līdzīgi, publicēšanai Flickr vietnē vajag ierakstīties un ļaut Shotwell savienojumiem piekļūt jūsu kontam.</p>
+    
+    <p>Ja jums ir Google konts, bet vēl neesat izmantojis Picasa Web Albums, jums vienreiz jāierakstās Picasa, izmantojot pārlūku, pirms varēsiet publicēt šajā pakalpojumā.</p>
+</page>

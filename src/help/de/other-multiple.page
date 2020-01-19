@@ -3,14 +3,14 @@
 
     <info>
         <link type="guide" xref="index#other"/>
-        <desc>You can open Shotwell with a different photo library by using the command line.</desc>
+        <desc>Sie können Shotwell mit einer anderen Fotobibliothek öffnen, wenn Sie die Befehlszeile verwenden.</desc>
         
         <link type="next" xref="other-files"/>
     
     <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
       <mal:name>Mario Blättermann</mal:name>
       <mal:email>mario.blaettermann@gmail.com</mal:email>
-      <mal:years>2009, 2016</mal:years>
+      <mal:years>2009, 2016-2017</mal:years>
     </mal:credit>
   
     <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
@@ -22,7 +22,7 @@
     <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
       <mal:name>Christian Kirbach</mal:name>
       <mal:email>christian.kirbach@gmail.com</mal:email>
-      <mal:years>2014, 2106</mal:years>
+      <mal:years>2014, 2016, 2017</mal:years>
     </mal:credit>
   </info>
 
@@ -30,7 +30,7 @@
 
 <p>Shotwell speichert normalerweise seine Datenbank und Vorschaubilder der Fotos im Ordner <file>~/.shotwell</file>. Dieser Ordner enthält keine Fotos, sondern lediglich eine Datenbank mit einer Liste aller Fotos in der Shotwell-Bibliothek.</p>
 
-<p>As an advanced feature, it's possible for you to have multiple Shotwell libraries, each of which has its own set of photos. Each library needs its own database directory. To launch Shotwell with an alternate library, specify an alternate database directory on the command line as follows:</p>
+<p>Als erweitertes Funktionsmerkmal können Sie mehrere Shotwell-Bibliotheken mit jeweils eigenen Fotos haben. Dabei benötigt jede der Bibliotheken ihren eigenen Datenbankordner. Um Shotwell mit einer alternativen Bibliothek zu öffnen, geben Sie in der Befehlszeile den entsprechenden Datenbankordner wie folgt an:</p>
 
 <screen>
 shotwell -d [Bibliothek-Ordner]

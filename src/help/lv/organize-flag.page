@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" type="guide" id="flag" xml:lang="lv">
+
+    <info>
+        <link type="guide" xref="index#organize"/>
+        <desc>Atzīmēt fotogrāfijas, lai marķētu tās kā īpašas vai darbotos ar tām kā ar kopu.</desc>
+        
+        <link type="next" xref="rating"/>
+    </info>
+
+	<title>Fotogrāfiju marķēšana</title>
+
+    <p>Shotwell jums ļauj <em>marķēt</em> fotogrāfijas. Kad fotogrāfija ir marķēta, tas augšējā labajā stūrī parādās maza karodziņa ikona. Jūs varat izvēlēties vienumu <gui>Ar karodziņu</gui> sānu joslā, lai redzētu visus marķētos vienumus.</p>
+    
+    <p>Fotogrāfiju marķēšana atzīmē tās kā īpašas. Jūs to varat interpretēt kā vien vēlaties. Piemēram, varat ar karodziņu atzīmēt visas fotogrāfijas, kurām jāveic vizuāla pielabošanas, vai visas fotogrāfijas, ar kurām vēlaties dalīties ar draugu.</p>
+    
+    <p>Marķēšana ir arī noderīga, jo varat darboties ar visām marķētajām fotogrāfijām kā ar vienu kopumu. Piemēram, varat izvēlēties <gui>Ar karodziņu</gui> skatu un augšupielādēt visas marķētās fotogrāfijas uz publicēšanas pakalpojumu.</p>
+    
+    <section id="flag-unflag">
+    <title>Lai marķētu vai noņemtu marķējumu no fotogrāfijas</title>
+    <p>Lai marķētu vai noņemtu marķējumu no fotogrāfijas, spiediet peles labo pogu uz fotogrāfijas, izvēlieties <gui>Marķēt</gui> vai <gui>Noņemt marķējumu</gui> konteksta izvēlnē. Vai lietojat tastatūras saīsnes <keyseq><key>Ctrl</key><key>G</key></keyseq> vai <key>/</key>.</p>
+    </section>
+    
+</page>

@@ -30,7 +30,7 @@
 
 <p>A Shotwell teljes képernyős módot is kínál a fényképek megjelenítéséhez. Válassza a <guiseq><gui>Nézet</gui><gui>Teljes képernyő</gui></guiseq> menüpontot, vagy nyomja meg az <key>F11</key> billentyűt. A teljes képernyős eszköztár megjelenítéséhez vigye az egérmutatót a képernyő aljára. Az eszköztár a gyűjteményben mozgásra, az eszköztár rögzítésére (hogy ne tűnjön el) és a teljes képernyős nézet elhagyására használható gombokat kínál.</p>
 
-<section>
+<section id="viewing-videos">
 <title>Videók megjelenítése</title>
 <p>Amikor duplán kattint egy videóra, a Shotwell egy külső videolejátszót indít el a videó lejátszásához. Jelenleg nem lehetséges videót lejátszani teljes ablakos módban a Shotwellben, vagy magán a Shotwellen belül.</p>
 </section>

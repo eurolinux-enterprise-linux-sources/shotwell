@@ -48,7 +48,10 @@
             </tbody>
         </table>
 
-        <p>Υπάρχουν άλλα διαθέσιμα σύμβολα· παρακαλούμε, ελέγξτε το εγχειρίδιο για strftime εκτελώντας την εντολή <cmd>man strftime</cmd> αν χρειάζεστε ένα σύμβολο που δεν είναι καταχωρισμένο εδώ.</p>
+        <p>
+            There are other symbols available; please check the <link href="man:strftime">manual for strftime</link> by running
+            the command <cmd>man strftime</cmd> if you need one that isn't listed here.
+        </p>
     </section>
 
     <section id="automatic-import">

@@ -3,14 +3,14 @@
 
     <info>
         <link type="guide" xref="index#organize"/>
-        <desc>Betiteln Ihrer Fotos</desc>
+        <desc>Betiteln Ihrer Fotos.</desc>
         
         <link type="next" xref="event"/>
     
     <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
       <mal:name>Mario Blättermann</mal:name>
       <mal:email>mario.blaettermann@gmail.com</mal:email>
-      <mal:years>2009, 2016</mal:years>
+      <mal:years>2009, 2016-2017</mal:years>
     </mal:credit>
   
     <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
@@ -22,14 +22,13 @@
     <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
       <mal:name>Christian Kirbach</mal:name>
       <mal:email>christian.kirbach@gmail.com</mal:email>
-      <mal:years>2014, 2106</mal:years>
+      <mal:years>2014, 2016, 2017</mal:years>
     </mal:credit>
   </info>
 
 	<title>Titel</title>
 
-<p>The <guiseq><gui>View</gui><gui>Titles</gui></guiseq> checkbox toggles the display of titles
-beneath each photo.  By default, a photo's title is its filename.</p>
+<p>Das Ankreuzfeld in <guiseq><gui>Ansicht</gui><gui>Titel</gui></guiseq> schaltet die Anzeige von Titeln neben jedem Foto an oder aus. In der Voreinstellung wird der Dateiname als Titel des Fotos verwendet.</p>
 
 <p>Um den Titel eines Fotos zu ändern, wählen Sie das Foto und anschließend <guiseq><gui>Fotos</gui><gui>Titel bearbeiten …</gui></guiseq> oder drücken Sie <key>F2</key>.</p>
 

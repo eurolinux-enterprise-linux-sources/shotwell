@@ -11,7 +11,7 @@
 	<title>Odstraňování a mazání fotografií</title>
 
     <p>Fotografie můžete odebrat z knihovny a navíc i úplně smazat z pevného disku.</p>
-<media type="image" src="figures/trash_process.png">Postup mazání</media>
+<media type="image" src="figures/trash_process.png"><p>Postup mazání</p></media>
 <p>Toto schéma ukazuje, jak je fotografie po smazání nejprve vložena do koše aplikace Shotwell. Po té, co ji smažete z koše v Shotwellu, je přesunuta do koše vašeho pracovního prostředí. Po smazání z tohoto koše je fotografie konečně a nevratně vymazána z vašeho počítače.</p>
 <section id="delete-remove">
 	<title>Odebírání fotografií z knihovny</title>

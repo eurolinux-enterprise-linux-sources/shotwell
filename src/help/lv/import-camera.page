@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" type="guide" id="import-camera" xml:lang="lv">
+
+    <info>
+        <link type="guide" xref="index#import"/>
+        <desc>Kopēt fotogrāfijas no ciparu kameras.</desc>
+        
+        <link type="next" xref="import-memorycard"/>
+    </info>
+
+	<title>Importēšana no kameras</title>
+
+    <p>Lai importētu fotogrāfijas no ciparu kameras:</p>
+
+   <steps>
+    <item>
+     <p>Pievienojiet kameru savam datoram un ieslēdziet to. Shotwell to atpazīs un parādīs sānu joslā.</p>
+    </item>
+    <item>
+     <p>Izvēlieties kameru sānu joslā. Tiks attēloti katras fotogrāfijas priekšskatījums.</p>
+    </item>
+    <item>
+     <p>Ja vēlaties, varat izvēlēties, kuras tieši fotogrāfijas importēt. Lai to izdarītu, turiet piespiestu <key>Ctrl</key> taustiņu un spiediet uz attiecīgajām fotogrāfijām. Varat arī turēt piespiestu <key>Shift</key> taustiņu un spiest uz fotogrāfijām, lai izvēlētos virkni fotogrāfiju uzreiz.</p>
+    </item>
+    <item>
+     <p>Spiediet vai nu <gui>Importēt izvēlētās</gui> vai <gui>Importēt visas</gui>. Fotogrāfijas tiks nokopētas no kameras un saglabātas datorā.</p>
+    </item>
+   </steps>
+   
+    <p>Kad importēšana ir pabeigta, varat atvērt skatu <gui>Pēdējais imports</gui> (sānu joslā) un tur būs redzamas visas importētās fotogrāfijas. Notikumu saraksts (arī sānu joslā) arī saturēs jaunās fotogrāfijas, kas ir organizētas pēc datuma.</p>
+</page>

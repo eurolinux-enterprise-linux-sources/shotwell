@@ -10,11 +10,11 @@
 
 	<title>Podporované formáty fotografií a videí</title>
 
-   <p>Shotwell podporuje soubory s fotografiemi ve formátech JPEG, PNG, TIFF, BMP a <link type="guide" xref="other-raw">RAW</link>. Zatím nepodporuje další formáty, jako je třeba GIF.</p>
+   <p>Shotwell podporuje soubory s fotografiemi ve formátech JPEG, PNG, TIFF, BMP a <link xref="other-raw">RAW</link>. Zatím nepodporuje další formáty, jako je třeba GIF.</p>
 
 <p>Podpora RAW je v aplikaci Shotwell prozatím omezená. Když si zobrazíte surovou fotografii RAW, zobrazí se vám ve skutečnosti JPEG odvozený z RAW, ne přímo RAW. Navíc, propojovací roura k editoru není plně 16bitová – upravované fotografie můžete exportovat jen jako 8bitové soubory. K exportu mohou být použity všechny podporované formáty (JPEG, PNG, TIFF, BMP).</p>
 
-<p>Více informací o formátu fotografií RAW v aplikaci Shotwell najdete v oddíle <link type="guide" xref="other-raw">RAW</link>.</p>
+<p>Více informací o formátu fotografií RAW v aplikaci Shotwell najdete v oddíle <link xref="other-raw">RAW</link>.</p>
 
 <p>Shotwell podporuje také videosoubory v libovolném formátu, který podporuje multimediální knihovna GStreamer na systému, ve kterém Shotwell běží. Typicky to představuje mimo jiné následující formáty:</p>
 <list>

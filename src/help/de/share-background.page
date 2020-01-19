@@ -10,7 +10,7 @@
     <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
       <mal:name>Mario Blättermann</mal:name>
       <mal:email>mario.blaettermann@gmail.com</mal:email>
-      <mal:years>2009, 2016</mal:years>
+      <mal:years>2009, 2016-2017</mal:years>
     </mal:credit>
   
     <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
@@ -22,7 +22,7 @@
     <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
       <mal:name>Christian Kirbach</mal:name>
       <mal:email>christian.kirbach@gmail.com</mal:email>
-      <mal:years>2014, 2106</mal:years>
+      <mal:years>2014, 2016, 2017</mal:years>
     </mal:credit>
   </info>
 
@@ -30,10 +30,6 @@
 
     <p>Wählen Sie <guiseq><gui>Datei</gui><gui>Als Hintergrundbild festlegen</gui></guiseq>, um ein einzelnes Foto als Schreibtisch-Hintergrund festzulegen.</p>
     
-    <p>You can also set your background to a slideshow of photos.  To do this, select the photos for
-    the slideshow and choose <guiseq><gui>File</gui><gui>Set as Desktop Slideshow...</gui></guiseq>.
-    Shotwell will prompt you for a slideshow delay, which can be any interval up to one day in length.
-    The background slideshow will proceed even when Shotwell is not running.
-    </p>
+    <p>Sie können den Hintergrund auch als Diaschau aus Ihren Fotos darstellen lassen. Wählen Sie hierzu die Fotos für die Diaschau aus und wählen Sie <guiseq><gui>Datei</gui><gui>Als Hintergrundbild-Vorführung setzen …</gui></guiseq>. Shotwell fragt Sie nach der Verzögerung für den Bildwechsel, die bis zu einen Tag betragen kann. Die Diaschau wird auch dann weitergeführt, wenn Shotwell nicht läuft.</p>
     
 </page>

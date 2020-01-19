@@ -3,14 +3,14 @@
 
     <info>
         <link type="guide" xref="index#organize"/>
-        <desc>Give photos a rating between 1 and 5 stars. You can reject bad photos, hiding them from view.</desc>
+        <desc>Geben Sie Ihren Fotos eine Bewertung zwischen einem und fünf Sternen. Sie können schlechte Fotos ablehnen, wodurch sie in der Ansicht verborgen werden.</desc>
         
         <link type="next" xref="delete"/>
     
     <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
       <mal:name>Mario Blättermann</mal:name>
       <mal:email>mario.blaettermann@gmail.com</mal:email>
-      <mal:years>2009, 2016</mal:years>
+      <mal:years>2009, 2016-2017</mal:years>
     </mal:credit>
   
     <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
@@ -22,25 +22,24 @@
     <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
       <mal:name>Christian Kirbach</mal:name>
       <mal:email>christian.kirbach@gmail.com</mal:email>
-      <mal:years>2014, 2106</mal:years>
+      <mal:years>2014, 2016, 2017</mal:years>
     </mal:credit>
   </info>
 
 	<title>Bewertungen</title>
-<p>You can assign each photo a rating from 1-5 stars, or may alternatively rate it as Rejected, in which case Shotwell will hide the photo by default.</p>
+<p>Sie können jedem Foto eine Bewertung zwischen einem und fünf Sternen zuweisen oder es alternativ als abgelehnt markieren, wodurch Shotwell dieses Foto in der Voreinstellung nicht mehr anzeigt.</p>
 
-<p>You can rate a photo or a set of photos in any of these ways:</p>
+<p>Sie bewerten ein Foto oder eine Gruppe von Fotos auf eine der folgenden Weisen:</p>
 
 <list>
-<item><p>Select the photo(s), then choose a rating from the top-level <guiseq><gui>Photos</gui><gui>Set Rating</gui></guiseq> menu.</p></item>
-<item><p>Right-click on the photo(s), then choose a rating from the Set Rating context menu.</p></item>
-<item><p>Select the photo(s), then press any of the shortcut keys <key>1</key>, <key>2</key>, <key>3</key>, <key>4</key> or <key>5</key> to assign a rating. Or press <key>9</key> to mark the photo(s) as rejected or <key>0</key> to clear the rating(s).</p></item>
+<item><p>Wählen Sie das Foto oder die Fotos aus, und wählen Sie dann eine Bewertung im Menü <guiseq><gui>Fotos</gui><gui>Bewerten</gui></guiseq>.</p></item>
+<item><p>Klicken Sie mit der rechten Maustaste auf das Foto oder die Fotogruppe und wählen Sie dann eine Bewertung im Kontextmenü »Bewerten«.</p></item>
+<item><p>Wählen Sie das Fotos oder die Fotogruppe aus und drücken Sie dann eine der Tasten <key>1</key>, <key>2</key>, <key>3</key>, <key>4</key> oder <key>5</key>, um eine Bewertung zu geben. Drücken Sie <key>9</key>, um das Foto oder die Gruppe abzuweisen. Drücken Sie <key>0</key>, um die Bewertung zu löschen.</p></item>
 </list>
 
-<p>
-Normally Shotwell displays all photos except rejected photos. You can set a different rating filter using the <guiseq><gui>View</gui><gui>Filter Photos</gui></guiseq> menu - for example, you can display only photos rated with 3 stars or higher, or you can display all photos including those marked rejected. The Shotwell icon on the toolbar displays the current rating filter and can also be used to set the filter.</p>
+<p>Normalerweise zeigt Shotwell alle bis auf die abgelehnten Fotos an. Sie können im Menü <guiseq><gui>Ansicht</gui><gui>Fotos filtern</gui></guiseq> eine andere Filterung der Bewertungen festlegen. Beispielsweise können Sie nur Fotos anzeigen, die mit 3 Sternen oder höher bewertet sind, oder auch jene Fotos in der Anzeige erscheinen lassen, die als abgelehnt markiert sind. Das Shotwell-Symbol in der Werkzeugleiste zeigt den aktuellen Bewertungsfilter an und kann auch zum Einrichten des Filters verwendet werden.</p>
 
-<p>Shotwell normally displays each photo's rating in its lower left-hand corner. You can turn off the display of ratings using the <guiseq><gui>View</gui><gui>Ratings</gui></guiseq> menu item.</p>
+<p>Shotwell zeigt normalerweise die Bewertung zu jedem Foto in dessen linker unterer Ecke an. Sie können diese Anzeige im Menü <guiseq><gui>Ansicht</gui><gui>Bewertungen</gui></guiseq> ausschalten.</p>
 
-<p>You can increase or decrease a photo's rating using the <guiseq><gui>Set Rating</gui><gui>Increase</gui></guiseq> and <guiseq><gui>Set Rating</gui><gui>Decrease</gui></guiseq> commands, or the keyboard shortcuts <key>&lt;</key> and <key>&gt;</key>. </p>
+<p>Die Bewertung eines Fotos können Sie mit <guiseq><gui>Bewerten</gui><gui>Aufwerten</gui></guiseq> und <guiseq><gui>Bewerten</gui><gui>Abwerten</gui></guiseq> erhöhen beziehungsweise verringern. Alternativ können Sie hierzu die Tasten <key>&lt;</key> und <key>&gt;</key> drücken.</p>
 </page>

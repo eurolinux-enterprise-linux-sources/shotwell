@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" type="guide" id="edit-crop" xml:lang="lv">
+
+    <info>
+        <link type="guide" xref="index#edit"/>
+        <desc>Uzlabojiet fotogrāfijas kompozīciju, nogriežot nost tās daļas.</desc>
+        
+        <link type="next" xref="edit-external"/>
+    </info>
+
+   <title>Kadrēšana</title>
+
+    <p>Lai samazinātu fotogrāfijas laukumu un virzītu skatītāja uzmanību uz mazāku tās daļu, izmantojiet Kadrēšanas rīku. Tas ir pieejams tikai pilna loga vai pilnekrāna režīmos.</p>
+
+<steps>
+ <item>
+  <p>Dubultklikšķiniet uz fotogrāfijas, lai atvērtu to pilna loga režīmā, tad rīkjoslā spiediet pogu <gui>Kadrēt</gui>.</p>
+ </item>
+ <item>
+  <p>Virs fotogrāfijas parādīsies balta kaste — kadrēšanas taisnstūris. Gaišākā fotogrāfijas daļa attēlo to attēla daļu, kas paliks pāri pēc kadrēšanas.</p>
+ </item>
+ <item>
+  <p>Ja novietosiet kursoru kaste vidū, varēsiet to pārvietot uz citu bildes daļu. Ja vilksiet kastes malu, varēsiet pielāgot tās izmēru. Pārvietojot un pielāgojot kadrēšanas kasti, jūs tajā redzēsiet četras tievas līnijas, līdzīgi kā krustiņu-nullīšu spēles režģi. Tās ir <em>trešdaļu likuma</em> līnijas.</p>
+  <p>Jūs varat arī ierobežot kadrēšanas kasti uz kādu no daudziem biežāk izmantotajiem izmēriem. Izvēlieties izmēru no izkrītošās izvēlnes. Ja piespiedīsiet tai blakus esošo apmešanas pogu, ierobežojuma virziens mainīsies (no ainavas uz portreta orientāciju).</p>
+ </item>
+ <item>
+  <p>Kad izvēlētā kadrēšanas kontūra jūs apmierina, spiediet pogu<gui>Kadrēt</gui>. Shotwell attēlos kadrēto fotogrāfiju.</p>
+ </item>
+ <item>
+  <p>Ja pārdomāsiet, atkal spiediet pogu <gui>Kadrēt</gui>, un pielabojiet.</p>
+  <p>Ja spiedīsiet <gui>Atcelt</gui> nevis <gui>Pielietot</gui>, Shotwell atgriezīs fotogrāfiju uz tās iepriekšējo kadrējumu.</p>
+ </item>
+</steps>
+
+<section id="rule-of-thirds">
+ <title>Kas ir trešdaļu likums?</title>
+ <p><em>Trešdaļu likums</em> jums palīdz izvēlēties patīkamu fotogrāfijas kompozīciju.</p>
+ <p>Iedomājieties ainu, kura ir sadalīta 3×3 režģī ar divām vienādā atstatumā esošām vertikālām un horizontālām līnijām. Vadoties pēc šī likuma, kompozīcija izskatīsies labāk, ja bildes galvenie elementi (horizonts, cilvēks) būs pie kādas no šīm līnijām. Pievērsiet uzmanību tam, kā elementi pāriet no vienas režģa daļas uz citu.</p>
+ <p>Fotogrāfijas kadrēšana, lai tā atbilstu trešdaļu likumam, bieži var uzlabot tās vizuālo pievilcību.</p>
+ <media type="image" src="figures/crop_thirds.jpg">
+  <p>Fotogrāfijas kadrēšana, izmantojot “trešdaļu likumu” līnijas, lai uzlabotu kompozīciju.</p>
+ </media>
+</section>
+</page>

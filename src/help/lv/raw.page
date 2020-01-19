@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" type="guide" id="other-raw" xml:lang="lv">
+
+    <info>
+        <link type="guide" xref="index#other"/>
+        <desc>Vairāk par RAW atbalstu Shotwell lietotnē.</desc>
+        
+        <link type="next" xref="running"/>
+    </info>
+   
+    <title>RAW atbalsts Shotwell lietotnē</title> 
+    <p>Dažas kameras var datus no sensora saglabāt pa tiešo datnē, kas satur papildu krāsu informāciju; tos parasti dēvē par “RAW” (jēlie) vai “kameras RAW”, un Shotwell atbalsta arī šīs datnes.</p>
+    
+    <p>Tā kā RAW fotogrāfijas nevar attēlot tiešā veidā, tās vispirms ir jāattīsta — tas ir, tās papildu informācija ir jālasa un jāinterpretē attēlošanai. Vairums kameru vai nu ieguls JPEG iekšā RAW datnē, vai izveidos gan RAW, gan JPEG datnes vienam un tam pašam kadram. Otrais risinājums šajā dokumentā tiks apzīmēts kā RAW+ JPEG. Ja importēsiet RAW+JPEG pāri, Shotwell tos paturēs sapārotus un bibliotēkā tie parādīsies kā viens vienums.</p>
+    
+    <p>Importējot RAW datni, jūs varat izvēlēties vai nu izmantot kameras iekšēji attīstīto JPEG vai Shotwell attīstīto, izvēlnēs izvēloties <guiseq><gui>Fotogrāfijas</gui><gui>Attīstītājs</gui></guiseq>.</p>
+
+    <note>
+        <p>Attīstītāju mainīšana var atcelt visas fotogrāfijās veiktās izmaiņas.</p>
+    </note>
+    
+    <p>Lai publicētu vai lietotu RAW fotogrāfijas vairumā lietotņu, tās vispirms ir jāeksportē. Shotwell var eksportēt RAW fotogrāfijas JPEG, PNG, TIFF un BMP formātos. Publicējot tās tiks eksportētas JPEG formātā.</p>  
+    
+</page>

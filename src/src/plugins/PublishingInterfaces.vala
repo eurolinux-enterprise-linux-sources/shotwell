@@ -608,5 +608,27 @@ public interface Service : Object, Spit.Pluggable {
     protected virtual void reserved7() {}
 }
 
+public interface Authenticator : Object {
+    public signal void authenticated();
+    public signal void authentication_failed();
+
+    public abstract void authenticate();
+    public abstract bool can_logout();
+    public abstract void logout();
+    public abstract void refresh();
+
+    public abstract GLib.HashTable<string, Variant> get_authentication_parameter();
+}
+
+public interface AuthenticatorFactory : Object {
+    // By contract, every AuthenticatorFactory implementation needs to have a
+    // static get_instance() method. Unfortunately this is not expressable in
+    // Vala.
+
+    public abstract Gee.List<string> get_available_authenticators();
+    public abstract Authenticator? create(string provider,
+            Spit.Publishing.PluginHost host);
+}
+
 }
 

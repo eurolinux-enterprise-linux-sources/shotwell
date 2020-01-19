@@ -1,39 +1,42 @@
 Name:           shotwell
-Version:        0.24.5
-Release:        2%{?dist}
+Version:        0.28.4
+Release:        1%{?dist}
 Summary:        A photo organizer for the GNOME desktop
 
 # LGPLv2+ for the code
 # CC-BY-SA for some of the icons
 License:        LGPLv2+ and CC-BY-SA
 URL:            https://wiki.gnome.org/Apps/Shotwell
-Source0:        https://download.gnome.org/sources/shotwell/0.24/shotwell-%{version}.tar.xz
+Source0:        https://download.gnome.org/sources/shotwell/0.28/shotwell-%{version}.tar.xz
 
-BuildRequires:  vala-devel >= 0.20.1
+BuildRequires:  vala
 BuildRequires:  desktop-file-utils
-BuildRequires:  libappstream-glib
+BuildRequires:  libappstream-glib >= 0.7.3
 BuildRequires:  gettext
 BuildRequires:  itstool
 BuildRequires:  pkgconfig(atk)
+BuildRequires:  pkgconfig(libgdata)
+BuildRequires:  pkgconfig(gcr-3)
+BuildRequires:  pkgconfig(gcr-ui-3)
 BuildRequires:  pkgconfig(gdk-3.0)
 BuildRequires:  pkgconfig(gdk-x11-3.0)
 BuildRequires:  pkgconfig(gee-0.8) >= 0.8.5
-BuildRequires:  pkgconfig(gexiv2) >= 0.4.90
+BuildRequires:  pkgconfig(gexiv2) >= 0.10.4
 BuildRequires:  pkgconfig(gio-unix-2.0) >= 2.20
-BuildRequires:  pkgconfig(glib-2.0) >= 2.30.0
+BuildRequires:  pkgconfig(glib-2.0) >= 2.40.0
 BuildRequires:  pkgconfig(gmodule-2.0) >= 2.24.0
 BuildRequires:  pkgconfig(gnome-doc-utils)
 BuildRequires:  pkgconfig(gstreamer-1.0) >= 1.0.0
 BuildRequires:  pkgconfig(gstreamer-base-1.0) >= 1.0.0
 BuildRequires:  pkgconfig(gstreamer-plugins-base-1.0) >= 1.0.0
 BuildRequires:  pkgconfig(gstreamer-pbutils-1.0) >= 1.0.0
-BuildRequires:  pkgconfig(gtk+-3.0) >= 3.12.2
+BuildRequires:  pkgconfig(gtk+-3.0) >= 3.14.0
 BuildRequires:  pkgconfig(gudev-1.0) >= 145
 BuildRequires:  pkgconfig(json-glib-1.0)
 BuildRequires:  pkgconfig(libexif) >= 0.6.16
-BuildRequires:  pkgconfig(libgphoto2) >= 2.4.2
+BuildRequires:  pkgconfig(libgphoto2) >= 2.5.0
 BuildRequires:  pkgconfig(libraw) >= 0.13.2
-BuildRequires:  pkgconfig(libsoup-2.4) >= 2.26.0
+BuildRequires:  pkgconfig(libsoup-2.4) >= 2.42.0
 BuildRequires:  pkgconfig(libxml-2.0) >= 2.6.32
 BuildRequires:  pkgconfig(sqlite3) >= 3.5.9
 BuildRequires:  pkgconfig(webkit2gtk-4.0) >= 2.6.3
@@ -74,7 +77,7 @@ export LANG=en_US.utf8
 %make_install
 
 # Remove libtool .la files
-find $RPM_BUILD_ROOT -name '*.la' -delete
+find %{buildroot} -name '*.la' -delete
 
 # Update the screenshot shown in the software center
 #
@@ -82,7 +85,7 @@ find $RPM_BUILD_ROOT -name '*.la' -delete
 #
 # See http://people.freedesktop.org/~hughsient/appdata/#screenshots for more details.
 #
-appstream-util replace-screenshots %{buildroot}%{_datadir}/appdata/shotwell.appdata.xml \
+appstream-util replace-screenshots %{buildroot}%{_datadir}/metainfo/shotwell.appdata.xml \
   https://raw.githubusercontent.com/hughsie/fedora-appstream/master/screenshots-extra/shotwell/a.png \
   https://raw.githubusercontent.com/hughsie/fedora-appstream/master/screenshots-extra/shotwell/b.png \
   https://raw.githubusercontent.com/hughsie/fedora-appstream/master/screenshots-extra/shotwell/c.png \
@@ -122,13 +125,14 @@ gtk-update-icon-cache --quiet %{_datadir}/icons/hicolor &>/dev/null || :
 %doc README NEWS THANKS AUTHORS
 %{_bindir}/shotwell
 %{_libdir}/shotwell
+%{_libdir}/libshotwell-authenticator.so.*
+%exclude %{_libdir}/libshotwell-authenticator.so
 %{_libdir}/libshotwell-plugin-common.so.*
 %exclude %{_libdir}/libshotwell-plugin-common.so
 %{_libexecdir}/shotwell
-%{_datadir}/shotwell
 %{_datadir}/applications/shotwell.desktop
 %{_datadir}/applications/shotwell-viewer.desktop
-%{_datadir}/appdata/shotwell.appdata.xml
+%{_datadir}/metainfo/shotwell.appdata.xml
 %{_datadir}/glib-2.0/schemas/*.xml
 %{_datadir}/icons/hicolor/*/apps/shotwell.png
 %{_datadir}/icons/hicolor/symbolic/apps/shotwell-symbolic.svg
@@ -136,6 +140,18 @@ gtk-update-icon-cache --quiet %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Wed Aug 01 2018 Kalev Lember <klember@redhat.com> - 0.28.4-1
+- Update to 0.28.4
+- Resolves: #1569785
+
+* Mon Jun 18 2018 Debarshi Ray <rishi@fedoraproject.org> - 0.28.3-2
+- Fix the Turkish translation
+- Resolves: #1569785
+
+* Tue May 08 2018 Kalev Lember <klember@redhat.com> - 0.28.3-1
+- Update to 0.28.3
+- Resolves: #1569785
+
 * Tue Oct 10 2017 Debarshi Ray <rishi@fedoraproject.org> - 0.24.5-2
 - Rebuild against new libgphoto2 soname
 - Resolves: #1500282

@@ -1,6 +1,10 @@
 SUBDIRS = misc help po app-icons icons ui
 
-EXTRA_DIST = AUTHORS
+if INSTALL_APPORT_HOOK
+SUBDIRS += apport
+endif
+
+EXTRA_DIST = AUTHORS git-hash
 
 AUTHORS:
 	$(AM_V_GEN)if test -d "$(srcdir)/.git"; \
@@ -27,6 +31,7 @@ MAINTAINERCLEANFILES = \
 	$(GITIGNORE_MAINTAINERCLEANFILES_M4_LIBTOOL)
 
 GITIGNOREFILES = \
+	build \
 	ABOUT-NLS \
 	plugins/**/*.h \
 	plugins/**/*.vapi \
@@ -53,7 +58,10 @@ lib_LTLIBRARIES = \
 
 plugins_common_libshotwell_plugin_common_la_SOURCES = \
 	plugins/common/RESTSupport.vala \
+	plugins/common/OAuth1Support.vala \
 	plugins/common/Resources.vala \
+	plugins/common/WebAuthenticationPane.vala \
+	plugins/common/BuilderPane.vala \
 	plugins/shotwell-plugin-dev-1.0.vapi
 
 $(top_srcdir)/plugins/shotwell-plugin-common.vapi plugins/shotwell-plugin-common.h: \
@@ -73,6 +81,7 @@ plugins_common_libshotwell_plugin_common_la_VALAFLAGS = \
 
 plugins_common_libshotwell_plugin_common_la_CFLAGS = \
 	$(PLUGIN_CFLAGS) \
+	-Wno-incompatible-pointer-types -Wno-discarded-qualifiers \
 	-DGETTEXT_PACKAGE='"$(GETTEXT_PACKAGE)"' \
 	-I $(top_srcdir)/plugins -I$(top_builddir)/plugins
 
@@ -125,8 +134,12 @@ dist_noinst_DATA = $(NULL)
 MOSTLYCLEANFILES = $(NULL)
 
 include $(top_srcdir)/common.am
+include $(top_srcdir)/pipeline.am
 include $(top_srcdir)/shotwell.am
 include $(top_srcdir)/thumbnailer.am
+
+# Authenticators
+include $(top_srcdir)/authenticator.am
 
 # Plugins
 include $(top_srcdir)/publish.am
@@ -136,7 +149,6 @@ include $(top_srcdir)/publish-extra.am
 endif
 
 include $(top_srcdir)/transition.am
-include $(top_srcdir)/import.am
 
 dist_noinst_SCRIPTS = \
 	autogen.sh
@@ -148,5 +160,41 @@ dist_noinst_DATA += \
 	vapi/libexif.vapi \
 	vapi/libgphoto2.vapi \
 	vapi/libraw.vapi \
-	vapi/unity.deps \
-	vapi/unity.vapi
+	vapi/misc.vapi \
+	app-icons/meson.build \
+	thumbnailer/meson.build \
+	meson.build \
+	po/meson.build \
+	apport/meson.build \
+	help/meson.build \
+	settings-migrator/meson.build \
+	misc/meson.build \
+	src/meson.build \
+	src/plugins/meson.build \
+	plugins/meson.build \
+	plugins/shotwell-publishing-extras/meson.build \
+	plugins/shotwell-publishing/meson.build \
+	plugins/authenticator/shotwell/meson.build \
+	plugins/authenticator/meson.build \
+	plugins/common/meson.build \
+	plugins/shotwell-transitions/meson.build \
+	meson_options.txt \
+	app-icons/meson.build \
+	apport/meson.build \
+	help/meson.build \
+	meson.build \
+	meson_options.txt \
+	misc/meson.build \
+	plugins/authenticator/meson.build \
+	plugins/authenticator/shotwell/meson.build \
+	plugins/common/meson.build \
+	plugins/meson.build \
+	plugins/shotwell-publishing-extras/meson.build \
+	plugins/shotwell-publishing/meson.build \
+	plugins/shotwell-transitions/meson.build \
+	po/meson.build \
+	settings-migrator/meson.build \
+	src/meson.build \
+	src/plugins/meson.build \
+	thumbnailer/meson.build \
+	apport/shotwell.py

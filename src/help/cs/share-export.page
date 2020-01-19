@@ -23,7 +23,14 @@
 </list>
 </item>
 <item><p>Kvalita exportovaného obrázku (nízká, střední, vysoká nebo maximální).</p></item>
-<item><p>Pravidlo pro škálování (což znamená, jak se má Shotwell chovat při škálování fotografií na menší rozměr) a požadovaná velikost v pixelech.</p></item>
+<item><p>Pravidlo pro škálování (což znamená, jak se má Shotwell chovat při změně velikosti fotografie na menší rozměr) a požadovaná velikost v pixelech.</p>
+<terms>
+<item><title>Původní velikost</title><p>Obrázek bude exportován bez použití změny velikosti</p></item>
+<item><title>Delší strana</title><p>Obrázek bude exportována tak, aby u delší strany došlo ke změně velikosti na <gui>Počet pixelů</gui> a u druhé úměrně tomu při zachování poměru stran.</p></item>
+<item><title>Šířka</title><p>U obrázku dojde ke změně šířky na zadaný počet pixelů a u výšky na úměrný počet pixelů tak, aby byl zachován počet stran. Výsledek je stejný, jako když použijete volbu <gui>Delší strana</gui> u obrázku otočeného na šířku.</p></item>
+<item><title>Výška</title><p>U obrázku dojde ke změně výšky na zadaný počet pixelů a u šiřky na úměrný počet pixelů tak, aby byl zachován počet stran. Výsledek je stejný, jako když použijete volbu <gui>Delší strana</gui> u obrázku otočeného na výšku.</p></item>
+</terms>
+</item>
 <item><p>Volba, jestli chcete exportovat i metadata, jako jsou štítky nebo hodnocení. To vám může pomoci v ochraně soukromí, pokud máte štítky s geolokačními údaji nebo jiné štítky, které nechcete, aby viděl někdo jiný.</p></item>
 </list>
 

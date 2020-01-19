@@ -32,7 +32,7 @@
     
     <p>Gracias a que Shotwell es un editor de fotos no destructivo, puede deshacer cualquier alteración que realice en una foto.</p>
     
-    <p>If you want to see what a photo looked like before your modifications, press the <key>Shift</key> key. The original photo will be displayed as long as you hold the key down.</p>
+    <p>Si quiere ver qué aspecto tenía una foto antes de realizar las modificaciones, pulse la tecla <key>Mayús</key>. La foto original se mostrará siempre que mantenga pulsada esta tecla.</p>
 
     <p>Para deshacer por completo todos los cambios realizados en una foto, haga clic en <guiseq><gui>Fotos</gui><gui>Volver al original</gui></guiseq>. La única excepción es que los ajustes de hora y fecha no se revertirán.</p>
 

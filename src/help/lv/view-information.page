@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" type="guide" id="view-information" xml:lang="lv">
+
+    <info>
+        <link type="guide" xref="index#view"/>
+        <desc>Skatīt sīkāku informāciju par fotogrāfijām, piemēram, kameras ekspozīcijas režīmu.</desc>
+        
+        <link type="next" xref="view-view"/>
+    </info>
+
+	<title>Pamata un paplašinātā informācija</title>
+
+<p>Pamatinformācijas rūts parādās sānu joslas apakšpusē un attēlo īsu kopsavilkumu par izvēlētajām fotogrāfijām. Ja nav izvēlētu fotogrāfiju, tas attēlo visas kolekcijas kopsavilkumu. Jūs varat pārslēgt šīs rūts attēlošanu, izmantojot komandu <guiseq><gui>Skats</gui><gui>Pamatinformācija</gui></guiseq></p>
+
+<p>Peldošais paplašinātās informācijas logs attēlo vairāk informācijas par izvēlēto fotogrāfiju. <guiseq><gui>Skats</gui><gui>Paplašināta informācija</gui></guiseq> komanda vai <keyseq><key>Ctrl</key><key>Shift</key><key>X</key></keyseq> pārslēdz šī loga attēlošanu.</p>
+
+</page>

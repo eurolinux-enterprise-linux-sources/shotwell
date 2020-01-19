@@ -5,12 +5,12 @@
         <link type="guide" xref="index#import"/>
         <desc>Fotos importieren, die bereits auf Ihrem Rechner gespeichert sind.</desc>
         
-        <link type="next" xref="import-f-spot"/>
+        <link type="next" xref="import-camera"/>
     
     <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
       <mal:name>Mario Blättermann</mal:name>
       <mal:email>mario.blaettermann@gmail.com</mal:email>
-      <mal:years>2009, 2016</mal:years>
+      <mal:years>2009, 2016-2017</mal:years>
     </mal:credit>
   
     <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
@@ -22,7 +22,7 @@
     <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
       <mal:name>Christian Kirbach</mal:name>
       <mal:email>christian.kirbach@gmail.com</mal:email>
-      <mal:years>2014, 2106</mal:years>
+      <mal:years>2014, 2016, 2017</mal:years>
     </mal:credit>
   </info>
 
@@ -30,12 +30,12 @@
 
     <p>Um Fotodateien von Ihrer Festplatte in Shotwell zu importieren, ziehen Sie sie einfach aus der Dateiverwaltung in das Shotwell-Fenster.</p>
     
-    <p>Wählen Sie alternativ <guiseq><gui>Datei</gui><gui>Aus Ordner importieren …</gui></guiseq> und wählen Sie den Ordner mit den Fotos aus, die Sie importieren wollen.</p>
+    <p>Wählen Sie alternativ <guiseq><gui>Datei</gui><gui>Aus Ordner importieren …</gui></guiseq> und wählen Sie den Ordner mit den Fotos aus, die Sie importieren wollen. Wenn Sie vermeiden wollen, dass Shotwell beim Import auch Unterordner mit einbezieht, dann deaktivieren Sie das Ankreuzfeld <gui>Unterordner einbeziehen</gui> unten im Dateiauswahldialog.</p>
     
-    <p>Shotwell will ask whether you want to copy the photo files to your library folder (usually this is the <file>Pictures</file> folder in your home directory) or to import them in place without copying the files.</p>
+    <p>Shotwell fragt, ob Sie die Fotodateien in Ihren Bibliotheksordner (normalerweise der Ordner <file>Bilder</file> in Ihrem persönlichen Ordner) kopieren möchten, oder ob Sie sie ohne Kopieren importieren wollen.</p>
     
-    <p>If you hold down <key>Ctrl</key> while dragging photos in, Shotwell will copy the photos into your library folder without prompting.  Similarly, if you hold down <keyseq><key>Ctrl</key><key>Shift</key></keyseq> while dragging photos in, Shotwell will import the photos without copying them.</p>
+    <p>Wenn Sie die <key>Strg</key>-Taste während des Ziehens von Fotos gedrückt halten, so kopiert Shotwell ohne Nachfrage die Fotos in Ihre Bibliothek. Wenn Sie <keyseq><key>Strg</key><key>Umschalttaste</key></keyseq> während des Ziehens von Fotos gedrückt halten, so importiert Shotwell die Fotos ohne Nachfrage.</p>
 
-    <p>Once the import is complete, you can select <gui>Last Import</gui> in the sidebar to see all photos successfully imported. The Events list will also show new entries for the dates corresponding to the imported photos.</p>
+    <p>Sobald der Import abgeschlossen ist, wählen Sie <gui>Letzter Import</gui> in der Seitenleiste, um alle erfolgreich importierten Fotos zu sehen. Die Ereignisliste zeigt auch neue Einträge für die importierten Fotos mit den zugehörigen Zeitstempeln.</p>
 
 </page>

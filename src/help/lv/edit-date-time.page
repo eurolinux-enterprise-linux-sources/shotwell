@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" type="guide" id="edit-date-time" xml:lang="lv">
+
+    <info>
+        <link type="guide" xref="index#edit"/>
+        <desc>Mainīt fotogrāfiju datumus un laikus, ja tie ir nepareizi.</desc>
+
+        <link type="next" xref="edit-enhance"/>
+    </info>
+
+	<title>Pielāgot fotogrāfiju datumus un laikus</title>
+
+<p>Lai pielāgotu fotogrāfiju datumu un laiku, izvēlieties fotogrāfijas, izvēlieties <guiseq><gui>Fotogrāfijas</gui><gui>Pielāgot datumu un laiku...</gui></guiseq> un iestatiet jaunu datumu un laiku.</p>
+
+<p>Ja maināt datumu un laiku vairākām fotogrāfijām uzreiz, varat to mainīt visām fotogrāfijām par vienādu laika nobīdi, vai arī visām iestatīt vienu un to pašu laiku.</p>
+
+<p>Pēc noklusējuma, datums un laiks tiek mainīts tikai pašā Shotwell. Jūs varat arī mainīt datumu un laiku oriģinālajā datnē, bet to nevar atsaukt, kad iziesiet ārā no Shotwell lietotnes.</p>
+
+</page>

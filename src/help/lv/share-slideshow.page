@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" type="guide" id="share-slideshow" xml:lang="lv">
+
+    <info>
+        <link type="guide" xref="index#share"/>
+        <desc>Skatieties savu fotogrāfiju slaidrādi.</desc>
+        
+        <link type="next" xref="share-export"/>
+    </info>
+
+	<title>Slaidrādes</title>
+
+    <p>Lai Shotwell lietotnē redzētu kādas kolekcijas slaidrādi, ejiet uz kolekciju un izvēlieties <guiseq><gui>Skats</gui><gui>Slaidrāde</gui></guiseq> vai spiediet <key>F5</key>.</p>
+    
+    <p>Aktīvā slaidrādē varat mainīt dažus iestatījumus:</p>
+    
+    <list>
+    <item><p>Laiku, cik ilgi būs redzams attēls: 1–30 sekundes</p></item>
+    <item><p>Varat izvēlēties dažādus pārejas efektus.</p></item>
+    <item><p>Laiks katram pārejas efektam: 0,1–1,0 sekundes</p></item>
+    </list>
+</page>

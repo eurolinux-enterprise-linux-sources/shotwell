@@ -72,7 +72,10 @@
             </tbody>
         </table>
 
-        <p>További szimbólumok érhetők el. Nézze meg az strftime kézikönyvét a <cmd>man strftime</cmd> parancsot lefuttatva, ha olyanra van szüksége, amely nincs itt felsorolva.</p>
+        <p>
+            There are other symbols available; please check the <link href="man:strftime">manual for strftime</link> by running
+            the command <cmd>man strftime</cmd> if you need one that isn't listed here.
+        </p>
     </section>
 
     <section id="automatic-import">

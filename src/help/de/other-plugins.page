@@ -10,7 +10,7 @@
     <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
       <mal:name>Mario Blättermann</mal:name>
       <mal:email>mario.blaettermann@gmail.com</mal:email>
-      <mal:years>2009, 2016</mal:years>
+      <mal:years>2009, 2016-2017</mal:years>
     </mal:credit>
   
     <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
@@ -22,24 +22,15 @@
     <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
       <mal:name>Christian Kirbach</mal:name>
       <mal:email>christian.kirbach@gmail.com</mal:email>
-      <mal:years>2014, 2106</mal:years>
+      <mal:years>2014, 2016, 2017</mal:years>
     </mal:credit>
   </info>
 
-	<title>Plugins</title>
-        <p>
-            Shotwell can be used with <em>plugins</em>, which are companion shared libraries that can
-            add support for new publishing destinations or new slideshow transitions.
-        </p>
+	<title>Erweiterungen</title>
+        <p>Shotwell bietet Unterstützung für <em>Erweiterungen</em> in Form von zusätzlichen Bibliotheken, mit deren Hilfe zusätzliche Funktionen wie beispielsweise neue Veröffentlichungsplattformen oder neue Diaschau-Übergänge bereit gestellt werden.</p>
         
-        <p>
-            To see a list of installed plugins, choose <guiseq><gui>Edit</gui><gui>Preferences</gui></guiseq>,
-            and in the <gui>Preferences</gui> window, click on the <gui>Plugins</gui> tab.  You'll see a list
-            of currently-installed plugins, each with a checkbox by it, and you may enable or disable each by
-            selecting or deselecting the checkbox by its name.
-        </p>
+        <p>Öffnen Sie <guiseq><gui>Bearbeiten</gui><gui>Einstellungen</gui></guiseq>, um eine Liste aller installierten Erweiterungen zu sehen. Klicken Sie im Fenster <gui>Einstellungen</gui> auf den Reiter <gui>Erweiterungen</gui>. Es wird daraufhin eine Liste aller derzeit installierten Erweiterungen angezeigt. Neben jeder Erweiterung befindet sich ein Ankreuzfeld, mit dessen Hilfe Sie die Erweiterung ein- und ausschalten können.</p>
         
-        <note style="advanced"><p>Full documentation on how to develop new plugins is available at 
-        <link href="http://redmine.yorba.org/projects/shotwell/wiki/ShotwellArchWritingPlugins">http://redmine.yorba.org/projects/shotwell/wiki/ShotwellArchWritingPlugins</link></p></note>
+        <note style="advanced"><p>Eine vollständige Dokumentation zum Entwickeln neuer Erweiterungen findet sich unter <link href="http://redmine.yorba.org/projects/shotwell/wiki/ShotwellArchWritingPlugins">http://redmine.yorba.org/projects/shotwell/wiki/ShotwellArchWritingPlugins</link></p></note>
     
 </page>

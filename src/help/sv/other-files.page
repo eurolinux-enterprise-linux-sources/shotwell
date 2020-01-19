@@ -60,7 +60,7 @@
             </tbody>
         </table>
 
-        <p>Det finns andra symboler tillgängliga, se handboken för strftime genom att köra kommandot <cmd>man strftime</cmd> om du behöver en som inte listas här.</p>
+        <p>Det finns andra symboler tillgängliga, se <link href="man:strftime">handboken för strftime</link> genom att köra kommandot <cmd>man strftime</cmd> om du behöver en som inte listas här.</p>
     </section>
 
     <section id="automatic-import">
@@ -75,7 +75,7 @@
     </section>
 
     <section id="automatic-rename">
-       <title>Automatiskt döpa om importerade bilder till gemener.</title>
+       <title>Automatiskt byta namn på importerade bilder till gemener</title>
        
        <p>Shotwell kan automatiskt ändra filnamnen för importerade bilder till gemener. För att aktivera detta, välj <guiseq><gui>Redigera</gui><gui>Inställningar</gui></guiseq> och i fönstret <gui>Inställningar</gui>, kryssa i rutan <gui>Byt namn på importerade filer till gemener</gui>.</p>
     

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" type="guide" id="delete" xml:lang="lv">
+
+    <info>
+        <link type="guide" xref="index#organize"/>
+        <desc>Izņemt fotogrāfijas no bibliotēkas vai pavisam izdzēst tās no datora.</desc>
+        
+        <link type="next" xref="search"/>
+    </info>
+
+	<title>Fotogrāfiju izņemšana un dzēšana</title>
+
+    <p>Jūs varat izņemt fotogrāfijas ārā no savas bibliotēkas un jūs varat tās pavisam izdzēst ārā no cietā diska.</p>
+<media type="image" src="figures/trash_process.png"><p>Dzēšanas process</p></media>
+<p>Šī diagramma rāda, kā dzēstā fotogrāfija vispirms tiek ievietota Shotwell miskastē. Ja izdzēsīsiet to ārā no Shotwell miskastes, tā tiks ievietota datora miskastē. Ja izdzēsīsiet to ārā no tās, fotogrāfija tiks neatgriezeniski izdzēsta no datora.</p>
+<section id="delete-remove">
+	<title>Fotogrāfiju izņemšana no bibliotēkas</title>
+    <p>Izvēlieties fotogrāfijas, kuras izņemt, izvēlieties <guiseq><gui>Rediģēt</gui><gui>Pārvietot uz miskasti</gui></guiseq>. (Jūs varat arī spiest taustiņu <key>Dzēst</key>.) Fotogrāfijas tiks pārvietotas no jūsu bibliotēkas uz Shotwell's miskasti.</p>
+    <p>Ja vēlaties izņemt fotogrāfijas no Shotwell, neizmetot tās miskastē, izvēlieties izņemamās fotogrāfijas un izvēlieties <guiseq><gui>Rediģēt</gui><gui>Izņemt no bibliotēkas</gui></guiseq>. Fotogrāfiju datnes paliks uz diska.</p>
+</section>
+
+<section id="delete-empty">
+	<title>Miskastes mapes iztukšošana vai atjaunošana</title>
+    <p>Izvēlieties miskastes ierakstu sānu joslā un Shotwell parādīs visas fotogrāfijas, kas ir atzīmētas kā izņemamas vai dzēšamas. Miskastes skatā ir pieejamas šādas komandas:</p>
+    <terms>
+    <item><title>Dzēst</title><p>Dzēst izvēlētās fotogrāfijas no miskastes mapes.</p></item>
+    <item><title>Atjaunot</title><p>Atjaunot izvēlētās fotogrāfijas uz Shotwell.</p></item>
+    <item><title>Iztukšot miskasti</title><p>Dzēst visas fotogrāfijas no miskastes mapes.</p></item>
+    </terms>
+</section>    
+    
+<section id="delete-trash">
+	<title>Dzēšana vai miskastes iztukšošana</title>
+    <p>Kad dzēšat datnes no miskastes mapes, vai arī iztīrāt miskastes mapi, jums tiks dotas šādas izvēles:</p>
+    <terms>
+    <item><title>Tikai izņemt</title><p>Fotogrāfiju izņemšana no bibliotēkas, bet uz datora atstāt fotogrāfijas turpat, kur tās bija.</p></item>
+    <item><title>Izmest datni</title><p>Izņemt fotogrāfijas no bibliotēkas un izdzēst tās no datora.</p></item>
+    <item><title>Atcelt</title><p>Nedarīt neko.</p></item>
+    </terms>    
+</section>
+    
+</page>

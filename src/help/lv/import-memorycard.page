@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" type="guide" id="import-memorycard" xml:lang="lv">
+
+    <info>
+        <link type="guide" xref="index#import"/>
+        <desc>Importēt fotogrāfijas no ciparu kameras atmiņas kartes.</desc>
+        
+        <link type="next" xref="import-file"/>
+    </info>
+
+	<title>Importēšana no atmiņas kartes</title>
+
+<p>Lai importētu fotogrāfijas no kameras atmiņas kartes:</p>
+
+<steps>
+ <item>
+  <p>Ievietojiet atmiņas karti savā karšu lasītājā. Pārliecinieties, ka lasītājs ir pievienots datoram un ieslēdziet to.</p>
+ </item>
+ <item>
+  <p>Karšu lasītāju un pašu karti datoram vajadzētu atpazīt automātiski.</p>
+ </item>
+ <item>
+  <p>Sekojiet instrukcijām, kā <link xref="import-file">importēt fotogrāfijas no cietā diska</link>. Ja spiedīsiet <guiseq><gui>Datne</gui><gui>Importēt no mapes...</gui></guiseq>, atmiņas karte būs redzama kā mape izvēlēs loga sānu joslā.</p>
+ </item>
+</steps>
+
+<p>Shotwell var importēt fotogrāfijas no jebkuras atmiņas kartes, kas ir savietojama ar jūsu karšu lasītāju.</p>
+
+<p>Ja karte nav automātiski atpazīta, iespējams, ka karšu lasītājs nav atpazīts. Mēģiniet to atvienot un atkal pievienot datoram. Ja tas nepalīdz jums vajadzētu varēt importēt fotogrāfijas, <link xref="import-camera">pievienojot datoram pašu kameru</link>.</p>
+
+</page>

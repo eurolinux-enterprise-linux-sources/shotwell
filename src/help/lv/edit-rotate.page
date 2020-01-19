@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" type="guide" id="edit-rotate" xml:lang="lv">
+
+    <info>
+        <link type="guide" xref="index#edit"/>
+        <desc>Spiediet pogu <gui>Pagriezt</gui>, vai izvēlieties vienu no komandām <gui>Fotogrāfiju</gui> izvēlnē.</desc>
+        
+        <link type="next" xref="edit-straighten"/>
+    </info>
+
+	<title>Pagriezt vai apmest fotogrāfiju</title>
+
+    <p>Jūs varat pagriezt fotogrāfijas pa labi vai pa kreisi (pulksteņa rādītāja virzienā vai pretēji) ar pogu <gui>Pagriezt</gui>, kas ir pieejams rīkjoslā. Jūs varat arī iegūt jebkuras fotogrāfijas spoguļattēlu.</p>
+    
+    <p>Lai pagrieztu pa labi, spiediet pogu <gui>Pagriezt</gui>. Lai pagrieztu pa kreisi, turiet piespiestu <key>Ctrl</key> taustiņu un spiediet pagriešanas pogu. Abas komandas ir pieejamas arī <gui>Fotogrāfiju</gui> izvēlnē. Varat izmantot arī tastatūras saīsnes:</p>
+    <list>
+    <item><p>pagriezt pa kreisi: <keyseq><key>Shift</key><key>Ctrl</key><key>R</key></keyseq> vai <key>[</key></p></item>
+    <item><p>pagriezt pa labi: <keyseq><key>Ctrl</key><key>R</key></keyseq> vai <key>]</key></p></item>
+    </list>
+    <p>Lai izveidotu fotogrāfijas spoguļattēlu, izmantojiet <gui>Apmest horizontāli</gui> komandu <gui>Fotogrāfiju</gui> izvēlnē. Lai apmestu fotogrāfiju vertikāli, izmantojiet <gui>Apmest vertikāli</gui> komandu tajā pat izvēlnē.</p>
+    
+    <note>
+     <p>Ja izvēlēsities vairāk kā vienu attēlu, varēsiet pagriezt tos visus uzreiz.</p>
+    </note>
+    
+</page>

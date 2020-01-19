@@ -10,7 +10,7 @@
     <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
       <mal:name>Mario Blättermann</mal:name>
       <mal:email>mario.blaettermann@gmail.com</mal:email>
-      <mal:years>2009, 2016</mal:years>
+      <mal:years>2009, 2016-2017</mal:years>
     </mal:credit>
   
     <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
@@ -22,16 +22,16 @@
     <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
       <mal:name>Christian Kirbach</mal:name>
       <mal:email>christian.kirbach@gmail.com</mal:email>
-      <mal:years>2014, 2106</mal:years>
+      <mal:years>2014, 2016, 2017</mal:years>
     </mal:credit>
   </info>
 
 	<title>Datum und Zeit von Fotos anpassen</title>
 
-<p>To adjust the date and time of photos, select the photos you would like to adjust, choose <guiseq><gui>Photos</gui><gui>Adjust Date and Time...</gui></guiseq> and select a new date and time.</p>
+<p>Wählen Sie die Fotos zum Anpassen aus und dann <guiseq><gui>Fotos</gui><gui>Datum und Zeit anpassen …</gui></guiseq>, um Datum und Zeit der gewählten Fotos anzupassen. Wählen Sie anschließend ein neues Datum und eine neue Zeit.</p>
 
-<p>If you are changing the date and time of multiple photos at once, you can choose to shift all the photos by the same amount of time or to set all the photos to the same time.</p>
+<p>Wenn Sie Datum und Zeit von mehreren Fotos gleichzeitig anpassen, so können Sie entweder alle Fotos auf die gleiche Zeit setzen oder bei allen Fotos die Zeit um den gleichen Betrag verschieben.</p>
 
-<p>By default, the date and time are only changed inside Shotwell. You can also choose to modify the date and time in the original file, but this cannot be undone once you exit Shotwell.</p>
+<p>Normalerweise werden Datum und Zeit nur innerhalb von Shotwell geändert. Sie können aber auch Datum und Zeit in der Originaldatei ändern. Dies kann jedoch nicht mehr rückgängig gemacht werden, nachdem Sie Shotwell beendet haben.</p>
 
 </page>

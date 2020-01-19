@@ -26,7 +26,14 @@ A window will appear allowing you to make several choices:
 </list>
 </item>
 <item><p>Η ποιότητα εικόνας για εξαγωγή (χαμηλή, μέτρια, υψηλή, ή μέγιστη).</p></item>
-<item><p>Ένας περιορισμός κλιμάκωσης (που σημαίνει πώς θα αποφασίσει το Shotwell να σμικρύνει τις φωτογραφίες) και το επιθυμητό μέγεθος εικονοστοιχείων.</p></item>
+<item><p>Ένας περιορισμός κλιμάκωσης (που σημαίνει πώς θα αποφασίσει το Shotwell να σμικρύνει τις φωτογραφίες) και το επιθυμητό μέγεθος εικονοστοιχείων.</p>
+<terms>
+<item><title>Original size</title><p>Image will be exported without any scaling applied</p></item>
+<item><title>Longest edge</title><p>Image will be exported by having its longest edge scaled to <gui>Pixels</gui> and the other according to the aspect ratio</p></item>
+<item><title>Width</title><p>The image width will have its width scaled to the given pixel size and its height according to the aspect ratio. This is equivalent to <gui>Longest Edge</gui> for landscape pictures.</p></item>
+<item><title>Height</title><p>The image height will have its height scaled to the given pixel size and its width according to the aspect ratio. This is equivalent to <gui>Longest Edge</gui> for portrait pictures.</p></item>
+</terms>
+</item>
 <item><p>Η επιλογή εξαγωγής μεταδεδομένων όπως ετικέτες ή αξιολογήσεις. Αυτό μπορεί να βοηθήσει στην αποθήκευση της ιδιωτικότητά σας αν έχετε ετικέτες γεωεντοπισμού ή ετικέτες που δεν θα έπρεπε να ιδωθούν από κάποιον.</p></item>
 </list>
 

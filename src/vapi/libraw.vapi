@@ -107,7 +107,7 @@ public struct OutputParams {
     public int highlight;
     public bool use_auto_wb;
     public bool use_camera_wb;
-    public bool use_camera_matrix;
+    public int use_camera_matrix;
     public int output_color;
     public int output_bps;
     public bool output_tiff;
@@ -144,14 +144,14 @@ public struct OutputParams {
     public float exp_shift;
     public float exp_preser;
     
-    public void set_chromatic_aberrations(double red_multiplier, double green_multiplier) {
-        aber[0] = red_multiplier;
-        aber[2] = green_multiplier;
+    public static void set_chromatic_aberrations(OutputParams* params, double red_multiplier, double green_multiplier) {
+        params->aber[0] = red_multiplier;
+        params->aber[2] = green_multiplier;
     }
     
-    public void set_gamma_curve(double power, double slope) {
-        gamm[0] = power;
-        gamm[1] = slope;
+    public static void set_gamma_curve(OutputParams* params, double power, double slope) {
+        params->gamm[0] = 1.0 / power;
+        params->gamm[1] = slope;
     }
 }
 
@@ -247,7 +247,8 @@ public struct Thumbnail {
     public ushort theight;
     public uint tlength;
     public int tcolors;
-    public int8 *thumb;
+    [CCode (array_length_cname="tlength")]
+    public uint8[] thumb;
 }
 
 [CCode (cname="enum LibRaw_thumbnail_formats", cprefix="LIBRAW_THUMBNAIL_")]

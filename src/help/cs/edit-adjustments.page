@@ -16,12 +16,16 @@
 
 <p>Až barevnost a kontrast fotografie odpovídají vašim představám, zmáčkněte <gui>Budiž</gui> a změny se uloží. Tlačítko <gui>Původní</gui> vrací obrázek do původního stavu. Pomocí <gui>Zrušit</gui> se všechny provedené změny zahodí a s úpravami se skončí.</p>
 
-<section>
+<section id="color-adjustments">
  <title>Co dělá která úprava barvy?</title>
  <terms>
   <item>
    <title>Expozice</title>
    <p>Mění jas, což funguje podobně, jako by byla fotografie exponována po delší nebo kratší čas. Použijte ke korekci podexponované nebo přeexponované fotografie.</p>
+  </item>
+  <item>
+   <title>Kontrast</title>
+   <p>Mění kontrast fotografie. To můžete využít k opravě fotografií, které mají malou „hloubku“, nebo u kterých nedobře působí příliš velké rozdíly mezi světlými a tmavými plochami.</p>
   </item>
   <item>
    <title>Sytost</title>

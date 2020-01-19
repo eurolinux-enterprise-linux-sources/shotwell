@@ -34,7 +34,7 @@
     
     <p>Marcar fotos es útil porque también puede trabajar en todas las fotos marcadas como un conjunto. Por ejemplo, puede seleccionar la vista <gui>Marcada</gui> y luego subir todas las fotos marcadas a un servicio de publicación.</p>
     
-    <section>
+    <section id="flag-unflag">
     <title>Para marcar o desmarcar una foto</title>
     <p>Para marcar o desmarcar una foto, pulse con el botón derecho en la foto y seleccione <gui>Marcar</gui> o <gui>Desmarcar</gui> desde el menú contextual. O pulse use los atajos del teclado <keyseq><key>Ctrl</key><key>G</key></keyseq> o <key>/</key>.</p>
     </section>

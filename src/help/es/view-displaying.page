@@ -36,7 +36,7 @@
 
 <p>Shotwell ofrece un modo de pantalla completa para mostrar las fotos. Escoja <guiseq><gui>Ver</gui><gui>Pantalla completa</gui></guiseq> o presione <key>F11</key>. Para ver la barra de herramientas de pantalla completa, mueva su ratón a la parte inferior de la pantalla. La barra de herramientas le ofrece botones para moverse a través de la colección, para fijar la barra de herramientas (así esta no se ocultará cuando mueva el ratón), y dejar la vista de pantalla completa.</p>
 
-<section>
+<section id="viewing-videos">
 <title>Ver vídeos</title>
 <p>Cuando pulse dos veces sobre un vídeo, Shotwell lanzará un reproductor de vídeo externo para reproducir el vídeo. Actualmente no es posible mostrar un vídeo en modo a pantalla completa o reproducirlo dentro del propio Shotwell</p>
 </section>

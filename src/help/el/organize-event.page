@@ -16,32 +16,32 @@
     
     <p>Αν μια φωτογραφία δεν έχει ενσωματωμένες πληροφορίες ημερομηνίας/χρόνου, τότε το Shotwell δεν μπορεί να την βάλει αυτόματα σε κανένα συμβάν. Σε αυτήν την περίπτωση η φωτογραφία θα εμφανιστεί στην προβολή <gui>Κανένα συμβάν</gui> προσβάσιμη από την πλευρική στήλη. Μπορείτε ακόμα να μετακινήσετε την φωτογραφία σε οποιοδήποτε συμβάν θέλετε όπως περιγράφεται παρακάτω.</p>
     
-    <section>
+    <section id="renaming">
     <title>Μετονομασία συμβάντων</title>
 
     <p>To give an event a name rather than referring to it by its date, select the event, click <guiseq><gui>Events</gui><gui>Rename Event...</gui></guiseq> and enter a new name. Another way of renaming an event is to double-click its name in the sidebar; type a new name and then press <key>Enter</key>.</p>
     </section>
 
-    <section>
+    <section id="moving-photos">
     <title>Μετακίνηση φωτογραφιών μεταξύ συμβάντων</title>
 
     <p>Αν και οι φωτογραφίες είναι αρχικά ομαδοποιημένες σε συμβάντα με την ημερομηνία τους, μπορείτε να μετακινήσετε φωτογραφίες μεταξύ συμβάντων. Για να το κάνετε αυτό, μεταφέρτε κάθε φωτογραφία στην πλευρική στήλη και αποθέστε την σε ένα συμβάν.</p>
     </section>
 
-    <section>
+    <section id="creating-events">
     <title>Δημιουργία και συγχώνευση συμβάντων</title>
     <p>Για να δημιουργήσετε ένα νέο συμβάν, επιλέξτε τις φωτογραφίες που θα θέλατε στο νέο συμβάν και πατήστε <guiseq><gui>Συμβάντα</gui><gui>Νέο συμβάν</gui></guiseq>.</p>
     <p>Για να συγχωνεύσετε συμβάντα, επιλέξτε <guiseq><gui>Συμβάντα</gui></guiseq> από την πλευρική στήλη, έπειτα, ενώ κρατάτε πατημένο το <key>Ctrl</key> πατήστε στα συμβάντα που θέλετε να συγχωνεύσετε στην περιοχή του κυρίως παραθύρου. Τελικά, πατήστε <guiseq><gui>Συμβάντα</gui><gui>Συγχώνευση συμβάντων</gui></guiseq>.</p>
     </section>
 
-    <section>
+    <section id="sorting-events">
     <title>Ταξινόμηση συμβάντων</title>
 
     <p>Τα συμβάντα εμφανίζονται σε ένα δένδρο στην πλευρική στήλη, οργανωμένα σύμφωνα με το έτος και τον μήνα της πιο πρόσφατης φωτογραφίας στο συμβάν. Για να αλλάξετε τη σειρά ταξινόμησης του συμβάντος, πατήστε <guiseq><gui>Προβολή</gui><gui>Ταξινόμηση συμβάντων</gui></guiseq> και επιλέξτε ή αύξουσα ή φθίνουσα.</p>
     
     </section>
     
-    <section>
+    <section id="change-photo">
     <title>Αλλαγή της χρησιμοποιούμενης φωτογραφίας που θα αναπαραστήσει κάθε συμβάν</title>
 
     <p>If you select the <gui>Events</gui> item in the sidebar, you'll see a single photo which represents each event. This is called the key photo.</p>

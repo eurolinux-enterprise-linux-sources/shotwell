@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" type="guide" id="import-file" xml:lang="lv">
+
+    <info>
+        <link type="guide" xref="index#import"/>
+        <desc>Importēt fotogrāfijas, kas jau ir saglabātas datorā.</desc>
+        
+        <link type="next" xref="import-camera"/>
+    </info>
+
+	<title>Importēt no cietā diska</title>
+
+    <p>Lai importētu datnes no cietā diska uz Shotwell, velciet tās no datņu pārlūka Shotwell logā.</p>
+    
+    <p>Alternatively, click <guiseq><gui>File</gui><gui>Import From Folder...</gui></guiseq> and select the folder containing the photos you want to import. If you do not want Shotwell to recurse into subfolders while importing, you can uncheck the <gui>Recurse Into Subfolders</gui> checkbox on the bottom of the file dialog.</p>
+    
+    <p>Shotwell jums prasīs, vai vēlaties kopēt fotogrāfiju datnes uz jūsu bibliotēkas mapi (parasti tā ir mape <file>Attēli</file>, kas atrodas jūsu mājas direktorijā), vai importējiet tās, nekopējot datnes.</p>
+    
+    <p>Ja turat piespiestu <key>Ctrl</key> taustiņu,  kamēr velkat fotogrāfijas, Shotwell kopēs jūsu fotogrāfijas bez nejautājot. Līdzīgi, ja velkot turēsiet piespiestus taustiņus <keyseq><key>Ctrl</key><key>Shift</key></keyseq>, Shotwell importēs fotogrāfijas tās nekopējot.</p>
+
+    <p>Kad importēšana ir pabeigta, varat izvēlēties <gui>Pēdējais imports</gui> sānu joslā, lai redzētu visas veiksmīgi importētās fotogrāfijas. Notikumu saraksts arī attēlos jaunos ierakstus datumiem, kas atbilst importētajām fotogrāfijām.</p>
+
+</page>

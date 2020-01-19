@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" type="guide" id="formats" xml:lang="lv">
+
+    <info>
+        <link type="guide" xref="index"/>
+        <desc>Shotwell atbalsta JPEG, PNG, TIFF, BMP un RAW fotogrāfiju datnes, kā arī video datnes.</desc>
+        
+        <link type="next" xref="running"/>
+    </info>
+
+	<title>Atbalstītie fotogrāfiju un video formāti</title>
+
+   <p>Shotwell supports JPEG, PNG, TIFF, BMP and <link xref="other-raw">RAW</link> photo files. Shotwell does not yet support other graphics format such as GIF.</p>
+
+<p>Pašlaik Shotwell jēlattēlu (RAW) formātu atbalsts ir ierobežots. Skatoties jēlattēlu, jūs redzat JPEG datni, kas ir izvilkta no jēlattēla, nevis pašu jēlattēlu. Bez tam, RAW rediģēšanas konveijers nav pilnībā 16 bitu — rediģētās fotogrāfijas var eksportēt tikai kā 8 bitu datnes. Eksportēšanai var izmantot visus atbalstītos formātus (JPEG, PNG, TIFF, BMP).</p>
+
+<p>For more information about RAW-format photos in Shotwell, please see
+the <link xref="other-raw">RAW</link> section.
+</p>
+
+<p>Shotwell atbalsta arī video datnes visos formātos, ko atbalsta GStreamer multimediju bibliotēka sistēmā, uz kuras darbojas Shotwell. Tas parasti iekļauj šos formātus:</p>
+<list>
+<item><p>Konteineru formāti: Ogg, QuickTime, MP4, AVI.</p></item>
+<item><p>Kodeki: Theora, Quicktime, MPEG-4, Motion JPEG. <em>Ņemiet vērā, ka dažas operētājsistēmas var neiekļaut visus šeit uzskaitītos kodekus dēļ juridiskiem vai licenču ierobežojumiem.</em></p></item>
+</list>
+
+<p>Shotwell atbalsta gan fotogrāfijas, gan video, bet dokumentācijā vienkāršības labad tiek izmantots termins “fotogrāfijas”. Vairums darbību Shotwell var veikt gan ar fotogrāfijām, gan video, precīzāk, notikumi, atzīmēšana ar karogu, vērtēšana, tagošana un publicēšana darbojas vienlīdz labi ar fotogrāfijām un video.</p>
+
+</page>

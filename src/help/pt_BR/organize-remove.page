@@ -17,7 +17,7 @@
 	<title>Removendo e apagando fotos</title>
 
     <p>Você pode remover fotos de sua biblioteca e/ou apagá-las de seu disco rígido.</p>
-<media type="image" src="figures/trash_process.png">Processo de exclusão</media>
+<media type="image" src="figures/trash_process.png"><p>Processo de exclusão</p></media>
 <p>Este diagrama mostra como uma foto, quando excluída, é primeiro colocado na lixeira do Shotwell. Se você excluí-la da lixeira do Shotwell, ela é colocado na lixeira do computador. Se você apagá-la da lixeira do seu computador a foto é finalmente e irremediavelmente apagada do seu computador.</p>
 <section id="delete-remove">
 	<title>Removendo fotos da biblioteca</title>

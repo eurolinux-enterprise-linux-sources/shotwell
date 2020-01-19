@@ -10,7 +10,7 @@
     <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
       <mal:name>Mario Blättermann</mal:name>
       <mal:email>mario.blaettermann@gmail.com</mal:email>
-      <mal:years>2009, 2016</mal:years>
+      <mal:years>2009, 2016-2017</mal:years>
     </mal:credit>
   
     <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
@@ -22,31 +22,21 @@
     <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
       <mal:name>Christian Kirbach</mal:name>
       <mal:email>christian.kirbach@gmail.com</mal:email>
-      <mal:years>2014, 2106</mal:years>
+      <mal:years>2014, 2016, 2017</mal:years>
     </mal:credit>
   </info>
 
 	<title>Fotos markieren</title>
 
-    <p>Shotwell lets you <em>flag</em> photos.  When a photo is flagged, a small flag icon
-    appears in its upper right corner.  You can select the <gui>Flagged</gui> item in the sidebar to see
-    all photos which have been flagged.</p>
+    <p>In Shotwell können Sie Fotos <em>markieren</em>. Wenn ein Foto markiert ist, erscheint ein kleines Flaggensymbol in dessen oberer rechter Ecke. In der Seitenleiste finden Sie unter dem Eintrag <gui>Markiert</gui> alle Fotos, die bereits markiert sind.</p>
     
-    <p>Flagging a photo marks it as special.  You can interpret this in any way you like.  For example,
-    you might flag all photos which need visual
-    adjustment, or all photos which you want to share with a friend.</p>
+    <p>Eine Markierung hebt ein Foto besonders hervor. Sie können dies nach Belieben interpretieren, zum Beispiel alle Fotos markieren, die eine Nachbearbeitung benötigen, oder alle Fotos, die Sie mit Freunden teilen wollen.</p>
     
-    <p>Flagging
-    is also useful because you can operate on all flagged photos as a set.  For example, you can
-    select the <gui>Flagged</gui> view and then upload all flagged photos to a publishing service.</p>
+    <p>Markierungen sind auch sinnvoll, wenn Sie mit den markierten Fotos als Sammlung arbeiten wollen. Beispielsweise können Sie die <gui>Markiert</gui>-Ansicht öffnen und alle markierten Fotos zu einem Veröffentlichungsdienst übertragen.</p>
     
-    <section>
+    <section id="flag-unflag">
     <title>So markieren Sie ein Foto oder heben die Markierung auf</title>
-    <p>
-    To flag or unflag a photo, right-click the photo and choose <gui>Flag</gui> or <gui>Unflag</gui>
-    from the context menu.  Or use the <keyseq><key>Ctrl</key><key>G</key></keyseq> or <key>/</key>
-    shortcut keys.
-    </p>
+    <p>Um ein Foto zu markieren oder die Markierung zu entfernen, klicken Sie mit der rechten Maustaste auf das Foto und wählen Sie <gui>Markieren</gui> oder <gui>Markierung aufheben</gui> aus dem Kontextmenü. Alternativ können Sie die Tastenkombination <keyseq><key>Strg</key><key>G</key></keyseq> oder einfach <key>/</key> drücken.</p>
     </section>
     
 </page>

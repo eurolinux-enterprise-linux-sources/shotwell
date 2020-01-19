@@ -48,7 +48,7 @@
             </tbody>
         </table>
 
-        <p>Existují ještě další symboly, které zde uvedené nejsou. Jestli vás zajímají, podívejte se do příručky k funkci strftime, stačí použít příkaz <cmd>man strftime</cmd>.</p>
+        <p>Existují ještě další symboly, které zde uvedené nejsou. Jestli vás zajímají, podívejte se do <link href="man:strftime">příručky k funkci strftime</link>, stačí použít příkaz <cmd>man strftime</cmd>.</p>
     </section>
 
     <section id="automatic-import">

@@ -115,7 +115,23 @@ namespace GPhoto {
         return true;
     }
 
-    // Libgphoto will in some instances refuse to get metadata from a camera, but the camera is accessable as a
+    public Bytes? camera_file_to_bytes (Context context, CameraFile file) {
+        // if buffer can be loaded into memory, return a Bytes class with
+        // CameraFile being the owner of the data. This way, the CameraFile is freed
+        // when the Bytes are freed
+        unowned uint8 *data;
+        ulong data_len;
+        var res = file.get_data_and_size(out data, out data_len);
+        if (res != Result.OK)
+            return null;
+
+        unowned uint8[] buffer = (uint8[]) data;
+        buffer.length = (int) data_len;
+
+        return Bytes.new_with_owner<GPhoto.CameraFile>(buffer, file);
+    }
+
+    // Libgphoto will in some instances refuse to get metadata from a camera, but the camera is accessible as a
     // filesystem.  In these cases shotwell can access the file directly. See:
     // http://redmine.yorba.org/issues/2959
     public PhotoMetadata? get_fallback_metadata(Camera camera, Context context, string folder, string filename) {
@@ -146,9 +162,10 @@ namespace GPhoto {
     }
     
     public Gdk.Pixbuf? load_preview(Context context, Camera camera, string folder, string filename,
-        out uint8[] raw, out size_t raw_length) throws Error {
-        raw = null;
-        raw_length = 0;
+            out string? preview_md5) throws Error {
+        Bytes? raw = null;
+        Bytes? out_bytes = null;
+        preview_md5 = null;
         
         try {
             raw = load_file_into_buffer(context, camera, folder, filename, GPhoto.CameraFileType.PREVIEW);
@@ -158,32 +175,18 @@ namespace GPhoto {
                 return null;
             if(0 == metadata.get_preview_count())
                 return null;
-            PhotoPreview? preview = metadata.get_preview(metadata.get_preview_count() - 1);
+
+            // Get the smallest preview from meta-data
+            var preview = metadata.get_preview (metadata.get_preview_count() - 1);
             raw = preview.flatten();
+            preview_md5 = Checksum.compute_for_bytes(ChecksumType.MD5, raw);
         }
         
-        if (raw == null) {
-            raw_length = 0;
-            return null;
-        }
-        
-        raw_length = raw.length;
-        
-        // Try to make sure last two bytes are JPEG footer.
-        // This is necessary because GPhoto sometimes includes a few extra bytes. See
-        // Yorba bug #2905 and the following GPhoto bug:
-        // http://sourceforge.net/tracker/?func=detail&aid=3141521&group_id=8874&atid=108874
-        if (raw_length > 32) {
-            for (size_t i = raw_length - 2; i > raw_length - 32; i--) {
-                if (raw[i] == Jpeg.MARKER_PREFIX && raw[i + 1] == Jpeg.Marker.EOI) {
-                    debug("Adjusted length of thumbnail for: %s", filename);
-                    raw_length = i + 2;
-                    break;
-                }
-            }
-        }
-        
-        MemoryInputStream mins = new MemoryInputStream.from_data(raw, null);
+        out_bytes = raw;
+        preview_md5 = Checksum.compute_for_bytes(ChecksumType.MD5, out_bytes);
+
+        MemoryInputStream mins = new MemoryInputStream.from_bytes (raw);
+
         return new Gdk.Pixbuf.from_stream_at_scale(mins, ImportPreview.MAX_SCALE, ImportPreview.MAX_SCALE, true, null);
     }
     
@@ -196,27 +199,28 @@ namespace GPhoto {
         return new Gdk.Pixbuf.from_stream(ins, null);
     }
 
-    public void save_image(Context context, Camera camera, string folder, string filename, 
-        File dest_file) throws Error {
+    public void save_image(Context context, Camera camera, string folder, string filename, File dest_file) throws Error {
+        var fd = Posix.creat(dest_file.get_path(), 0640);
+        if (fd < 0) {
+            throw new IOError.FAILED("[%d] Error creating file %s: %m", GLib.errno, dest_file.get_path());
+        }
+
         GPhoto.CameraFile camera_file;
-        GPhoto.Result res = GPhoto.CameraFile.create(out camera_file);
-        if (res != Result.OK)
+        GPhoto.Result res = GPhoto.CameraFile.create_from_fd(out camera_file, fd);
+        if (res != Result.OK) {
             throw new GPhotoError.LIBRARY("[%d] Error allocating camera file: %s", (int) res, res.as_string());
+        }
         
         res = camera.get_file(folder, filename, GPhoto.CameraFileType.NORMAL, camera_file, context);
-        if (res != Result.OK)
+        if (res != Result.OK) {
             throw new GPhotoError.LIBRARY("[%d] Error retrieving file object for %s/%s: %s", 
                 (int) res, folder, filename, res.as_string());
-
-        res = camera_file.save(dest_file.get_path());
-        if (res != Result.OK)
-            throw new GPhotoError.LIBRARY("[%d] Error copying file %s/%s to %s: %s", (int) res, 
-                folder, filename, dest_file.get_path(), res.as_string());
+        }
     }
     
     public PhotoMetadata? load_metadata(Context context, Camera camera, string folder, string filename)
         throws Error {
-        uint8[] camera_raw = null;
+        Bytes? camera_raw = null;
         try {
             camera_raw = load_file_into_buffer(context, camera, folder, filename, GPhoto.CameraFileType.EXIF);
         } catch {
@@ -246,17 +250,12 @@ namespace GPhoto {
             throw new GPhotoError.LIBRARY("[%d] Error retrieving file object for %s/%s: %s", 
                 (int) res, folder, filename, res.as_string());
         
-        // if entire file fits in memory, return a stream from that ... can't merely wrap
-        // MemoryInputStream around the camera_file buffer, as that will be destroyed when the
-        // function returns
-        unowned uint8 *data;
-        ulong data_len;
-        res = camera_file.get_data_and_size(out data, out data_len);
-        if (res == Result.OK) {
-            uint8[] buffer = new uint8[data_len];
-            Memory.copy(buffer, data, buffer.length);
-            
-            return new MemoryInputStream.from_data(buffer, on_mins_destroyed);
+        // if entire file fits in memory, return a stream from that ...
+        // The camera_file is set as data on the object to keep it alive while
+        // the MemoryInputStream is alive.
+        var bytes = camera_file_to_bytes (context, camera_file);
+        if (bytes != null) {
+            return new MemoryInputStream.from_bytes(bytes);
         }
 
         // if not stored in memory, try copying it to a temp file and then reading out of that
@@ -269,35 +268,20 @@ namespace GPhoto {
         return temp.read(null);
     }
     
-    private static void on_mins_destroyed(void *data) {
-        free(data);
-    }
-    
     // Returns a buffer with the requested file, if within reason.  Use load_file for larger files.
-    public uint8[]? load_file_into_buffer(Context context, Camera camera, string folder,
+    public Bytes? load_file_into_buffer(Context context, Camera camera, string folder,
         string filename, CameraFileType filetype) throws Error {
         GPhoto.CameraFile camera_file;
         GPhoto.Result res = GPhoto.CameraFile.create(out camera_file);
         if (res != Result.OK)
             throw new GPhotoError.LIBRARY("[%d] Error allocating camera file: %s", (int) res, res.as_string());
-        
+
         res = camera.get_file(folder, filename, filetype, camera_file, context);
         if (res != Result.OK)
             throw new GPhotoError.LIBRARY("[%d] Error retrieving file object for %s/%s: %s", 
                 (int) res, folder, filename, res.as_string());
-        
-        // if buffer can be loaded into memory, return a copy of that (can't return buffer itself
-        // as it will be destroyed when the camera_file is unref'd)
-        unowned uint8 *data;
-        ulong data_len;
-        res = camera_file.get_data_and_size(out data, out data_len);
-        if (res != Result.OK)
-            return null;
-        
-        uint8[] buffer = new uint8[data_len];
-        Memory.copy(buffer, data, buffer.length);
-        
-        return buffer;
+
+        return camera_file_to_bytes (context, camera_file);
     }
 }
 

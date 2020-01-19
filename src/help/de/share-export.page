@@ -10,7 +10,7 @@
     <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
       <mal:name>Mario Blättermann</mal:name>
       <mal:email>mario.blaettermann@gmail.com</mal:email>
-      <mal:years>2009, 2016</mal:years>
+      <mal:years>2009, 2016-2017</mal:years>
     </mal:credit>
   
     <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
@@ -22,7 +22,7 @@
     <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
       <mal:name>Christian Kirbach</mal:name>
       <mal:email>christian.kirbach@gmail.com</mal:email>
-      <mal:years>2014, 2106</mal:years>
+      <mal:years>2014, 2016, 2017</mal:years>
     </mal:credit>
   </info>
 
@@ -30,7 +30,7 @@
 
 <p>Um Fotos aus Shotwell mittels Ziehen-und-Ablegen zu exportieren, ziehen Sie die Fotos aus Shotwell in das Fenster einer Dateiverwaltung oder auf Ihre Arbeitsfläche. Die neuen Dateien entsprechen dann einer Kopie der Fotos Ihrer Bibliothek in Originalgröße.</p>
 
-<p>Alternativ wählen Sie eine Gruppe Fotos und wählen Sie <guiseq><gui>Datei</gui><gui>Exportieren</gui></guiseq> oder drücken Sie <keyseq><key>Umschalttaste</key><key>Strg</key><key>E</key></keyseq>, um Fotos zu exportieren und dabei die Größe und Abmessung der Fotodateien zu bestimmen. Daraufhin erscheint ein Fenster mit mehreren Wahlmöglichkeiten:</p>
+<p>Alternativ wählen Sie eine Fotogruppe und wählen Sie <guiseq><gui>Datei</gui><gui>Exportieren</gui></guiseq> oder drücken Sie <keyseq><key>Umschalttaste</key><key>Strg</key><key>E</key></keyseq>, um Fotos zu exportieren und dabei die Größe und Abmessung der Fotodateien zu bestimmen. Daraufhin erscheint ein Fenster mit mehreren Wahlmöglichkeiten:</p>
 
 <list>
 <item><p>Ein Format für den Export.</p>
@@ -41,7 +41,14 @@
 </list>
 </item>
 <item><p>Die Bildqualität beim Exportieren (gering, mittel, hoch oder maximal).</p></item>
-<item><p>Eine Skalierungsbeschränkung (sie legt fest, wie Shotwell entscheidet die Fotos zu skalieren) und die gewünschte Pixelgröße.</p></item>
+<item><p>Eine Skalierungsbeschränkung (sie legt fest, wie Shotwell entscheidet die Fotos zu skalieren) und die gewünschte Pixelgröße.</p>
+<terms>
+<item><title>Ursprüngliche Größe</title><p>Das Bild wird ohne Skalierung exportiert</p></item>
+<item><title>Längste Seite</title><p>Die längste Seite des Bildes wird anhand der angegebenen <gui>Pixel</gui> skaliert und die andere Seite entsprechend dem Seitenverhältnis.</p></item>
+<item><title>Breite</title><p>Die Bildbreite wird anhand der angegebenen Pixel skaliert und die Bildhöhe entsprechend dem Seitenverhältnis. Dies entspricht der <gui>Längsten Seite</gui> bei Querformaten.</p></item>
+<item><title>Höhe</title><p>Die Bildhöhe wird anhand der angegebenen Pixel skaliert und die Bildbreite entsprechend dem Seitenverhältnis. Dies entspricht der <gui>Längsten Seite</gui> bei Hochformaten.</p></item>
+</terms>
+</item>
 <item><p>Legt fest, ob Metadaten wie beispielsweise Markierungen oder Bewertungen exportiert werden sollen. Im Falle von Metadaten für Ortsdienste oder anderweitiger privater Markierungen kann dies dabei helfen, Ihre Privatsphäre zu schützen.</p></item>
 </list>
 

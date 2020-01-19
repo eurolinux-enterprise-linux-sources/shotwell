@@ -25,15 +25,18 @@
     <p>Genom att använda <link xref="other-plugins">insticksmoduler</link> kan Shotwell publicera bilder och filmer till följande tjänster, som var och en kräver ett konto:</p>
     
     <list>
-    <item><p><link href="http://facebook.com">Facebook</link></p></item>
-    <item><p><link href="http://flickr.com">Flickr</link></p></item>
-    <item><p><link href="http://picasaweb.google.com">Picasa Web Albums</link> och <link href="http://plus.google.com">Google+</link></p></item>
-    <item><p><link href="http://youtube.com">YouTube</link> (endast video)</p></item>
-    <item><p><link href="http://fotki.yandex.ru">Yandex.Fotki</link>, en populär webbplats i Ryssland (endast bilder)</p></item>
+    <item><p><link href="https://facebook.com">Facebook</link></p></item>
+    <item><p><link href="https://flickr.com">Flickr</link></p></item>
+    <item><p><link href="https://picasaweb.google.com">Picasa Web Albums</link> and <link href="http://plus.google.com">Google+</link></p></item>
+    <item><p><link href="https://youtube.com">YouTube</link> (videos only)</p></item>
+    <item><p><link href="https://tumblr.com">Tumblr</link> (videos only)</p></item>
     <item><p>Vilken webbplats som helst som kör <link href="http://piwigo.org">Piwigo</link>-bildgalleriprogram (endast bilder)</p></item>
     </list>
     
-    <p>För att publicera markerade bilder i en samling, välj <guiseq><gui>Redigera</gui><gui>Inställningar</gui></guiseq> och klicka på fliken <gui>Insticksmoduler</gui> för att aktivera insticket för tjänsten du vill publicera till. Välj sedan <guiseq><gui>Arkiv</gui><gui>Publicera</gui></guiseq>, tryck verktygsfältsknappen <gui>Publicera</gui> eller använd <keyseq><key>Ctrl</key><key>P</key></keyseq>. Du får då upp en dialog som låter dig välja en publiceringstjänst. Du måste sedan logga in eller skapa ett konto.</p>
+    <p>To publish selected photos in a collection, choose <guiseq><gui>Edit</gui><gui>Preferences</gui></guiseq> and
+    click on the <gui>Plugins</gui> tab to enable the plugin for the service you want to publish to.  Next, choose,
+     <guiseq><gui>File</gui><gui>Publish</gui></guiseq>, press the <gui>Publish</gui> toolbar button or use <keyseq><key>Ctrl</key><key>Shift</key><key>P</key></keyseq>.
+    You will see a dialog that lets you select a publishing service.  You will then need to log in or create an account.</p>
     
     <p>Att publicera till Facebook kräver att du ger tillstånd för programmet Shotwell för Facebook. Du behöver bara ge dessa tillstånd en gång, då du först associerar Shotwell med ditt Facebook-konto.</p>
     <note style="advanced"><p>Du kommer bara kunna publicera bilder med högst behörigheten du givit tillstånd till för programmet Shotwell för Facebook</p></note>

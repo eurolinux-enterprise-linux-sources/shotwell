@@ -115,8 +115,8 @@ private const string fallback_image_missing[] = {
 };
 
 bool is_color_parsable(string spec) {
-    Gdk.Color color;
-    return Gdk.Color.parse(spec, out color);
+    var color = Gdk.RGBA ();
+    return color.parse(spec);
 }
 
 Gdk.RGBA parse_color(string spec) {
@@ -248,14 +248,6 @@ public void shift_colors(Gdk.Pixbuf pixbuf, int red, int green, int blue, int al
                 pixels[offset + 3] = shift_color_byte(pixels[offset + 3], alpha);
         }
     }
-}
-
-public void dim_pixbuf(Gdk.Pixbuf pixbuf) {
-    PixelTransformer transformer = new PixelTransformer();
-    SaturationTransformation sat = new SaturationTransformation(SaturationTransformation.MIN_PARAMETER);
-    transformer.attach_transformation(sat);
-    transformer.transform_pixbuf(pixbuf);
-    shift_colors(pixbuf, 0, 0, 0, -100);
 }
 
 bool coord_in_rectangle(int x, int y, Gdk.Rectangle rect) {
@@ -454,6 +446,59 @@ Gdk.Point derotate_point_arb(Gdk.Point source_point, int img_w, int img_h, doubl
     return rotate_point_arb(source_point, img_w, img_h, angle, true);
 }
 
+private static Cairo.Surface background_surface = null;
+
+private Cairo.Surface get_background_surface() {
+    if (background_surface == null) {
+        string color_a;
+        string color_b;
+        var config = Config.Facade.get_instance();
+
+        var type = config.get_transparent_background_type();
+        switch (type) {
+            case "checkered":
+                color_a = "#808080";
+                color_b = "#ccc";
+                break;
+            case "solid":
+                color_a = color_b = config.get_transparent_background_color();
+                break;
+            default:
+                color_a = color_b = "#000";
+                break;
+        }
+
+        background_surface = new Cairo.ImageSurface(Cairo.Format.RGB24, 16, 16);
+        var ctx = new Cairo.Context(background_surface);
+        ctx.set_operator(Cairo.Operator.SOURCE);
+        set_source_color_from_string(ctx, color_a);
+        ctx.rectangle(0,0,8,8);
+        ctx.rectangle(8,8,8,8);
+        ctx.fill();
+        set_source_color_from_string(ctx, color_b);
+        ctx.rectangle(0,8,8,8);
+        ctx.rectangle(8,0,8,8);
+        ctx.fill();
+    }
+
+    return background_surface;
+}
+
+public void invalidate_transparent_background() {
+    background_surface = null;
+}
+
+public void paint_pixmap_with_background (Cairo.Context ctx, Gdk.Pixbuf pixbuf, int x, int y) {
+    if (pixbuf.get_has_alpha()) {
+        ctx.set_source_surface(get_background_surface(), 0, 0);
+        ctx.get_source().set_extend(Cairo.Extend.REPEAT);
+        ctx.rectangle(x, y, pixbuf.width, pixbuf.height);
+        ctx.fill();
+    }
+
+    Gdk.cairo_set_source_pixbuf(ctx, pixbuf, x, y);
+    ctx.paint();
+}
 
 // Force an axially-aligned box to be inside a rotated rectangle.
 Box clamp_inside_rotated_image(Box src, int img_w, int img_h, double angle_deg,

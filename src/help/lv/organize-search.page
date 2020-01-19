@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" type="guide" id="search" xml:lang="lv">
+
+    <info>
+        <link type="guide" xref="index#organize"/>
+        <desc>Savā kolekcijā meklēt fotogrāfijas un video pēc dažādiem kritērijiem.</desc>
+        
+        <link type="next" xref="tag"/>
+    </info>
+
+    <title>Meklēšana</title>
+    
+    <p>Shotwell var veikt divu veidu meklēšanu: ar filtru rīkjoslā un ar saglabātu meklēšanu. Meklēšanas josla jums ļauj ātri meklēt dotajā skatā pēc noteiktiem kritērijiem. Saglabātās meklēšanas sniedz kompleksākus meklēšanas kritērijus un paliek sānu joslā starp sesijām.</p>
+    
+    <section id="searchbar">
+        <title>Meklēšanas josla</title>
+            <p><guiseq><gui>Skats</gui><gui>Meklēšanas josla</gui></guiseq> izvēles rūtiņa pārslēdz meklēšanas joslas attēlošanu. Jūs varat arī spiest <keyseq><key>Ctrl</key><key>F</key></keyseq> vai <key>F8</key>, lai parādītu meklēšanas joslu. Šajā joslā jūs varat meklēt, attēlot un slēpt fotogrāfijas un video pēc to nosaukumiem, tagiem, vērtējumiem un citām opcijām.</p>
+            
+            <p>Lai sāktu meklēšanu, ievadiet meklēšanas atslēgvārdus teksta laukā, vai spiediet <gui>Ar karodziņu</gui>, <gui>Vērtējums</gui> vai <gui>Tips</gui>. Teksta meklēšana salīdzinās jūsu atslēgvārdus ar tagu nosaukumiem, fotogrāfiju vai video nosaukumiem un fotogrāfiju datņu nosaukumiem. Pogas <gui>Ar karodziņu</gui>, <gui>Vērtējums</gui> and <gui>Tips</gui> jums attiecīgi ļauj filtrēt savu kolekciju pēc to marķējuma, zvaigznēm vērtējumā un pēc tā, vai vienumā ir attēli, video vai kameras jēlās datnes.</p>
+            
+            <p>Meklēšanas joslas izslēgšana un Shotwell aizvēršana automātiski atstata meklēšanas joslu.</p>
+    </section>
+    
+    <section id="savedsearch">
+        <title>Saglabātie meklējumi</title>
+            <p>Paplašinātā meklēšana saglabājas starp Shotwell sesijām un tiek atjaunināta, kad fotogrāfijas un video tiek pievienotas vai izņemtas no Shotwell bibliotēkas.</p>
+            
+            <p>Izveido saglabāto meklēšanu ar <guiseq><gui>Rediģēt</gui><gui>Jauna saglabātā meklēšana...</gui></guiseq> vai spiežot <keyseq><key>Ctrl</key><key>S</key></keyseq>. Dialoglodziņš jums ļauj ievadīt meklējuma nosaukuu un izvēlēties, vai sekojošajās rindās jāizpildās Kādam, Visiem vai Nevienam kritērijam.</p>
+            
+            <p>Katra rinda apzīmē meklēšanas kritēriju. Izmantojiet pogu <gui>+</gui>, lai pievienotu vairāk rindu, un pogu <gui>-</gui>, lai izņemtu attiecīgo rindu. Kombinētais lodziņš katras rindas kreisajā pusē izvēlas kritērija veidu. Kritērijam ir jābūt pareizi ievadītām, pirms kļūst pieejama poga <gui>Labi</gui>.</p>
+    </section>
+
+</page>

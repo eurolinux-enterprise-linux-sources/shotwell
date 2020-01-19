@@ -5,14 +5,14 @@
         <link type="guide" xref="index#import"/>
         <desc>Jak importovat fotografie, které jsou již uloženy ve vašem počítači.</desc>
         
-        <link type="next" xref="import-f-spot"/>
+        <link type="next" xref="import-camera"/>
     </info>
 
 	<title>Import z pevného disku</title>
 
     <p>Pro naimportování souborů z pevného disku do aplikace Shotwell stačí soubory přetáhnout ze správce souborů do okna Shotwell.</p>
     
-    <p>Případně můžete kliknout na <guiseq><gui>Soubor</gui> <gui>Importovat ze složky…</gui></guiseq> a vyberte složku obsahující fotografie, které chcete importovat.</p>
+    <p>Případně můžete kliknout na <guiseq><gui>Soubor</gui> <gui>Importovat ze složky…</gui></guiseq> a vyberte složku obsahující fotografie, které chcete importovat. Jestliže nechcete, aby se Shotwell při importu zanořoval postupně do podsložek, můžete zrušit zaškrtnutí volby <gui>Zanořovat se do podsložek</gui> ve spodní části dialogového okna.</p>
     
     <p>Shotwell se vás dotáže, jestli chcete soubory s fotografiemi zkopírovat do složky knihovny (což je obvykle složka <file>Obrázky</file> ve vaší domovské složce) nebo je naimportovat s odkazem na stávající umístění, bez kopírování souborů.</p>
     

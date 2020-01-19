@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" type="guide" id="rating" xml:lang="lv">
+
+    <info>
+        <link type="guide" xref="index#organize"/>
+        <desc>Vērtējiet fotogrāfijas skalā no 1 līdz 5 zvaigznes. Jūs varat noraidīt sliktās fotogrāfijas, slēpjot tās no skata.</desc>
+        
+        <link type="next" xref="delete"/>
+    </info>
+
+	<title>Vērtējumi</title>
+<p>Jūs varat katrai fotogrāfijai piešķirt vērtējumu no 1 līdz 5 zvaigznēm, vai arī tās noraidīt, kas pēc noklusējuma šīs bildes paslēps.</p>
+
+<p>Jūs varat novērtēt fotogrāfiju vai to kopumu šādos veidos:</p>
+
+<list>
+<item><p>Izvēlieties fotogrāfiju(-as), tad izvēlieties vērtējumu no izvēlnes<guiseq><gui>Fotogrāfijas</gui><gui>Iestatīt vērtējumu</gui></guiseq>.</p></item>
+<item><p>Spiediet labo peles pogu uz fotogrāfijas(-ām) un izvēlieties vērtējumu no “Iestatīt vērtējumu” konteksta izvēlnes.</p></item>
+<item><p>Izvēlieties fotogrāfiju(-as), tad spiediet kādu no saīsnes taustiņiem <key>1</key>, <key>2</key>, <key>3</key>, <key>4</key> vai <key>5</key>, lai piešķirtu vērtējumu. Vai spiediet <key>9</key>, lai atzīmētu fotogrāfiju kā noraidītu, vai <key>0</key>, lai noņemtu vērtējumu.</p></item>
+</list>
+
+<p>Parasti Shotwell attēlo visas fotogrāfijas, izņemot noraidītās. Jūs varat iestatīt citu vērtējumu filtru, piemēram, izmantojot <guiseq><gui>Skats</gui><gui>Filtrēt attēlus</gui></guiseq> izvēlni, jūs varat rādīt tikai attēlus ar vismaz 3 zvaigznēm vērtējumā, vai rādīt visas noraidītās fotogrāfijas. Shotwell ikona rīkjoslā attēlo aktuālo filtru un to var izmantot filtru iestatīšanai.</p>
+
+<p>Shotwell parasti attēlo katras fotogrāfijas vērtējumu tās apakšējā kreisajā stūrī. Jūs varat izslēgt vērtējumu attēlošanu, izmantojot <guiseq><gui>Skats</gui><gui>Vērtējumi</gui></guiseq> izvēlni.</p>
+
+<p>Jūs varat palielināt vai samazināt fotogrāfijas vērtējumu, izmantojot komandas <guiseq><gui>Iestatīt vērtējumu</gui><gui>Palielināt</gui></guiseq> un <guiseq><gui>Iestatīt vērtējumu</gui><gui>samazināt</gui></guiseq>, vai ar tastatūras saīsnēm <key>&lt;</key> un <key>&gt;</key>.</p>
+</page>

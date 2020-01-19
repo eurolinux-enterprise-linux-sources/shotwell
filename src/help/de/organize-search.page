@@ -10,7 +10,7 @@
     <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
       <mal:name>Mario Blättermann</mal:name>
       <mal:email>mario.blaettermann@gmail.com</mal:email>
-      <mal:years>2009, 2016</mal:years>
+      <mal:years>2009, 2016-2017</mal:years>
     </mal:credit>
   
     <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
@@ -22,7 +22,7 @@
     <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
       <mal:name>Christian Kirbach</mal:name>
       <mal:email>christian.kirbach@gmail.com</mal:email>
-      <mal:years>2014, 2106</mal:years>
+      <mal:years>2014, 2016, 2017</mal:years>
     </mal:credit>
   </info>
 
@@ -32,45 +32,20 @@
     
     <section id="searchbar">
         <title>Suchleiste</title>
-            <p>
-                The <guiseq><gui>View</gui><gui>Search Bar</gui></guiseq> checkbox toggles the display of the
-                search bar.  You can also hit <keyseq><key>Ctrl</key><key>F</key></keyseq> or <key>F8</key> to
-                bring up the search bar. From this bar, you can find, show and hide photos and videos based on
-                title, tag, rating or other options.
-            </p>
+            <p>Das Ankreuzfeld in <guiseq><gui>Ansicht</gui><gui>Suchleiste</gui></guiseq> blendet die Suchleiste ein oder aus. Sie können auch <keyseq><key>Strg</key><key>F</key></keyseq> oder <key>F8</key> drücken, um die Suchleiste zu öffnen. In dieser Suchzeile können Fotos und Videos anhand des Titels, des Stichworts, der Bewertung und weiterer Kriterien finden, anzeigen oder verbergen.</p>
             
-            <p>
-                To begin searching, simply enter a search keyword in the text box, or click on <gui>Flagged</gui>,
-                <gui>Rating</gui> or <gui>Type</gui>. The text search matches your keywords across tag names, 
-                photo or video titles and photos' original filenames. The <gui>Flagged</gui>,
-                <gui>Rating</gui> and <gui>Type</gui> buttons allow you to filter your collection by 
-                whether photos are flagged, their current number of stars, and whether the items shown are
-                images, videos, or raw camera files, respectively. 
-            </p>
+            <p>Um mit einer Suche zu beginnen, geben Sie einfach einen Suchbegriff in das Textfeld ein oder klicken Sie auf <gui>Markiert</gui>, <gui>Bewertung</gui> oder <gui>Typ</gui>. Die Textsuche sucht nach Treffern anhand von Stichworten, Foto- oder Videotiteln und den Namen von Originaldateien. Mit den Knöpfen <gui>Markiert</gui>, <gui>Bewertung</gui> oder <gui>Typ</gui> können Sie Ihre Sammlung danach filtern, ob Fotos markiert sind, nach der Anzahl der Bewertungssterne oder ob es sich um Bilder, Videos oder Kamera-Rohbilder (RAW) handelt.</p>
             
-            <p>
-                Disabling the search bar or exiting Shotwell automatically resets the search bar.
-            </p>
+            <p>Durch Deaktivieren der Suchleiste oder Beenden von Shotwell wird die Suchleiste automatisch zurückgesetzt.</p>
     </section>
     
     <section id="savedsearch">
         <title>Gespeicherte Suche</title>
-            <p>
-                A saved search persists across Shotwell sessions, and is updated as photos and videos are added 
-                and removed from your Shotwell library.
-            </p>
+            <p>Eine gespeicherte Suche bleibt auch für eine spätere Shotwell-Sitzung erhalten. Sie wird durch Hinzufügen und Entfernen von Fotos und Videos zur beziehungsweise aus der Shotwell-Bibliothek aktualisiert.</p>
             
-            <p>
-                Create a new saved search with <guiseq><gui>Edit</gui><gui>New Saved Search...</gui></guiseq> or by hitting
-                <keyseq><key>Ctrl</key><key>S</key></keyseq>. The dialog box allows you to enter a name for the
-                search and select whether you want to meet Any, All, or None of the criteria in the following rows.
-            </p>
+            <p>Erstellen Sie eine neue gespeicherte Suche mit <guiseq><gui>Bearbeiten</gui><gui>Neue gespeicherte Suche …</gui></guiseq> oder durch Drücken von <keyseq><key>Strg</key><key>S</key></keyseq>. Im Dialogfeld können Sie einen Namen für die Suche vergeben und entscheiden, ob <gui>beliebige</gui>, <gui>alle</gui> oder <gui>keine</gui> der Kriterien in den folgenden Zeilen angewendet werden sollen.</p>
             
-            <p>
-                Each row represents a search criterion.  Use the <gui>+</gui> button to add more rows, and the
-                <gui>-</gui> button to remove a specific row.  The combo box on the left of each row selects the type
-                of criteria. Criteria must be entered correctly before the <gui>OK</gui> button becomes available.
-            </p>
+            <p>Jede Zeile stellt ein Suchkriterium dar. Mit dem <gui>+</gui>-Knopf können Sie weitere Zeilen hinzufügen und mit dem <gui>-</gui>-Knopf eine bestimmte Zeile entfernen. Das Kombinationsfeld links an jeder Zeile wählt das Suchkriterium aus. Die Kriterien müssen korrekt eingegeben werden, damit der <gui>OK</gui>-Knopf benutzbar wird.</p>
     </section>
 
 </page>

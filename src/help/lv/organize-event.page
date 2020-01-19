@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" type="guide" id="event" xml:lang="lv">
+
+    <info>
+        <link type="guide" xref="index#organize"/>
+        <desc>Grupēt kopā fotogrāfijas, kas ir uzņemtas tajā pašā laikā. Uzziniet, kā pārdēvēt, apvienot un kārtot notikumus.</desc>
+        
+        <link type="next" xref="flag"/>
+    </info>
+
+	<title>Notikumi</title>
+
+    <p>Notikums ir virkne ar fotogrāfijām, kas ir uzņemtas aptuveni vienā laikā. Importējot fotogrāfijas, Shotwell pārbauda, kad katra fotogrāfija ir uzņemta. Tad tas sagrupē fotogrāfijas notikumos.</p>
+    
+    <p>Izvēlieties <gui>Notikumi</gui> sānu joslā, lai redzētu fotogrāfijas, kas ir organizētas pēc datumiem. Ja sānu joslā izvēlēsities mēnesi vai gadu, galvenajā logā parādīsies saraksts ar notikumiem. Dubultklikšķiniet uz notikuma, lai redzētu visas fotogrāfijas, kas tika uzņemtas ap to laiku.</p>
+    
+    <p>Ja fotogrāfijā nav iekļauta informācija par datumu un laiku, Shotwell nevar automātiski to novietot kādā notikumā. Šādā gadījumā fotogrāfija parādīsies <gui>Nav notikuma</gui> sadaļā sānu joslā. Jūs vēl aizvien varat pārvietot šādu fotogrāfiju uz jebkuru notikumu tāpat kā pārējās fotogrāfijas.</p>
+    
+    <section id="renaming">
+    <title>Notikumu pārdēvēšana</title>
+
+    <p>Lai notikumam piešķirtu nosaukumu, nevis norādīt uz to pēc datuma, izvēlieties notikumu, spiediet <guiseq><gui>Notikumi</gui><gui>Pārdēvēt notikumu...</gui></guiseq> un ievadiet jauno nosaukumu. Vēl notikumus var pārdēvēt, dubultklikšķinot uz to nosaukuma sānu joslā, ievadot jauno nosaukumu un spiežot <key>Enter</key>.</p>
+    </section>
+
+    <section id="moving-photos">
+    <title>Fotogrāfiju pārvietošana starp notikumiem</title>
+
+    <p>Lai gan fotogrāfijas sākumā tiek grupētas notikumos pēc to datumiem, jūs varat pārvietot fotogrāfijas starp notikumiem. Lai to izdarītu, velciet jebkuru fotogrāfiju uz sānu joslu un nometiet to notikumā.</p>
+    </section>
+
+    <section id="creating-events">
+    <title>Notikumu izveidošana un apvienošana</title>
+    <p>Lai izveidotu jaunu notikumu, izvēlieties fotogrāfijas, ko redzēt jaunajā notikumā un spiediet <guiseq><gui>Notikumi</gui><gui>Jauni notikumi</gui></guiseq>.</p>
+    <p>Lai apvienotu notikumus, izvēlieties <guiseq><gui>Notikumi</gui></guiseq> sānu joslā, tad, turot piespiestu <key>Ctrl</key>, spiediet uz notikumiem, kurus vēlaties apvienot galvenā loga laukumā. Visbeidzot, spiediet <guiseq><gui>Notikumi</gui><gui>Apvienot notikumus</gui></guiseq>.</p>
+    </section>
+
+    <section id="sorting-events">
+    <title>Notikumu kārtošana</title>
+
+    <p>Notikumi tiek attēloti sānu joslas kokā, organizēti pa notikumiem, pēc vecākās fotogrāfijas datuma un mēneša. Lai mainītu notikumu kārtošanas secību, spiediet <guiseq><gui>Skats</gui><gui>Kārtot notikumus</gui></guiseq> un izvēlieties kārtot vai nu augoši, vai dilstoši.</p>
+    
+    </section>
+    
+    <section id="change-photo">
+    <title>Mainīt fotogrāfiju, kas reprezentē katru notikumu</title>
+
+    <p>Ja sānu joslā izvēlieties vienumu <gui>notikumi</gui>, redzēsiet vienu fotogrāfiju, kas reprezentē katru notikumu. To dēvē par atslēgas fotogrāfiju.</p>
+
+    <p>Pēc noklusējuma, Shotwell izmanto pirmo fotogrāfiju kā atslēgas fotogrāfiju. Lai izmantotu citu atslēgas fotogrāfiju, izvēlieties vēlamo fotogrāfiju uz spiediet <guiseq><gui>Fotogrāfijas</gui><gui>Izvēlēties kā atslēgas fotogrāfiju notikumam</gui></guiseq>.</p>
+    
+    </section>
+    
+</page>

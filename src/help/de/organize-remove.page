@@ -3,14 +3,14 @@
 
     <info>
         <link type="guide" xref="index#organize"/>
-        <desc>Remove photos from the library, or delete them from your computer entirely.</desc>
+        <desc>Fotos aus der Bibliothek entfernen oder ganz vom Rechner löschen.</desc>
         
         <link type="next" xref="search"/>
     
     <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
       <mal:name>Mario Blättermann</mal:name>
       <mal:email>mario.blaettermann@gmail.com</mal:email>
-      <mal:years>2009, 2016</mal:years>
+      <mal:years>2009, 2016-2017</mal:years>
     </mal:credit>
   
     <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
@@ -22,26 +22,24 @@
     <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
       <mal:name>Christian Kirbach</mal:name>
       <mal:email>christian.kirbach@gmail.com</mal:email>
-      <mal:years>2014, 2106</mal:years>
+      <mal:years>2014, 2016, 2017</mal:years>
     </mal:credit>
   </info>
 
-	<title>Removing and deleting photos</title>
+	<title>Fotos entfernen und löschen</title>
 
-    <p>You may remove photos from your library and you may additionally delete them entirely from your hard disk.</p>
-<media type="image" src="figures/trash_process.png">Delete process</media>
-<p>This diagram shows how a photo, when deleted, is first put into Shotwell's trash. If you delete it from Shotwell's trash, it is put into your computer's trash. If you delete it from your computer's trash the photo is finally and irretrievably deleted from your computer.</p>
+    <p>Sie können Fotos aus Ihrer Bibliothek entfernen und diese zusätzlich vollständig von der Festplatte löschen.</p>
+<media type="image" src="figures/trash_process.png"><p>Löschvorgang</p></media>
+<p>Das Diagramm zeigt, wie ein Foto beim Löschen zunächst in den Shotwell-eigenen Papierkorb verschoben wird. Wenn Sie es aus dem Papierkorb entfernen, wird es in den systemeigenen Papierkorb verschoben. Sobald Sie es aus diesem globalen Papierkorb entfernen, wird es unwiderruflich und endgültig von Ihrem Rechner entfernt.</p>
 <section id="delete-remove">
 	<title>Fotos werden aus Bibliothek entfernt</title>
-    <p>Select the photos to remove and choose <guiseq><gui>Edit</gui><gui>Move to Trash</gui></guiseq>.
-    (You can also press the <key>Delete</key> key.)
-    The photos will be moved from your library to Shotwell's Trash.</p>
-    <p>If you want to remove photos from Shotwell without having them pass through the trash, simply select the photos to be removed and choose <guiseq><gui>Edit</gui><gui>Remove From Library</gui></guiseq>.  The photo files will be left in place on disk.</p>
+    <p>Wählen Sie die zu entfernenden Fotos aus udn wählen Sie <guiseq><gui>Bearbeiten</gui><gui>In den Papierkorb verschieben</gui></guiseq> oder drücken Sie die <key>Löschtaste</key>. Die Fotos werden aus Ihrer Bibliothek in den Shotwell-eigenen Papierkorb verschoben.</p>
+    <p>Wenn Sie Fotos aus Shotwell entfernen und dabei den Papierkorb umgehen wollen, wählen Sie einfach die zu entfernenden Fotos aus und wählen Sie <guiseq><gui>Bearbeiten</gui><gui>Aus der Bibliothek entfernen</gui></guiseq>. Die eigentlichen Fotodateien auf Ihrer Festplatte bleiben dabei erhalten.</p>
 </section>
 
 <section id="delete-empty">
 	<title>Den Papierkorb leeren oder Fotos wiederherstellen</title>
-    <p>Select the Trash entry in the Sidebar and Shotwell will display all photos that have been marked for removal or deletion.  In the Trash view, the following commands are available:</p>
+    <p>Wählen Sie den Papierkorb-Eintrag in der Seitenleiste aus. Dadurch zeigt Shotwell alle Fotos an, die zum Entfernen oder Löschen markiert wurden. In der Papierkorb-Ansicht haben Sie folgende Möglichkeiten:</p>
     <terms>
     <item><title>Löschen</title><p>Löschen der ausgewählten Fotos aus dem Papierkorb.</p></item>
     <item><title>Wiederherstellen</title><p>Wiederherstellen der gewählten Fotos in Shotwell.</p></item>

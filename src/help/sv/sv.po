@@ -1,13 +1,13 @@
 # Swedish translation for shotwell help
-# Copyright © 2015, 2016 shotwell's COPYRIGHT HOLDER
+# Copyright © 2015, 2016, 2017 shotwell's COPYRIGHT HOLDER
 # This file is distributed under the same license as the shotwell package.
 # Josef Andersson <josef.andersson@fripost.org>, 2015.
-# Anders Jonsson <anders.jonsson@norsjovallen.se>, 2016.
+# Anders Jonsson <anders.jonsson@norsjovallen.se>, 2016, 2017.
 msgid ""
 msgstr ""
 "Project-Id-Version: shotwell master\n"
-"POT-Creation-Date: 2016-07-01 22:30+0000\n"
-"PO-Revision-Date: 2016-09-21 13:25+0200\n"
+"POT-Creation-Date: 2017-09-25 16:12+0000\n"
+"PO-Revision-Date: 2017-09-28 22:48+0200\n"
 "Last-Translator: Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.9\n"
+"X-Generator: Poedit 2.0.3\n"
 
 #. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
 msgctxt "_"
@@ -165,20 +165,6 @@ msgstr ""
 "svarta är. Använd dem för att ändra kontrasten på en bild. Speciellt bilder "
 "som ser urblekta ut bör ha nytta av att ändra dessa inställningar."
 
-#. (itstool) path: media
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: C/edit-crop.page:42
-#| msgid ""
-#| "@@image: 'figures/crop_thirds.jpg'; md5=4cf0a026bb812c7eab0c9db8210a9524"
-msgctxt "_"
-msgid ""
-"external ref='figures/crop_thirds.jpg' md5='4cf0a026bb812c7eab0c9db8210a9524'"
-msgstr ""
-"external ref='figures/crop_thirds.jpg' md5='4cf0a026bb812c7eab0c9db8210a9524'"
-
 #. (itstool) path: info/desc
 #: C/edit-crop.page:7
 msgid "Improve the composition of a photo by cutting out parts of it."
@@ -313,6 +299,18 @@ msgid ""
 msgstr ""
 "Att beskära en bild så att den passar under tredelningsregeln ger ofta en "
 "visuellt tilltalande bild."
+
+#. (itstool) path: section/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: C/edit-crop.page:42
+msgctxt "_"
+msgid ""
+"external ref='figures/crop_thirds.jpg' md5='4cf0a026bb812c7eab0c9db8210a9524'"
+msgstr ""
+"external ref='figures/crop_thirds.jpg' md5='4cf0a026bb812c7eab0c9db8210a9524'"
 
 #. (itstool) path: media/p
 #: C/edit-crop.page:43
@@ -722,16 +720,16 @@ msgstr ""
 msgid "Supported photo and video formats"
 msgstr "Bild- och videoformat som stöds"
 
+# TODO:format->formats?
 #. (itstool) path: page/p
 #: C/formats.page:14
 msgid ""
-"Shotwell supports JPEG, PNG, TIFF, BMP and <link type=\"guide\" xref=\"other-"
-"raw\">RAW</link> photo files. Shotwell does not yet support other graphics "
-"format such as GIF."
+"Shotwell supports JPEG, PNG, TIFF, BMP and <link xref=\"other-raw\">RAW</"
+"link> photo files. Shotwell does not yet support other graphics format such "
+"as GIF."
 msgstr ""
-"Shotwell stödjer JPEG, PNG, TIFF, BMP och <link type=\"guide\" xref=\"other-"
-"raw\">RAW</link>-bildfiler. Shotwell stödjer inte ännu andra grafikformat "
-"som GIF."
+"Shotwell stödjer JPEG, PNG, TIFF, BMP och <link xref=\"other-raw\">RAW</"
+"link>-bildfiler. Shotwell stödjer inte ännu andra grafikformat som GIF."
 
 #. (itstool) path: page/p
 #: C/formats.page:16
@@ -752,10 +750,10 @@ msgstr ""
 #: C/formats.page:18
 msgid ""
 "For more information about RAW-format photos in Shotwell, please see the "
-"<link type=\"guide\" xref=\"other-raw\">RAW</link> section."
+"<link xref=\"other-raw\">RAW</link> section."
 msgstr ""
-"För mer information om RAW-formatbilder i Shotwell, se avsnittet <link type="
-"\"guide\" xref=\"other-raw\">RAW</link>."
+"För mer information om RAW-formatbilder i Shotwell, se avsnittet <link xref="
+"\"other-raw\">RAW</link>."
 
 #. (itstool) path: page/p
 #: C/formats.page:22
@@ -886,10 +884,16 @@ msgstr ""
 #: C/import-file.page:16
 msgid ""
 "Alternatively, click <guiseq><gui>File</gui><gui>Import From Folder...</"
-"gui></guiseq> and select the folder containing the photos you want to import."
+"gui></guiseq> and select the folder containing the photos you want to "
+"import. If you do not want Shotwell to recurse into subfolders while "
+"importing, you can uncheck the <gui>Recurse Into Subfolders</gui> checkbox "
+"on the bottom of the file dialog."
 msgstr ""
 "Alternativt, klicka <guiseq><gui>Arkiv</gui><gui>Importera från mapp…</gui></"
-"guiseq> och markera mappen som innehåller de bilder du vill importera."
+"guiseq> och markera mappen som innehåller de bilder du vill importera. Om du "
+"inte vill att Shotwell rekursivt ska gå in i undermappar under import kan du "
+"avmarkera kryssrutan <gui>Gå rekursivt in i undermappar</gui> längst ner i "
+"fildialogen."
 
 #. (itstool) path: page/p
 #: C/import-file.page:18
@@ -925,56 +929,6 @@ msgstr ""
 "När importen är färdig kan du välja <gui>Senaste import</gui> i sidopanelen "
 "för att se alla importerade bilder. Händelselistan kommer också att visa nya "
 "poster för datumen som motsvarar de importerade bilderna."
-
-#. (itstool) path: info/desc
-#: C/import-f-spot.page:7
-msgid ""
-"Shotwell can import all your photos and tags from the F-Spot photo manager."
-msgstr ""
-"Shotwell kan importera alla dina bilder och taggar från bildhanteraren F-"
-"Spot."
-
-#. (itstool) path: page/title
-#: C/import-f-spot.page:12
-msgid "Importing from F-Spot"
-msgstr "Importera från F-Spot"
-
-#. (itstool) path: page/p
-#: C/import-f-spot.page:14
-msgid "To import an existing photo collection from F-Spot:"
-msgstr "För att importera en befintlig bildsamling från F-Spot:"
-
-#. (itstool) path: item/p
-#: C/import-f-spot.page:16
-msgid "Select <guiseq><gui>File</gui><gui>Import From F-Spot</gui></guiseq>."
-msgstr ""
-"Välj <guiseq><gui>Arkiv</gui><gui>Importera från F-Spot</gui></guiseq>."
-
-#. (itstool) path: item/p
-#: C/import-f-spot.page:17
-msgid ""
-"Now choose either the default F-Spot library or another F-Spot database. If "
-"importing from another F-Spot database, select a directory and file from the "
-"chooser dialog box."
-msgstr ""
-"Välj nu antingen F-Spot-biblioteket eller en annan F-Spot-databas. Om "
-"importen sker från en annan F-Spot-databas, välj katalog och fil från "
-"valdialogrutan."
-
-#. (itstool) path: page/p
-#: C/import-f-spot.page:20
-msgid ""
-"Shotwell will import your photos, together with their tags and other "
-"information. Once the import is complete, you can select <gui>Last Import</"
-"gui> in the sidebar to see all photos successfully imported. The Events list "
-"will also show new entries for the dates corresponding to the imported "
-"photos."
-msgstr ""
-"Shotwell kommer att importera dina bilder tillsammans med deras taggar och "
-"annan information. När importen är klar kan du välja <gui>Senaste import</"
-"gui> i sidopanelen för att se alla bilder som importerades. Händelselistan "
-"kommer också att visa nya angivelser för datum som motsvarar de importerade "
-"bilderna."
 
 #. (itstool) path: info/desc
 #: C/import-memorycard.page:7
@@ -1041,12 +995,43 @@ msgstr ""
 "fungerar bör du ändå kunna importera bilder genom att ansluta <link xref="
 "\"import-camera\"> din kamera direkt till datorn </link>."
 
-#. (itstool) path: media
+#. (itstool) path: info/title
+#: C/index.page:6
+msgctxt "link"
+msgid "Shotwell"
+msgstr "Shotwell"
+
+#. (itstool) path: credit/name
+#: C/index.page:8
+msgid "Jim Nelson"
+msgstr "Jim Nelson"
+
+#. (itstool) path: credit/name
+#: C/index.page:10
+msgid "Allison Barlow"
+msgstr "Allison Barlow"
+
+#. (itstool) path: credit/name
+#: C/index.page:12
+msgid "Robert Ancell"
+msgstr "Robert Ancell"
+
+#. (itstool) path: credit/name
+#: C/index.page:14
+msgid "Peter Smith"
+msgstr "Peter Smith"
+
+#. (itstool) path: credit/name
+#: C/index.page:16
+msgid "Phil Bull"
+msgstr "Phil Bull"
+
+#. (itstool) path: title/media
 #. This is a reference to an external file such as an image or video. When
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: C/index.page:23
+#: C/index.page:22
 msgctxt "_"
 msgid ""
 "external ref='figures/shotwell_logo.png' "
@@ -1055,45 +1040,8 @@ msgstr ""
 "external ref='figures/shotwell_logo.png' "
 "md5='4b333499555b4e496b1a38f7899067f3'"
 
-#. (itstool) path: info/title
-#: C/index.page:6
-msgctxt "link"
-msgid "Shotwell"
-msgstr "Shotwell"
-
-#. (itstool) path: info/title
-#: C/index.page:7
-msgctxt "text"
-msgid "Shotwell"
-msgstr "Shotwell"
-
-#. (itstool) path: credit/name
-#: C/index.page:9
-msgid "Jim Nelson"
-msgstr "Jim Nelson"
-
-#. (itstool) path: credit/name
-#: C/index.page:11
-msgid "Allison Barlow"
-msgstr "Allison Barlow"
-
-#. (itstool) path: credit/name
-#: C/index.page:13
-msgid "Robert Ancell"
-msgstr "Robert Ancell"
-
-#. (itstool) path: credit/name
-#: C/index.page:15
-msgid "Peter Smith"
-msgstr "Peter Smith"
-
-#. (itstool) path: credit/name
-#: C/index.page:17
-msgid "Phil Bull"
-msgstr "Phil Bull"
-
 #. (itstool) path: page/title
-#: C/index.page:23
+#: C/index.page:22
 msgid ""
 "<media type=\"image\" src=\"figures/shotwell_logo.png\"/>Shotwell Photo "
 "Manager"
@@ -1102,32 +1050,32 @@ msgstr ""
 "bildhanterare"
 
 #. (itstool) path: section/title
-#: C/index.page:26
+#: C/index.page:25
 msgid "Importing Photos"
 msgstr "Importera bilder"
 
 #. (itstool) path: section/title
-#: C/index.page:30
+#: C/index.page:29
 msgid "Viewing Photos"
 msgstr "Visa bilder"
 
 #. (itstool) path: section/title
-#: C/index.page:34
+#: C/index.page:33
 msgid "Organizing Photos"
 msgstr "Ordna bilder"
 
 #. (itstool) path: section/title
-#: C/index.page:38
+#: C/index.page:37
 msgid "Editing Photos"
 msgstr "Redigera bilder"
 
 #. (itstool) path: section/title
-#: C/index.page:42
+#: C/index.page:41
 msgid "Sharing Photos"
 msgstr "Dela bilder"
 
 #. (itstool) path: section/title
-#: C/index.page:46
+#: C/index.page:45
 msgid "Other Features"
 msgstr "Andra egenskaper"
 
@@ -1266,7 +1214,7 @@ msgstr ""
 #. (itstool) path: section/title
 #: C/organize-event.page:51
 msgid "Change the photo used to represent each event"
-msgstr "Ändra bilden som representerar varje händelse."
+msgstr "Ändra bilden som representerar varje händelse"
 
 #. (itstool) path: section/p
 #: C/organize-event.page:53
@@ -1451,22 +1399,6 @@ msgstr ""
 "<guiseq><gui>Betygsätt</gui><gui>Sänk</gui></guiseq>-kommandona, eller "
 "tangentbordsgenvägarna <key>&lt;</key> och <key>&gt;</key>."
 
-#. (itstool) path: media
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: C/organize-remove.page:15
-#| msgid ""
-#| "@@image: 'figures/trash_process.png'; md5=ed596bda34c2f4a79a310fbc8bb51fd2"
-msgctxt "_"
-msgid ""
-"external ref='figures/trash_process.png' "
-"md5='ed596bda34c2f4a79a310fbc8bb51fd2'"
-msgstr ""
-"external ref='figures/trash_process.png' "
-"md5='ed596bda34c2f4a79a310fbc8bb51fd2'"
-
 #. (itstool) path: info/desc
 #: C/organize-remove.page:7
 msgid ""
@@ -1489,6 +1421,20 @@ msgstr ""
 "fullständigt från din hårddisk."
 
 #. (itstool) path: page/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: C/organize-remove.page:15
+msgctxt "_"
+msgid ""
+"external ref='figures/trash_process.png' "
+"md5='ed596bda34c2f4a79a310fbc8bb51fd2'"
+msgstr ""
+"external ref='figures/trash_process.png' "
+"md5='ed596bda34c2f4a79a310fbc8bb51fd2'"
+
+#. (itstool) path: media/p
 #: C/organize-remove.page:15
 msgid "Delete process"
 msgstr "Raderingsprocess"
@@ -2181,12 +2127,13 @@ msgstr "PM"
 #. (itstool) path: section/p
 #: C/other-files.page:72
 msgid ""
-"There are other symbols available; please check the manual for strftime by "
-"running the command <cmd>man strftime</cmd> if you need one that isn't "
-"listed here."
+"There are other symbols available; please check the <link href=\"man:strftime"
+"\">manual for strftime</link> by running the command <cmd>man strftime</cmd> "
+"if you need one that isn't listed here."
 msgstr ""
-"Det finns andra symboler tillgängliga, se handboken för strftime genom att "
-"köra kommandot <cmd>man strftime</cmd> om du behöver en som inte listas här."
+"Det finns andra symboler tillgängliga, se <link href=\"man:strftime"
+"\">handboken för strftime</link> genom att köra kommandot <cmd>man strftime</"
+"cmd> om du behöver en som inte listas här."
 
 #. (itstool) path: section/title
 #: C/other-files.page:79
@@ -2227,7 +2174,7 @@ msgstr ""
 #. (itstool) path: section/title
 #: C/other-files.page:95
 msgid "Automatically renaming imported photos to lowercase"
-msgstr "Automatiskt döpa om importerade bilder till gemener."
+msgstr "Automatiskt byta namn på importerade bilder till gemener"
 
 #. (itstool) path: section/p
 #: C/other-files.page:97
@@ -2632,7 +2579,7 @@ msgstr ""
 #. (itstool) path: page/title
 #: C/share-background.page:12
 msgid "Set a desktop background or slideshow"
-msgstr "Ange en skrivbordsbakgrund eller ett bildspel."
+msgstr "Ange en skrivbordsbakgrund eller ett bildspel"
 
 #. (itstool) path: page/p
 #: C/share-background.page:14
@@ -2921,13 +2868,11 @@ msgstr ""
 
 #. (itstool) path: item/p
 #: C/share-upload.page:18
-#| msgid "<link href=\"http://youtube.com\">YouTube</link> (videos only)"
 msgid "<link href=\"http://facebook.com\">Facebook</link>"
 msgstr "<link href=\"http://facebook.com\">Facebook</link>"
 
 #. (itstool) path: item/p
 #: C/share-upload.page:19
-#| msgid "<link href=\"http://youtube.com\">YouTube</link> (videos only)"
 msgid "<link href=\"http://flickr.com\">Flickr</link>"
 msgstr "<link href=\"http://flickr.com\">Flickr</link>"
 
@@ -3168,12 +3113,12 @@ msgstr ""
 "Sidopanelen till vänster om fönstret listar olika vyer över ditt bibliotek."
 
 #. (itstool) path: page/title
-#: C/view-sidebar.page:21
+#: C/view-sidebar.page:20
 msgid "The sidebar"
 msgstr "Sidopanelen"
 
 #. (itstool) path: page/p
-#: C/view-sidebar.page:23
+#: C/view-sidebar.page:22
 msgid ""
 "The sidebar on the left side of the Shotwell window lists various views of "
 "your library. Although you may see the same photo in multiple views, it's "
@@ -3184,7 +3129,7 @@ msgstr ""
 "lagrad en gång på din hårddisk."
 
 #. (itstool) path: page/p
-#: C/view-sidebar.page:25
+#: C/view-sidebar.page:24
 msgid ""
 "The <gui>Last Import</gui> view lists your last imported photos no matter if "
 "they are imported from F-Spot, your camera, a memory card or the hard disk."
@@ -3194,12 +3139,12 @@ msgstr ""
 "hårddisken."
 
 #. (itstool) path: page/p
-#: C/view-sidebar.page:27
+#: C/view-sidebar.page:26
 msgid "The <gui>Flagged</gui> lists all photos you had previous flagged."
 msgstr "<gui>Flaggade</gui> listar alla bilder du tidigare flaggat."
 
 #. (itstool) path: page/p
-#: C/view-sidebar.page:29
+#: C/view-sidebar.page:28
 msgid ""
 "The <gui>Saved Search</gui> allows you to sort your library by many criteria."
 msgstr ""
@@ -3207,7 +3152,7 @@ msgstr ""
 "kriterier."
 
 #. (itstool) path: page/p
-#: C/view-sidebar.page:31
+#: C/view-sidebar.page:30
 msgid ""
 "The <gui>Events</gui> folder lists all events in your library. An event is a "
 "group of photos that were taken at approximately the same time."
@@ -3216,7 +3161,7 @@ msgstr ""
 "händelser är en grupp av bilder som tagits ungefär samtidigt."
 
 #. (itstool) path: page/p
-#: C/view-sidebar.page:33
+#: C/view-sidebar.page:32
 msgid ""
 "The <gui>Tags</gui> folder lists all tags you've assigned to photos. Photos "
 "can have multiple tags attached to them. When you click on the name of a tag "
@@ -3225,6 +3170,50 @@ msgstr ""
 "Mappen <gui>Taggar</gui> listar alla taggar du tilldelat till bilder. Bilder "
 "kan ha flera taggar kopplade till dem. När du klickar på namnet på en tagg i "
 "sidopanelen kommer du att se alla bilder associerade med den taggen."
+
+#~ msgctxt "text"
+#~ msgid "Shotwell"
+#~ msgstr "Shotwell"
+
+#~ msgid ""
+#~ "Shotwell can import all your photos and tags from the F-Spot photo "
+#~ "manager."
+#~ msgstr ""
+#~ "Shotwell kan importera alla dina bilder och taggar från bildhanteraren F-"
+#~ "Spot."
+
+#~ msgid "Importing from F-Spot"
+#~ msgstr "Importera från F-Spot"
+
+#~ msgid "To import an existing photo collection from F-Spot:"
+#~ msgstr "För att importera en befintlig bildsamling från F-Spot:"
+
+#~ msgid ""
+#~ "Select <guiseq><gui>File</gui><gui>Import From F-Spot</gui></guiseq>."
+#~ msgstr ""
+#~ "Välj <guiseq><gui>Arkiv</gui><gui>Importera från F-Spot</gui></guiseq>."
+
+#~ msgid ""
+#~ "Now choose either the default F-Spot library or another F-Spot database. "
+#~ "If importing from another F-Spot database, select a directory and file "
+#~ "from the chooser dialog box."
+#~ msgstr ""
+#~ "Välj nu antingen F-Spot-biblioteket eller en annan F-Spot-databas. Om "
+#~ "importen sker från en annan F-Spot-databas, välj katalog och fil från "
+#~ "valdialogrutan."
+
+#~ msgid ""
+#~ "Shotwell will import your photos, together with their tags and other "
+#~ "information. Once the import is complete, you can select <gui>Last "
+#~ "Import</gui> in the sidebar to see all photos successfully imported. The "
+#~ "Events list will also show new entries for the dates corresponding to the "
+#~ "imported photos."
+#~ msgstr ""
+#~ "Shotwell kommer att importera dina bilder tillsammans med deras taggar "
+#~ "och annan information. När importen är klar kan du välja <gui>Senaste "
+#~ "import</gui> i sidopanelen för att se alla bilder som importerades. "
+#~ "Händelselistan kommer också att visa nya angivelser för datum som "
+#~ "motsvarar de importerade bilderna."
 
 #~ msgid "Facebook"
 #~ msgstr "Facebook"

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" type="guide" id="edit-external" xml:lang="lv">
+
+    <info>
+        <link type="guide" xref="index#edit"/>
+        <desc>Izmantot citu lietotni fotogrāfijas rediģēšanai.</desc>
+        
+        <link type="next" xref="edit-redeye"/>
+    </info>
+
+    <title>Rediģēt fotogrāfijas ar ārēju programmu</title>
+
+    <p>Jūs varat izmantot ārēju redaktoru, lai veiktu papildu izmaiņās fotogrāfijā. Ja ir instalēts, GIMP un UFRaw ir noklusējuma ārējie redaktori attiecīgi fotogrāfijām un jēlajām datnēm. Ja šīs programmas nav instalētas, jums jāizvēlas vēlamie redaktori <guiseq><gui>Rediģēt</gui><gui>Iestatījumi</gui></guiseq> un jāizvēlas redaktori no instalēto lietotņu izkrītošajām izvēlnēm.</p>
+
+    <p>Kad redaktors ir iestatīs, izvēlieties fotogrāfiju un izvēlieties<guiseq><gui>Fotogrāfijas</gui> <gui>Atvērt ar ārēju redaktoru</gui></guiseq> lai atvērtu fotogrāfiju ar ārēju redaktoru. Līdzīgi, ja fotogrāfija ir jēldatne, izvēlieties <guiseq><gui>Fotogrāfijas</gui><gui>Atvērt ar RAW redaktoru</gui></guiseq>, lai rediģētu jēldatni ar iestatīto RAW redaktoru.</p>
+
+    <p>Kad beigsiet rediģēt un saglabāsiet datni, Shotwell pamanīs izmaiņas un atjauninās fotogrāfiju. Kad ārējās izmaiņas ir pabeigtas, spiediet taustiņu <key>Shift</key> pilnekrāna logā, lai rādītu sākotnējo fotogrāfiju, nevis ārēji rediģēto.</p>
+                            
+    <p>Atjaunošana uz oriģinālu dzēsīs ārpusē veiktās izmaiņas.</p>
+    
+    <note>
+        <p>Ja jūs ārēji rediģējat RAW fotogrāfiju un to saglabājat citā attēlā, piemēram, JPEG vai PNG, Shotwell nevar automātiski noteikt, ka oriģinālā RAW un jaunais attēls ir saistīti.</p>
+            
+        <p>Ja vēlaties Shotwell lietotnē strādāt ar iegūto attēlu, jums pašam tā būs jāimportē.</p>
+    </note>    
+</page>

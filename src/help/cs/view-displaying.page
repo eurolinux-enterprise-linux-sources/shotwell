@@ -18,7 +18,7 @@
 
 <p>Shotwell také nabízí k prohlížení fotografií režim celé obrazovky. Zvolte <guiseq><gui>Zobrazit</gui> <gui>Celá obrazovka</gui></guiseq> nebo zmáčkněte <key>F11</key>. Abyste v režimu celé obrazovky viděli nástrojovou lištu, musíte najet myší do spodní části obrazovky. Nástrojová lišta nabízí tlačítka pro pohyb ve sbírce, pro přišpendlení nástrojové lišty (aby se neskrývala, když myší odjedete) a k opuštění režimu celé obrazovky.</p>
 
-<section>
+<section id="viewing-videos">
 <title>Zobrazování videí</title>
 <p>Když dvojitě kliknete na video, Shotwell spustí externí videopřehrávač, aby video přehrál. V současnosti není možné přehrát video v režimu celé obrazovky aplikace Shotwell nebo jinak přímo v rámci Shotwellu.</p>
 </section>

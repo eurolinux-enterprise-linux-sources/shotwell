@@ -3,14 +3,14 @@
 
     <info>
         <link type="guide" xref="index#other"/>
-        <desc>Keep the Shotwell library in sync with photo files on disk.</desc>
+        <desc>Halten Sie die Shotwell-Bibliothek auf dem gleichen Stand wie die Fotos auf Ihrer Festplatte.</desc>
         
         <link type="next" xref="other-plugins"/>
     
     <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
       <mal:name>Mario Blättermann</mal:name>
       <mal:email>mario.blaettermann@gmail.com</mal:email>
-      <mal:years>2009, 2016</mal:years>
+      <mal:years>2009, 2016-2017</mal:years>
     </mal:credit>
   
     <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
@@ -22,27 +22,20 @@
     <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
       <mal:name>Christian Kirbach</mal:name>
       <mal:email>christian.kirbach@gmail.com</mal:email>
-      <mal:years>2014, 2106</mal:years>
+      <mal:years>2014, 2016, 2017</mal:years>
     </mal:credit>
   </info>
 
    <title>Fotodateien</title>
 
-    <p>
-    Every photo in the Shotwell library corresponds to a file stored on your hard disk.  Shotwell has
-    several features which help you keep the Shotwell library and files on disk in sync.
-    </p>
+    <p>Jedes Foto in der Shotwell-Bibliothek entspricht einer auf Ihrer Festplatte gespeicherten Datei. Shotwell verfügt über verschiedene Funktionen, um die Shotwell-Bibliothek mit den Dateien auf der Festplatte synchron zu halten.</p>
     <links type="section"/>
     
     <section id="dirpattern">
         <title>Ein eigenes Namensschema verwenden</title>
         <p>Shotwell erlaubt es, ein eigenes Namensschema für Ihre Bibliothek zu verwenden. Passen Sie dazu die Einstellungen für <gui>Ordnerstruktur</gui> und <gui>Muster</gui> in den <gui>Einstellungen</gui> an. Verwenden Sie ein vorgewähltes Schema oder wählen Sie <gui>Benutzerdefiniert</gui> und tippen Sie Ihr eigenes ein.</p>
 
-        <p>
-            The available symbols for the directory pattern begin with a % (percent sign). The values 
-            these symbols produce are locale-dependent, so what you see on your computer may vary
-            from the examples below.
-        </p>
+        <p>Die verfügbaren Symbole für das Ordnernamensmuster beginnen mit einem % (Prozentzeichen). Die Werte dieser Symbole sind von der Spracheinstellung abhängig. Folglich kann das Ergebnis auf Ihrem Rechner von den nachfolgenden Beispielen abweichen.</p>
 
         <table frame="all" rules="rowgroups">
             <tbody>
@@ -73,76 +66,52 @@
             </tbody>
         </table>
 
-        <p>
-            There are other symbols available; please check the manual for strftime by running 
-            the command <cmd>man strftime</cmd> if you need one that isn't listed here.
-        </p>
+        <p>Es sind weitere Symbole verfügbar. Bitte schauen Sie dazu im <link href="man:strftime">Handbuch von strftime</link> nach, welches Sie mit dem Befehl <cmd>man strftime</cmd> ansehen können, falls ein benötigtes Symbol hier nicht aufgelistet ist.</p>
     </section>
 
     <section id="automatic-import">
        <title>Automatisch Fotos importieren</title>
        
-       <p>Shotwell can automatically import new photos which appear in the library directory.
-       (The library directory is usually the <file>Pictures</file> directory in your home directory;
-       you can change its location in in the <gui>Preferences</gui> window.)
-       </p>
+       <p>Shotwell kann Fotos automatisch importieren, die dann im Bibliotheksordner erscheinen. Der Bibliotheksordner befindet sich im Allgemeinen im Ordner <file>Bilder</file> in Ihrem persönlichen Ordner. Diesen Ort können Sie in den <gui>Einstellungen</gui> ändern.</p>
        
-       <p>To enable auto-import,
-       check the box <gui>Watch library directory for new files</gui> in
-       the <gui>Preferences</gui> window.</p>
+       <p>Um den automatischen Import zu aktivieren, aktivieren Sie das Ankreuzfeld <gui>Bibliotheksordner auf neue Dateien überwachen</gui> in den <gui>Einstellungen</gui>.</p>
        
-       <note style="advanced"><p>Shotwell can also follow symbolic links inside automatically-imported directories.</p></note>
+       <note style="advanced"><p>Shotwell kann auch symbolischen Verknüpfungen innerhalb der automatisch importierten Ordner folgen.</p></note>
 
     </section>
 
     <section id="automatic-rename">
-       <title>Automatically renaming imported photos to lowercase</title>
+       <title>Umbenennen automatisch importierter Fotos in Kleinbuchstaben</title>
        
-       <p>
-       Shotwell can automatically change the filenames of imported photos
-       to lowercase.  To enable this, choose <guiseq><gui>Edit</gui><gui>Preferences</gui></guiseq>,
-       and in the <gui>Preferences</gui> window, check the <gui>Rename imported files to lowercase</gui>
-       box.
-       </p>
+       <p>Shotwell kann automatisch die Dateinamen importierter Fotos in Kleinbuchstaben ändern. Um dies zu aktivieren, wählen Sie <guiseq><gui>Bearbeiten</gui><gui>Einstellungen</gui></guiseq> und aktivieren Sie im <gui>Einstellungen</gui>-Fenster das Ankreuzfeld <gui>Namen von importierten Dateien in Kleinbuchstaben ändern</gui>.</p>
     
     </section>
     
     <section id="writing-metadata">
-       <title>Writing metadata on the fly</title>
+       <title>Metadaten unmittelbar ändern</title>
        
-       <p>By default, Shotwell does not modify photo files, even when you edit photos or change their
-       tags or titles.  Shotwell records these changes in its own database only.</p>
+       <p>In der Voreinstellung ändert Shotwell keine Fotos, selbst wenn Sie sie bearbeiten oder deren Stichworte und Titel ändern. Solche Änderungen werden lediglich in der Shotwell-eigenen Datenbank registriert.</p>
        
-       <p>To change this behavior, you can enable the checkbox
-       <gui>Write tags, titles and other metadata to photo files</gui>
-       in the <gui>Preferences</gui> dialog.  When this option is enabled, Shotwell will write
-       the following metadata to most photo files whenever you change it in Shotwell:</p>
+       <p>Um dieses Verhalten zu ändern, aktivieren Sie das Ankreuzfeld <gui>Stichworte, Titel und andere Metadaten in die Fotodateien schreiben</gui> im <gui>Einstellungen</gui>-Dialog. Wenn diese Option aktiviert ist, werden die folgenden Metadaten in die Fotodateien geschrieben, sobald Sie sie in Shotwell ändern:</p>
        
        <list>
        <item><p>Titel</p></item>
        <item><p>Markierungen</p></item>
        <item><p>Bewertungen</p></item>
-       <item><p>Rotationsinformation</p></item>
+       <item><p>Ausrichtungsinformation</p></item>
        <item><p>Uhrzeit/Datum</p></item>
        </list>
        
-       <p>Shotwell stores this information in photo files in EXIF, IPTC and/or XMP format.  Note
-       that Shotwell can write only to photo files in JPEG, PNG and TIFF format, not to BMP photos, RAW photos
-       or to video files.  
-       </p>
+       <p>Shotwell speichert diese Informationen in Fotodateien im EXIF-, IPTC- und/oder XMP-Format. Beachten Sie, dass Shotwell nur in Fotodateien in den Formaten JPEG, PNG und TIFF schreiben kann, nicht in BMP-Fotos, RAW-Fotos oder Videodateien.</p>
     
     </section>
     
     <section id="runtime-monitoring">
-    <title>Runtime monitoring</title>
+    <title>Laufzeitüberwachung</title>
     
-    <p>While Shotwell is running, it notices changes made to any photo file externally.
-    When a photo file changes, Shotwell rereads the file and updates your view of the
-    photo and metadata.</p>
+    <p>Wenn Shotwell ausgeführt wird, werden Änderungen an jeder Fotodatei extern gespeichert. Bei Änderungen an einer Fotodatei liest Shotwell diese erneut ein und aktualisiert die Bild- und Metadatenansicht.</p>
     
-    <p>Note that Shotwell checks all photo files for changes at startup, but only photo files contained in
-    the library directory are monitored in real time after startup.  We hope to remove this limitation
-    in a further release.</p>
+    <p>Beachten Sie, das Shotwell beim Start alle Fotodateien auf Änderungen prüft, jedoch nach dem Start nur die im Bibliotheksordner enthaltenen Fotodateien in Echtzeit überwacht werden. Wir hoffen, diese Einschränkung in einer zukünftigen Version dieses Programms beseitigen zu können.</p>
 
     </section>
     

@@ -28,12 +28,16 @@
 
 <p>När du är nöjd med bildens färg och kontrast, tryck <gui>OK</gui> för att spara ändringarna. <gui>Återställ</gui> kommer att återställa bilden till dess ursprungliga tillstånd. <gui>Avbryt</gui> förkastar alla ändringar du har gjort.</p>
 
-<section>
+<section id="color-adjustments">
  <title>Vad gör färgjusteringarna?</title>
  <terms>
   <item>
    <title>Exponering</title>
    <p>Ändra ljusstyrkan för att få det att se ut som att bilden exponerades en längre eller kortare tid. Använd detta för att korrigera över- eller underexponerade bilder.</p>
+  </item>
+  <item>
+   <title>Contrast</title>
+   <p>Changes the contrast of a photo. Use it to correct flat-looking photos or photos where the difference between bright and dark spots seems to big.</p>
   </item>
   <item>
    <title>Mättnad</title>

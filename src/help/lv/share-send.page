@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" type="guide" id="share-send" xml:lang="lv">
+
+    <info>
+        <link type="guide" xref="index#share"/>
+        <desc>Sūtīt fotogrāfijas pa e-pastu, tūlītējo ziņojumapmaiņu vai citos veidos.</desc>
+        
+        <link type="next" xref="share-background"/>
+    </info>
+
+	<title>Fotogrāfiju sūtīšana</title>
+
+    <p>Shotwell var sūtīt fotogrāfijas, izmantojot GNOME darbvirsmas “Sūtīt uz” mehānismu, kas jums ļauj sūtīt fotogrāfijas caur e-pastu, tūlītējo ziņojumapmaiņu un citos veidos.</p>
+    <p>Lai sūtītu fotogrāfijas, atlasiet tās Shotwell lietotnē un izvēlieties <guiseq><gui>Datne</gui><gui>Sūtīt uz...</gui></guiseq>, vai spiediet labo peles klikšķi uz fotogrāfijām un izvēlieties <gui>Sūtīt uz...</gui> konteksta izvēlnē. Parādīsies dialoglodziņš <gui>Sūtīt uz</gui>, kas ļauj izvēlēties datņu sūtīšanas mehānismu (piemēram, e-pasts vai tūlītējā ziņojumapmaiņa) un gala mērķi. Jūs varat arī izvēlēties sūtīt datnes saspiestā formātā.</p>
+    
+</page>

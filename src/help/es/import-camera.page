@@ -38,7 +38,7 @@
      <p>Seleccione la cámara en la barra lateral. Se mostrará la vista previa de cada una de las fotos de la cámara.</p>
     </item>
     <item>
-     <p>If you like, you can choose a set of specific photos to import. To do this, hold down the <key>Ctrl</key> key and click to select individual photos. You can hold down <key>Shift</key> and click to select a range of photos too.</p>
+     <p>Si quiere, puede elegir un conjunto de fotos específicas para importar. Para ello, mantenga presionada la tecla <key>Ctrl</key> y pulse para seleccionar las fotos individuales. Puede mantener pulsada la tecla <key>Mayús</key> y pulsar para seleccionar varias fotos también.</p>
     </item>
     <item>
      <p>Pulse <gui>Importar seleccionadas</gui> o <gui> Importar todo</gui>. Las fotos se copiarán de la cámara y se guardarán en el ordenador.</p>

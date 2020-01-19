@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" type="guide" id="other-plugins" xml:lang="lv">
+
+    <info>
+        <link type="guide" xref="index#other"/>
+        <desc>Dinamiski izvērst Shotwell funkcionalitāti.</desc>
+        
+        <link type="next" xref="other-missing"/>
+    </info>
+
+	<title>Spraudņi</title>
+        <p>Shotwell var lietot ar <em>spraudņiem</em>, kas ir koplietotās bibliotēkas, kas var pievienot atbalstu jauniem publicēšanas mērķiem vai jaunām slaidrādes pārejām.</p>
+        
+        <p>Lai redzētu instalēto spraudņu sarakstu, izvēlieties <guiseq><gui>Rediģēt</gui><gui>Iestatījumi</gui></guiseq>, un logā <gui>Iestatījumi</gui> spiediet uz cilni <gui>Spraudņi</gui>. Tur būs redzami pašlaik instalētie spraudņi un tiem blakus izvēles rūtiņu. Jūs varat ieslēgt vai izslēgt katru no tiem, ieķeksējot vai noņemot ķeksi no attiecīgās izvēles rūtiņas.</p>
+        
+        <note style="advanced"><p>Pilna informācija par to, kā izstrādāt spraudņus, ir pieejama <link href="http://redmine.yorba.org/projects/shotwell/wiki/ShotwellArchWritingPlugins">http://redmine.yorba.org/projects/shotwell/wiki/ShotwellArchWritingPlugins</link></p></note>
+    
+</page>

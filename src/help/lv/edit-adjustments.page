@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" type="guide" id="edit-adjustments" xml:lang="lv">
+
+    <info>
+        <link type="guide" xref="index#edit"/>
+        <desc>Mainīt fotogrāfijas ekspozīciju, piesātinājumu, toni un ēnas.</desc>
+        
+        <link type="next" xref="edit-crop"/>
+    </info>
+
+   <title>Krāsu labojumi</title>
+
+<p>Poga <gui>Pielāgot</gui> atver peldošu lodziņu ar histogrammu un slīdņiem, ar ko pielabot fotogrāfijas ekspozīciju, piesātinājumu, toni, temperatūru un ēnas. Histogrammai ir arī slīdņi, ar ko samazināt fotogrāfijas augšējo un apakšējo sliekšņu intensitāti, palielinot vidējā apgabala kontrastu.</p>
+
+<p>Poga <gui>Uzlabot</gui> pielāgot histogrammas un ēnu slīdņus, lai uzlabotu fotogrāfijas kvalitāti.</p>
+
+<p>Kad fotogrāfijas krāsas un kontrasts atbilst jūsu vēlmēm, spiediet <gui>Labi</gui>, lai saglabātu izmaiņas. <gui>Atiestatīt</gui> atgriezīs bildi tās sākotnējā stāvoklī. <gui>Atcelt</gui> atmetīs visas veiktās izmaiņas.</p>
+
+<section id="color-adjustments">
+ <title>Ko dara krāsu pielabošana?</title>
+ <terms>
+  <item>
+   <title>Ekspozīcija</title>
+   <p>Maina gaišumu, lai izskatītos, ka fotogrāfijas ir eksponētas ilgāku vai īsāku laiku. Ar to var labot pāreksponētas vai nepietiekami eksponētas fotogrāfijas.</p>
+  </item>
+  <item>
+   <title>Contrast</title>
+   <p>Changes the contrast of a photo. Use it to correct flat-looking photos or photos where the difference between bright and dark spots seems to big.</p>
+  </item>
+  <item>
+   <title>Piesātinājums</title>
+   <p>Maina, cik spilgtas izskatās krāsas. Ja fotogrāfija izskatās pārāk pelēka vai izbalējusi, mēģiniet palielināt piesātinājumu. Ja krāsas ir pārāk izteiktas, samaziniet to.</p>
+  </item>
+  <item>
+   <title>Tonis</title>
+   <p>Tonē fotogrāfiju ar noteiktu krāsu. Šī iespēja noder, ja fotogrāfija ir uzņemta ne nepareiziem baltās krāsas balansa iestatījumiem, kas rada nedabīgu nokrāsu. Piemēram, fotogrāfijas, kas uzņemtas ārtelpās ar “Tungsten” (volframs) baltās krāsas balansa iestatījumiem, var radīt zilu nokrāsu.</p>
+  </item>
+  <item>
+   <title>Temperatūra</title>
+   <p>Maina, cik “silta” vai “auksta” izskatās bilde. Ar to aukstu un nomācošu ainu var padarīt dzīvīgāku.</p>
+  </item>
+  <item>
+   <title>Ēnas</title>
+   <p>Tas liek tumšākām attēla daļām izskatīties gaišākām. Izmantojiet šo, lai padarītu redzamākas tās detaļas, kuras ir pārāk tumšas vai ir ēnā.</p>
+  </item>
+  <item>
+   <title>Intensitātes slieksnis (slīdņi pie histogrammas)</title>
+   <p>Šie slīdņi maina, cik gaišs ir pats gaišākais punkts un cik tumšs ir pats tumšākais punkts. Tos varat izmantot, lai mainītu attēla kontrastu. Tas īpaši noderēs fotogrāfijām, kas izskatās izbalējušas vai miglainas.</p>
+  </item>
+ </terms>
+</section>
+    
+</page>

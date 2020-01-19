@@ -12,7 +12,7 @@
     <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
       <mal:name>Mario Blättermann</mal:name>
       <mal:email>mario.blaettermann@gmail.com</mal:email>
-      <mal:years>2009, 2016</mal:years>
+      <mal:years>2009, 2016-2017</mal:years>
     </mal:credit>
   
     <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
@@ -24,22 +24,15 @@
     <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
       <mal:name>Christian Kirbach</mal:name>
       <mal:email>christian.kirbach@gmail.com</mal:email>
-      <mal:years>2014, 2106</mal:years>
+      <mal:years>2014, 2016, 2017</mal:years>
     </mal:credit>
   </info>
 
 	<title>Fotos markieren</title>
 
-    <p>
-		You can assign one or more tags to selected photos.
-		A tag can be one or more words that you want to associate with 
-		those photos.
-	</p>
+    <p>Sie können den ausgewählten Fotos eines oder mehrere Stichworte zuweisen. Ein Stichwort kann aus einem oder mehreren Wörtern bestehen, die Sie mit diesen Fotos verbinden.</p>
     
-    <p>
-		To add new tags to photos, select the photos you would like to 
-		tag, then do any of the following:
-	</p>
+    <p>Um neue Stichworte zu Fotos hinzuzufügen, wählen Sie zunächst die gewünschten Fotos aus. Auf folgende Weise können Sie nun Stichworte zuweisen:</p>
     
     <list>
 		<item><p>Wählen Sie <guiseq><gui>Stichworte</gui><gui>Stichworte hinzufügen …</gui></guiseq>.</p></item>
@@ -47,65 +40,20 @@
 		<item><p>Ziehen Sie die gewählten Fotos und legen Sie diese auf das gewünschte Stichwort ab.</p></item>
     </list>
      
-    <p>
-		When you use <keyseq><key>Ctrl</key><key>T</key></keyseq> or 
-		<guiseq><gui>Tags</gui><gui>Add Tags...</gui></guiseq> you can type
-		in the names of one or more tags, separated by commas.
-		Once you have created a tag, you can rename it by selecting that 
-		tag in the sidebar and choosing 
-		<guiseq><gui>Tags</gui><gui>Rename Tag "[name]"...</gui></guiseq>,
-		by rightclicking on it and choose <gui>Rename...</gui> or
-		double-click on the tag in the sidebar.
-	</p>
+    <p>Wenn Sie <keyseq><key>Strg</key><key>T</key></keyseq> oder <guiseq><gui>Stichworte</gui><gui>Stichworte hinzufügen …</gui></guiseq> verwenden, so geben Sie anschließend ein oder mehrere Stichworte durch Kommata getrennt ein. Sofern Sie ein Stichwort erstellt haben, so benennen Sie es um, indem Sie es in der Seitenleiste auswählen und entweder <guiseq><gui>Stichworte</gui><gui>Stichwort »[Wort]« umbenennen …</gui></guiseq> wählen, oder mit der rechten Maustaste darauf klicken und <gui>Umbenennen …</gui> wählen, oder wenn Sie zweimal auf das Stichwort in der Seitenleiste klicken.</p>
     
-    <p>
-		To change which tags are associated with a particular photo, 
-		select that photo, choose 
-		<guiseq><gui>Tags</gui><gui>Modify Tags...</gui></guiseq> or
-		right-click on a photo and select <gui>Modify Tags...</gui> and
-		edit the comma separated list.
-		To remove a tag from one or more photos, first select that tag 
-		in the sidebar, then select the photos you would like to remove, 
-		and choose 
-		<guiseq><gui>Tags</gui><gui>Remove Tag "[name]" from Photos</gui></guiseq> 
-		or right-click on the photos an select 
-		<gui>Remove Tag "[name]" from Photos</gui>.
-	</p>
+    <p>Um zu ändern, welche Stichworte einem bestimmten Foto zugeordnet sind, wählen Sie das Foto aus und wählen Sie <guiseq><gui>Stichworte</gui><gui>Stichworte ändern …</gui></guiseq> oder klicken Sie mit der rechten Maustaste auf ein Foto und wählen <gui>Stichworte ändern …</gui>, um die durch Kommata getrennte Liste zu bearbeiten. Um ein Stichwort von einem oder mehreren Fotos zu entfernen, wählen Sie zunächst das Stichwort in der Seitenleiste aus und danach die Fotos, von denen Sie die Stichworte entfernen wollen. Wählen Sie dann <guiseq><gui>Stichworte</gui><gui>Stichwort »[Name]« von Fotos entfernen</gui></guiseq> oder klicken Sie mit der rechten Maustaste auf die Fotos und wählen <gui>Stichwort »[Name]« von Fotos entfernen</gui>.</p>
     
-    <p>
-		To delete a tag entirely, select that tag in the sidebar and choose 
-		<guiseq><gui>Tags</gui><gui>Delete Tag "[name]"</gui></guiseq> 
-		or by right-click and select <gui>Delete Tag "[name]"</gui>.
-	</p>
+    <p>Um ein Stichwort vollständig zu löschen, wählen Sie es in der Seitenleiste aus und wählen <guiseq><gui>Stichwort</gui><gui>Stichwort »[Name]« entfernen</gui></guiseq>. Alternativ klicken Sie mit der rechten Maustaste darauf und wählen <gui>Stichwort »[Name]« entfernen</gui>.</p>
 
-    <p>
-		When you create a tag, it will appear in the sidebar under the 
-		<gui>Tags</gui> item, which is hidden if there are no tags. Photos
-		can have multiple tags attached to them, and when you click on the
-		name of a given tag in the sidebar, you will see all the photos
-		associated with that tag.
-	</p>
+    <p>Wenn Sie ein neues Stichwort anlegen, so erscheint es in der Seitenleiste unter <gui>Stichworte</gui>, was nur bei bestehenden Stichworten dargestellt wird. Fotos können mit mehreren Stichworten verknüpft sein. Wenn Sie auf ein Stichwort in der Seitenleiste klicken, so erscheinen daraufhin alle Fotos, die mit diesem Stichwort verknüpft sind.</p>
     
     <section id="hierarchaicaltags">
         <title>Hierarchische Stichworte</title>
-            <p>
-				Shotwell supports also hierarchial tags. You can 
-				rearrange your tags by drag and drop a tag onto another. 
-				To create a new subtag right-click on a tag and select 
-				<gui>New</gui>.
-			</p>
+            <p>Shotwell unterstützt auch verschachtelte Stichworte. Sie können Ihre Stichworte neu arrangieren, indem Sie sie durch Ziehen und Ablegen ineinander verschieben. Um ein neues untergeordnetes Stichwort zuzuweisen, klicken Sie mit der rechten Maustaste auf ein Stichwort und wählen Sie <gui>Neu</gui>.</p>
             
-            <p>
-				Hierarchial tags can help you to sort your tag list in 
-				ways that better match how you work or think; for example,
-				you can store location tags like "Mountains" or "Beach"
-				under a parent tag "Places", which itself can be placed
-				under the tag "Summer Holidays".
-			</p>
+            <p>Verschachtelte Stichwörter sind hilfreich, wenn Sie die Sortierung Ihrer Stichwortliste besser an Ihre eigenen Bedürfnisse anpassen wollen. Beispielsweise können Sie ortsbezogene Stichworte wie »Berge« oder »Strand« dem Stichwort »Orte« unterordnen, welches seinerseits zum übergeordneten Stichwort »Sommerurlaub« gehören könnte.</p>
 			
-			<p>
-				Note that deleting a parent tag will also delete its 
-				child tags.
-			</p>
+			<p>Beachten Sie, dass beim Löschen eines übergeordneten Stichworts auch sämtliche enthaltenen untergeordneten Stichworte gelöscht werden.</p>
     </section>
 </page>

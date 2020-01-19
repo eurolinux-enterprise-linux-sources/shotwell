@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" type="guide" id="edit-redeye" xml:lang="lv">
+
+    <info>
+        <link type="guide" xref="index#edit"/>
+        <desc>Labojiet fotogrāfijas, kur cilvēkiem ir sarkanas acis dēļ kameras zibspuldzes.</desc>
+        
+        <link type="next" xref="edit-rotate"/>
+    </info>
+
+	<title>Sarkano acu noņemšana</title>
+
+    <p>Sarkano acu efekts notiek, kad kameras zibspuldze atspīd no acu zīlītes. Lai šo efektu novērstu fotogrāfijā, izmantojiet sarkano acu rīku.</p>
+    <steps>
+     <item>
+      <p>Spiediet <gui>Sarkanās acis</gui>. Fotogrāfijā parādīsies aplis.</p>
+     </item>
+     <item>
+      <p>Velciet apli virs sarkanās zīlītes, pielāgojiet tā izmēru ar slīdni un spiediet <gui>Pielietot</gui>. Sarkanums tiks noņemts.</p>
+     </item>
+     <item>
+      <p>Atkārtojiet procesu visām sarkanajām acīm fotogrāfijā. Kad pabeidzat, spiediet <gui>Aizvērt</gui>.</p>
+     </item>
+    </steps>
+</page>

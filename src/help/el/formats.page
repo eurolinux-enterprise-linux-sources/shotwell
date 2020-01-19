@@ -10,11 +10,13 @@
 
 	<title>Υποστηριζόμενες μορφές φωτογραφιών και βίντεο</title>
 
-   <p>Το Shotwell υποστηρίζει αρχεία φωτογραφίας JPEG, PNG, TIFF, BMP και <link type="guide" xref="other-raw">RAW</link>. Το Shotwell δεν υποστηρίζει ακόμα άλλες μορφές γραφικών όπως GIF.</p>
+   <p>Shotwell supports JPEG, PNG, TIFF, BMP and <link xref="other-raw">RAW</link> photo files. Shotwell does not yet support other graphics format such as GIF.</p>
 
 <p>Η υποστήριξη της μορφής RAW του Shotwell είναι προς το παρόν περιορισμένη. Όταν προβάλετε μια φωτογραφία RAW, στην πραγματικότητα προβάλετε μια JPEG που παράγεται από τη φωτογραφία RAW, όχι την ίδια την εικόνα RAW. Επιπρόσθετα, η διοχέτευση επεξεργασίας RAW δεν είναι πλήρως 16-δυαδικών - μπορείτε μόνο να εξάγετε επεξεργασμένες φωτογραφίες ως αρχεία 8 δυαδικών. Όλες οι υποστηριζόμενες μορφές μπορούν να χρησιμοποιηθούν για εξαγωγή (JPEG, PNG, TIFF, BMP).</p>
 
-<p>Για περισσότερες πληροφορίες σχετικά με τις φωτογραφίες μορφής RAW στο Shotwell, παρακαλούμε δείτε την ενότητα <link type="guide" xref="other-raw">RAW</link>.</p>
+<p>For more information about RAW-format photos in Shotwell, please see
+the <link xref="other-raw">RAW</link> section.
+</p>
 
 <p>Το Shotwell υποστηρίζει επίσης αρχεία βίντεο σε οποιαδήποτε υποστηριζόμενη μορφή από τη βιβλιοθήκη πολυμέσων GStreamer στο σύστημα όπου εκτελείται το Shotwell. Αυτό περιλαμβάνει τυπικά τις παρακάτω μορφές μεταξύ άλλων:</p>
 <list>

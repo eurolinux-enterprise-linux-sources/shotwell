@@ -59,7 +59,9 @@ public abstract class MediaSource : ThumbnailSource, Indexable {
     protected override void notify_altered(Alteration alteration) {
         Alteration local = alteration;
         
-        if (local.has_detail("metadata", "name") || local.has_detail("backing", "master")) {
+        if (local.has_detail("metadata", "name") ||
+            local.has_detail("metadata", "comment") ||
+            local.has_detail("backing", "master")) {
             update_indexable_keywords();
             local = local.compress(new Alteration("indexable", "keywords"));
         }
@@ -723,6 +725,17 @@ public abstract class MediaSourceCollection : DatabaseSourceCollection {
                 // Note: we may get an exception even though the delete succeeded.
                 debug("Exception deleting file %s: %s", file.get_path(), err.message);
             }
+
+            var masterfile = source.get_master_file();
+            if (masterfile != null) {
+                try {
+                    masterfile.delete(null);
+                } catch (Error err) {
+                    if (!(err is IOError.NOT_FOUND)) {
+                        debug("Exception deleting master file %s: %s", masterfile.get_path(), err.message);
+                    }
+                }
+            }
             
             bool deleted = !file.query_exists();
             if (!deleted && null != not_deleted) {
@@ -781,6 +794,7 @@ public class MediaCollectionRegistry {
         LibraryMonitor replacement = new LibraryMonitor(import_dir, true,
             !CommandlineOptions.no_runtime_monitoring);
         LibraryMonitorPool.get_instance().replace(replacement, LIBRARY_MONITOR_START_DELAY_MSEC);
+        LibraryFiles.select_copy_function();
     }
     
     public static MediaCollectionRegistry get_instance() {

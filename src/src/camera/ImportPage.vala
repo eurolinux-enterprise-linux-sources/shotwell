@@ -463,7 +463,7 @@ public class CameraAccumulator : Object, Core.TrackerAccumulator {
 }
 
 public class ImportPage : CheckerboardPage {
-    private const string UNMOUNT_FAILED_MSG = _("Unable to unmount camera.  Try unmounting the camera from the file manager.");
+    private const string UNMOUNT_FAILED_MSG = _("Unable to unmount camera. Try unmounting the camera from the file manager.");
     
     private class ImportViewManager : ViewManager {
         private ImportPage owner;
@@ -615,20 +615,13 @@ public class ImportPage : CheckerboardPage {
             
             return true;
         }
-        
-        public override bool complete(MediaSource source, BatchImportRoll import_roll) throws Error {
-            bool ret = false;
-            if (source is Photo) {
-                Photo photo = source as Photo;
-                
-                // Associate paired JPEG with RAW photo.
-                if (associated_file != null) {
-                    photo.add_backing_photo_for_development(RawDeveloper.CAMERA, associated_file);
-                    ret = true;
-                    photo.set_raw_developer(Config.Facade.get_instance().get_default_raw_developer());
-                }
+
+        public override File? get_associated_file() {
+            if (associated_file == null) {
+                return null;
             }
-            return ret;
+
+            return File.new_for_path(associated_file.filepath);
         }
     }
     
@@ -766,8 +759,8 @@ public class ImportPage : CheckerboardPage {
         LibraryPhoto.global.contents_altered.connect(on_media_added_removed);
         Video.global.contents_altered.connect(on_media_added_removed);
         
-        init_item_context_menu("/ImportContextMenu");
-        init_page_context_menu("/ImportContextMenu");
+        init_item_context_menu("ImportContextMenu");
+        init_page_context_menu("ImportContextMenu");
     }
     
     ~ImportPage() {
@@ -809,7 +802,8 @@ public class ImportPage : CheckerboardPage {
             
             // Find button
             Gtk.ToggleToolButton find_button = new Gtk.ToggleToolButton();
-            find_button.set_related_action(get_action("CommonDisplaySearchbar"));
+            find_button.set_icon_name("edit-find");
+            find_button.set_action_name ("win.CommonDisplaySearchbar");
             
             toolbar.insert(find_button, -1);
             
@@ -818,15 +812,21 @@ public class ImportPage : CheckerboardPage {
             
             // Import selected
             Gtk.ToolButton import_selected_button = new Gtk.ToolButton(null, null);
-            import_selected_button.set_icon_name(Resources.IMPORT);
-            import_selected_button.set_related_action(get_action("ImportSelected"));
+            import_selected_button.set_icon_name("import");
+            import_selected_button.set_label(_("Import _Selected"));
+            import_selected_button.is_important = true;
+            import_selected_button.use_underline = true;
+            import_selected_button.set_action_name ("win.ImportSelected");
             
             toolbar.insert(import_selected_button, -1);
             
             // Import all
             Gtk.ToolButton import_all_button = new Gtk.ToolButton(null, null);
-            import_all_button.set_icon_name(Resources.IMPORT_ALL);
-            import_all_button.set_related_action(get_action("ImportAll"));
+            import_all_button.set_icon_name("import-all");
+            import_all_button.set_label(_("Import _All"));
+            import_all_button.is_important = true;
+            import_all_button.use_underline = true;
+            import_all_button.set_action_name ("win.ImportAll");
             
             toolbar.insert(import_all_button, -1);
 
@@ -872,37 +872,29 @@ public class ImportPage : CheckerboardPage {
         
         ui_filenames.add("import.ui");
     }
-    
-    protected override Gtk.ToggleActionEntry[] init_collect_toggle_action_entries() {
-        Gtk.ToggleActionEntry[] toggle_actions = base.init_collect_toggle_action_entries();
 
-        Gtk.ToggleActionEntry titles = { "ViewTitle", null, TRANSLATABLE, "<Ctrl><Shift>T",
-            TRANSLATABLE, on_display_titles, Config.Facade.get_instance().get_display_photo_titles() };
-        titles.label = _("_Titles");
-        titles.tooltip = _("Display the title of each photo");
-        toggle_actions += titles;
+    private const GLib.ActionEntry[] entries = {
+        { "ImportSelected", on_import_selected },
+        { "ImportAll", on_import_all },
+        // Toggle actions
+        { "ViewTitle", on_action_toggle, null, "false", on_display_titles },
+    };
 
-        return toggle_actions;
+    protected override void add_actions (GLib.ActionMap map) {
+        base.add_actions (map);
+
+        map.add_action_entries (entries, this);
+
+        get_action ("ViewTitle").change_state (Config.Facade.get_instance ().get_display_photo_titles ());
     }
 
-    protected override Gtk.ActionEntry[] init_collect_action_entries() {
-        Gtk.ActionEntry[] actions = base.init_collect_action_entries();
-        
-        Gtk.ActionEntry import_selected = { "ImportSelected", Resources.IMPORT,
-            TRANSLATABLE, null, null, on_import_selected };
-        import_selected.label = _("Import _Selected");
-        import_selected.tooltip = _("Import the selected photos into your library");
-        actions += import_selected;
-
-        Gtk.ActionEntry import_all = { "ImportAll", Resources.IMPORT_ALL, TRANSLATABLE,
-            null, null, on_import_all };
-        import_all.label = _("Import _All");
-        import_all.tooltip = _("Import all the photos into your library");
-        actions += import_all;
-
-        return actions;
+    protected override void remove_actions(GLib.ActionMap map) {
+        base.remove_actions(map);
+        foreach (var entry in entries) {
+            map.remove_action(entry.name);
+        }
     }
-    
+
     public GPhoto.Camera get_camera() {
         return camera;
     }
@@ -918,8 +910,8 @@ public class ImportPage : CheckerboardPage {
     protected override void init_actions(int selected_count, int count) {
         on_view_changed();
         
-        set_action_important("ImportSelected", true);
-        set_action_important("ImportAll", true);
+        set_action_sensitive("ImportSelected", true);
+        set_action_sensitive("ImportAll", true);
         
         base.init_actions(selected_count, count);
     }
@@ -956,8 +948,7 @@ public class ImportPage : CheckerboardPage {
     private void on_view_changed() {
         set_action_sensitive("ImportSelected", !busy && refreshed && get_view().get_selected_count() > 0);
         set_action_sensitive("ImportAll", !busy && refreshed && get_view().get_count() > 0);
-        AppWindow.get_instance().set_common_action_sensitive("CommonSelectAll",
-            !busy && (get_view().get_count() > 0));
+        set_action_sensitive("CommonSelectAll", !busy && (get_view().get_count() > 0));
 
         update_toolbar_state();
     }
@@ -966,13 +957,15 @@ public class ImportPage : CheckerboardPage {
         search_filter.refresh();
     }
 
-    private void on_display_titles(Gtk.Action action) {
-        bool display = ((Gtk.ToggleAction) action).get_active();
+    private void on_display_titles(GLib.SimpleAction action, Variant? value) {
+        bool display = value.get_boolean ();
 
         set_display_titles(display);
+
         Config.Facade.get_instance().set_display_photo_titles(display);
+        action.set_state (value);
     }
-    
+
     public override void switched_to() {
         set_display_titles(Config.Facade.get_instance().get_display_photo_titles());
         
@@ -1005,7 +998,7 @@ public class ImportPage : CheckerboardPage {
                 }
                 
                 // if locked because it's mounted, offer to unmount
-                debug("Checking if %s is mounted ...", uri);
+                debug("Checking if %s is mounted…", uri);
 
                 File uri = File.new_for_uri(uri);
 
@@ -1015,10 +1008,21 @@ public class ImportPage : CheckerboardPage {
                 } catch (Error err) {
                     // error means not mounted
                 }
+
+                // Could not find mount for gphoto2://, re-try with mtp://
+                // It seems some devices are mounted using MTP and not gphoto2 daemon
+                if (mount == null && this.uri.has_prefix("gphoto2")) {
+                    uri = File.new_for_uri("mtp" + this.uri.substring(7));
+                    try {
+                        mount = uri.find_enclosing_mount(null);
+                    } catch (Error err) {
+                        // error means not mounted
+                    }
+                }
                 
                 if (mount != null) {
                     // it's mounted, offer to unmount for the user
-                    string mounted_message = _("Shotwell needs to unmount the camera from the filesystem in order to access it.  Continue?");
+                    string mounted_message = _("Shotwell needs to unmount the camera from the filesystem in order to access it. Continue?");
 
                     Gtk.MessageDialog dialog = new Gtk.MessageDialog(AppWindow.get_instance(), 
                         Gtk.DialogFlags.MODAL, Gtk.MessageType.QUESTION,
@@ -1034,7 +1038,7 @@ public class ImportPage : CheckerboardPage {
                         unmount_camera(mount);
                     }
                 } else {
-                    string locked_message = _("The camera is locked by another application.  Shotwell can only access the camera when it's unlocked.  Please close any other application using the camera and try again.");
+                    string locked_message = _("The camera is locked by another application. Shotwell can only access the camera when it’s unlocked. Please close any other application using the camera and try again.");
 
                     // it's not mounted, so another application must have it locked
                     Gtk.MessageDialog dialog = new Gtk.MessageDialog(AppWindow.get_instance(),
@@ -1066,14 +1070,14 @@ public class ImportPage : CheckerboardPage {
         progress_bar.visible = true;
         progress_bar.set_fraction(0.0);
         progress_bar.set_ellipsize(Pango.EllipsizeMode.NONE);
-        progress_bar.set_text(_("Unmounting..."));
+        progress_bar.set_text(_("Unmounting…"));
         
         // unmount_with_operation() can/will complete with the volume still mounted (probably meaning
         // it's been *scheduled* for unmounting).  However, this signal is fired when the mount
         // really is unmounted -- *if* a VolumeMonitor has been instantiated.
         mount.unmounted.connect(on_unmounted);
         
-        debug("Unmounting camera ...");
+        debug("Unmounting camera…");
         mount.unmount_with_operation.begin(MountUnmountFlags.NONE, 
             new Gtk.MountOperation(AppWindow.get_instance()), null, on_unmount_finished);
         
@@ -1153,22 +1157,45 @@ public class ImportPage : CheckerboardPage {
         return false;
     }
 
+    private int claim_timeout = 500;
+
     private RefreshResult refresh_camera() {
         if (busy)
             return RefreshResult.BUSY;
             
-        this.set_page_message (_("Starting import, please wait..."));
-
+        this.set_page_message (_("Connecting to camera, please wait…"));
         update_status(busy, false);
         
         refresh_error = null;
         refresh_result = camera.init(spin_idle_context.context);
+
+        // If we fail to claim the device, we might have run into a conflict
+        // with gvfs-gphoto2-volume-monitor. Back off, try again after
+        // claim_timeout ms.
+        // We will wait 3.5s in total (500 + 1000 + 2000) before giving
+        // up with the infamous -53 error dialog.
+        if (refresh_result == GPhoto.Result.IO_USB_CLAIM) {
+            if (claim_timeout < 4000) {
+                Timeout.add (claim_timeout, () => {
+                    refresh_camera();
+                    return false;
+                });
+                claim_timeout *= 2;
+
+                return RefreshResult.LOCKED;
+            }
+        }
+
+        // reset claim_timeout to initial value
+        claim_timeout = 500;
+
         if (refresh_result != GPhoto.Result.OK) {
             warning("Unable to initialize camera: %s", refresh_result.to_full_string());
             
             return (refresh_result == GPhoto.Result.IO_LOCK) ? RefreshResult.LOCKED : RefreshResult.LIBRARY_ERROR;
         }
 
+        this.set_page_message (_("Starting import, please wait…"));
         update_status(true, refreshed);
         
         on_view_changed();
@@ -1379,6 +1406,7 @@ public class ImportPage : CheckerboardPage {
             
             return true;
         }
+        files.sort();
 
         for (int ctr = 0; ctr < files.count(); ctr++) {
             string filename;
@@ -1553,9 +1581,7 @@ public class ImportPage : CheckerboardPage {
             // calculate EXIF's fingerprint
             string? exif_only_md5 = null;
             if (metadata != null) {
-                uint8[]? flattened_sans_thumbnail = metadata.flatten_exif(false);
-                if (flattened_sans_thumbnail != null && flattened_sans_thumbnail.length > 0)
-                    exif_only_md5 = md5_binary(flattened_sans_thumbnail, flattened_sans_thumbnail.length);
+                exif_only_md5 = metadata.exif_hash();
             }
             
             // XXX: Cannot use the metadata for the thumbnail preview because libgphoto2
@@ -1564,9 +1590,8 @@ public class ImportPage : CheckerboardPage {
             // this means the preview orientation will be wrong and the MD5 is not generated
             // if the EXIF did not parse properly (see above)
             
-            uint8[] preview_raw = null;
-            size_t preview_raw_length = 0;
             Gdk.Pixbuf preview = null;
+            string? preview_md5 = null;
             try {
                 string preview_fulldir = fulldir;
                 string preview_filename = filename;
@@ -1575,7 +1600,7 @@ public class ImportPage : CheckerboardPage {
                     preview_filename = associated.get_filename();
                 }
                 preview = GPhoto.load_preview(spin_idle_context.context, camera, preview_fulldir,
-                    preview_filename, out preview_raw, out preview_raw_length);
+                    preview_filename, out preview_md5);
             } catch (Error err) {
                 // only issue the warning message if we're not reading a video. GPhoto is capable
                 // of reading video previews about 50% of the time, so we don't want to put a guard
@@ -1586,11 +1611,6 @@ public class ImportPage : CheckerboardPage {
                     warning("Unable to fetch preview for %s/%s: %s", fulldir, filename, err.message);
                 }
             }
-            
-            // calculate thumbnail fingerprint
-            string? preview_md5 = null;
-            if (preview != null && preview_raw != null && preview_raw_length > 0)
-                preview_md5 = md5_binary(preview_raw, preview_raw_length);
             
 #if TRACE_MD5
             debug("camera MD5 %s: exif=%s preview=%s", filename, exif_only_md5, preview_md5);
@@ -1799,10 +1819,8 @@ public class ImportPage : CheckerboardPage {
 
     public override void set_display_titles(bool display) {
         base.set_display_titles(display);
-    
-        Gtk.ToggleAction? action = get_action("ViewTitle") as Gtk.ToggleAction;
-        if (action != null)
-            action.set_active(display);
+
+        set_action_active ("ViewTitle", display);
     }
     
     // Gets the search view filter for this page.

@@ -30,7 +30,7 @@
 
 <p>Shotwell es un editor de fotos no destructivo. No modifica sus fotografías originales. Es decir, si recorta una foto o ajusta sus colores, el archivo de la foto del disco permanece intacto. Shotwell almacena sus ediciones en una base de datos y las aplica sobre la marcha, según sea necesario. Esto significa que puede deshacer cualquier alteración que realices en una fotografía.</p>
 
-<p>If you want to see what a photo looked like before your modifications, press the <key>Shift</key> key. The original photo will be displayed as long as you hold the key down.</p>
+<p>Si quiere ver qué aspecto tenía una foto antes de realizar las modificaciones, pulse la tecla <key>Mayús</key>. La foto original se mostrará siempre que mantenga pulsada esta tecla.</p>
 
 <p>Tenga en cuenta que Shotwell puede escribir metadatos opcionalmente (como etiquetas y títulos) en los archivos de fotos. Para obtener más información, consulte la sección <link xref="other-files">Archivos de fotos</link>.</p>
 
