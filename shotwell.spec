@@ -1,6 +1,6 @@
 Name:           shotwell
 Version:        0.28.4
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        A photo organizer for the GNOME desktop
 
 # LGPLv2+ for the code
@@ -140,6 +140,10 @@ gtk-update-icon-cache --quiet %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Mon Dec 17 2018 Debarshi Ray <rishi@fedoraproject.org> - 0.28.4-2
+- Rebuild against new LibRaw soname
+- Resolves: #1652700
+
 * Wed Aug 01 2018 Kalev Lember <klember@redhat.com> - 0.28.4-1
 - Update to 0.28.4
 - Resolves: #1569785
