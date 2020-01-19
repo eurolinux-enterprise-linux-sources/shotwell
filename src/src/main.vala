@@ -1,4 +1,4 @@
-/* Copyright 2009-2013 Yorba Foundation
+/* Copyright 2016 Software Freedom Conservancy Inc.
  *
  * This software is licensed under the GNU LGPL (version 2.1 or later).
  * See the COPYING file in this distribution.
@@ -58,7 +58,7 @@ void library_exec(string[] mounts) {
         case Db.VerifyResult.UPGRADE_ERROR:
             errormsg = _("Shotwell was unable to upgrade your photo library from version %s (schema %d) to %s (schema %d).  For more information please check the Shotwell Wiki at %s").printf(
                 app_version, schema_version, Resources.APP_VERSION, DatabaseTable.SCHEMA_VERSION,
-                Resources.WIKI_URL);
+                Resources.HOME_URL);
         break;
         
         case Db.VerifyResult.NO_UPGRADE_AVAILABLE:
@@ -104,6 +104,12 @@ void library_exec(string[] mounts) {
             progress_dialog = new ProgressDialog(null, _("Loading Shotwell"));
             progress_dialog.update_display_every(100);
             progress_dialog.set_minimum_on_screen_time_msec(250);
+            try {
+                string icon_path = AppDirs.get_resources_dir().get_child("icons").get_child("shotwell.svg").get_path();
+                progress_dialog.icon = new Gdk.Pixbuf.from_file(icon_path);
+            } catch (Error err) {
+                debug("Warning - could not load application icon for loading window: %s", err.message);
+            }
             
             aggregate_monitor = new AggregateProgressMonitor(grand_total, progress_dialog.monitor);
             monitor = aggregate_monitor.monitor;
@@ -339,8 +345,11 @@ void main(string[] args) {
     }
     
     if (CommandlineOptions.show_version) {
-        print("%s %s\n", Resources.APP_TITLE, Resources.APP_VERSION);
-        
+        if (Resources.GIT_VERSION != null)
+            print("%s %s (%s)\n", Resources.APP_TITLE, Resources.APP_VERSION, Resources.GIT_VERSION);
+        else
+            print("%s %s\n", Resources.APP_TITLE, Resources.APP_VERSION);
+
         AppDirs.terminate();
         
         return;
@@ -367,9 +376,18 @@ void main(string[] args) {
     }
     
     Debug.init(is_string_empty(filename) ? Debug.LIBRARY_PREFIX : Debug.VIEWER_PREFIX);
-    message("Shotwell %s %s",
-        is_string_empty(filename) ? Resources.APP_LIBRARY_ROLE : Resources.APP_DIRECT_ROLE,
-        Resources.APP_VERSION);
+
+    if (Resources.GIT_VERSION != null)
+        message("Shotwell %s %s (%s)",
+            is_string_empty(filename) ? Resources.APP_LIBRARY_ROLE : Resources.APP_DIRECT_ROLE,
+            Resources.APP_VERSION, Resources.GIT_VERSION);
+    else
+        message("Shotwell %s %s",
+            is_string_empty(filename) ? Resources.APP_LIBRARY_ROLE : Resources.APP_DIRECT_ROLE,
+            Resources.APP_VERSION);
+
+    debug ("Shotwell is running in timezone %s", new
+           DateTime.now_local().get_timezone_abbreviation ());
         
     // Have a filename here?  If so, configure ourselves for direct
     // mode, otherwise, default to library mode.
@@ -418,9 +436,17 @@ void main(string[] args) {
     if (is_string_empty(filename) && !was_already_running) {
         string orig_path = AppDirs.get_data_subdir("data").get_child("photo.db").get_path();
         string backup_path = orig_path + ".bak";
-        string cmdline = "cp " + orig_path + " " + backup_path;
-        Posix.system(cmdline);
-        Posix.system("sync");
+        try {
+            File src = File.new_for_commandline_arg(orig_path);
+            File dest = File.new_for_commandline_arg(backup_path);
+            src.copy(dest,
+                     FileCopyFlags.OVERWRITE |
+                     FileCopyFlags.ALL_METADATA);
+        } catch(Error error) {
+            warning("Failed to create backup file of database: %s",
+                    error.message);
+        }
+        Posix.sync();
     }
 }
 

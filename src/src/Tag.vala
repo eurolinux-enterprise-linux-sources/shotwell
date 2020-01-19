@@ -1,4 +1,4 @@
-/* Copyright 2010-2013 Yorba Foundation
+/* Copyright 2016 Software Freedom Conservancy Inc.
  *
  * This software is licensed under the GNU Lesser General Public License
  * (version 2.1 or later).  See the COPYING file in this distribution.
@@ -205,7 +205,7 @@ public class TagSourceCollection : ContainerSourceCollection {
     }
     
     protected override void notify_container_contents_added(ContainerSource container, 
-        Gee.Collection<DataSource> added, bool relinking) {
+        Gee.Collection<DataObject> added, bool relinking) {
         Tag tag = (Tag) container;
         Gee.Collection<MediaSource> sources = (Gee.Collection<MediaSource>) added;
         
@@ -221,7 +221,7 @@ public class TagSourceCollection : ContainerSourceCollection {
             
             Gee.SortedSet<Tag>? sorted_tags = sorted_source_map.get(source);
             if (sorted_tags == null) {
-                sorted_tags = new FixedTreeSet<Tag>(Tag.compare_names);
+                sorted_tags = new Gee.TreeSet<Tag>(Tag.compare_names);
                 sorted_source_map.set(source, sorted_tags);
             }
             
@@ -233,7 +233,7 @@ public class TagSourceCollection : ContainerSourceCollection {
     }
     
     protected override void notify_container_contents_removed(ContainerSource container, 
-        Gee.Collection<DataSource> removed, bool unlinking) {
+        Gee.Collection<DataObject> removed, bool unlinking) {
         Tag tag = (Tag) container;
         Gee.Collection<MediaSource> sources = (Gee.Collection<MediaSource>) removed;
         
@@ -269,6 +269,7 @@ public class TagSourceCollection : ContainerSourceCollection {
 public class Tag : DataSource, ContainerSource, Proxyable, Indexable {
     public const string TYPENAME = "tag";
     public const string PATH_SEPARATOR_STRING = "/";
+    public const string TAG_LIST_SEPARATOR_STRING = ", ";
     
     private class TagSnapshot : SourceSnapshot {
         private TagRow row;
@@ -529,19 +530,21 @@ public class Tag : DataSource, ContainerSource, Proxyable, Indexable {
     public static void terminate() {
     }
     
-    public static int compare_names(void *a, void *b) {
-        Tag *atag = (Tag *) a;
-        Tag *btag = (Tag *) b;
-        
-        return String.precollated_compare(atag->get_name(), atag->get_name_collation_key(),
-            btag->get_name(), btag->get_name_collation_key());
+    public static int compare_names(Tag a, Tag b) {        
+        return String.precollated_compare(a.get_name(), a.get_name_collation_key(), b.get_name(),
+            b.get_name_collation_key());
     }
-    
-    public static uint hash_name_string(void *a) {
+
+    public static int compare_user_visible_names(Tag a, Tag b) {
+        return String.precollated_compare(a.get_user_visible_name(), a.get_name_collation_key(),
+                                          b.get_user_visible_name(), b.get_name_collation_key());
+    }
+
+    public static uint hash_name_string(string a) {
         return String.collated_hash(a);
     }
     
-    public static bool equal_name_strings(void *a, void *b) {
+    public static bool equal_name_strings(string a, string b) {
         return String.collated_equals(a, b);
     }
     
@@ -604,40 +607,47 @@ public class Tag : DataSource, ContainerSource, Proxyable, Indexable {
         
         return result;
     }
-    
-    public static string make_tag_string(Gee.Collection<Tag> tags, string? start = null, 
-        string separator = ", ", string? end = null, bool escape = false) {
-        StringBuilder builder = new StringBuilder(start ?? "");
+
+    // Creates a sorted list of terminal tags, unique by user-visible-name
+    public static Gee.List<Tag> make_user_visible_tag_list(Gee.Collection<Tag> tags) {
         Gee.HashSet<string> seen_tags = new Gee.HashSet<string>();
         Gee.Collection<Tag> terminal_tags = get_terminal_tags(tags);
-        Gee.ArrayList<string> sorted_tags = new Gee.ArrayList<string>();
+        Gee.ArrayList<Tag> sorted_tags = new Gee.ArrayList<Tag>();
         foreach (Tag tag in terminal_tags) {
-            string user_visible_name = escape ? guarded_markup_escape_text(
-                tag.get_user_visible_name()) : tag.get_user_visible_name();
+            string user_visible_name = tag.get_user_visible_name();
+            if (!seen_tags.contains(user_visible_name)) {
+                sorted_tags.add(tag);
+                seen_tags.add(user_visible_name);
+            }
+        }
+        sorted_tags.sort(Tag.compare_user_visible_names);
+        return sorted_tags;
+    }
 
-            if (!seen_tags.contains(user_visible_name))
-                sorted_tags.add(user_visible_name);
+    public static string make_tag_markup_string(Gee.List<Tag> tags, int highlight_index = -1) {
+        StringBuilder builder = new StringBuilder("<small>");
+        int i = 0;
+        bool first = true;
+        foreach(Tag tag in tags) {
+            string tag_name = tag.get_user_visible_name();
+            string esc_tag_name = guarded_markup_escape_text(tag_name);
+            if (first)
+                first = false;
+            else
+                builder.append(TAG_LIST_SEPARATOR_STRING);
+            if (highlight_index == i)
+                builder.append("<u>");
+            builder.append(esc_tag_name);
+            if (highlight_index == i)
+                builder.append("</u>");
+            ++i;
         }
-        
-        sorted_tags.sort();
-        Gee.Iterator<string> iter = sorted_tags.iterator();
-        while(iter.next()) {
-            builder.append(iter.get());
-            builder.append(separator);
-        }
-        
+
+        builder.append("</small>");
         string built = builder.str;
-        
-        if (built.length >= separator.length)
-            if (built.substring(built.length - separator.length, separator.length) == separator);
-                built = built.substring(0, built.length - separator.length);
-        
-        if (end != null)
-            built += end;
-        
         return built;
     }
-    
+
     // Utility function to cleanup a tag name that comes from user input and prepare it for use
     // in the system and storage in the database.  Returns null if the name is unacceptable.
     public static string? prep_tag_name(string name) {
@@ -721,6 +731,11 @@ public class Tag : DataSource, ContainerSource, Proxyable, Indexable {
     public string get_user_visible_name() {
         return HierarchicalTagUtilities.get_basename(get_path());
     }
+
+    public string get_searchable_name() {
+        string istring = HierarchicalTagUtilities.get_basename(get_path()).down();
+        return String.remove_diacritics(istring);
+    }
     
     public void flatten() {
         assert (get_hierarchical_parent() == null);
@@ -789,7 +804,7 @@ public class Tag : DataSource, ContainerSource, Proxyable, Indexable {
         
         // default lexicographic comparison for strings ensures hierarchical tag paths will be
         // sorted from least-derived to most-derived
-        FixedTreeSet<string> forward_sorted_paths = new FixedTreeSet<string>();
+        Gee.TreeSet<string> forward_sorted_paths = new Gee.TreeSet<string>();
         
         string target_path = get_path() + Tag.PATH_SEPARATOR_STRING;
         foreach (string path in Tag.global.get_all_names()) {
@@ -936,7 +951,7 @@ public class Tag : DataSource, ContainerSource, Proxyable, Indexable {
     }
     
     private void update_indexable_keywords() {
-        indexable_keywords = prepare_indexable_string(get_user_visible_name());
+        indexable_keywords = prepare_indexable_string(get_searchable_name());
     }
     
     public unowned string? get_indexable_keywords() {

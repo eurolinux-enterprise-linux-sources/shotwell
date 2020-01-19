@@ -1,4 +1,4 @@
-/* Copyright 2009-2013 Yorba Foundation
+/* Copyright 2016 Software Freedom Conservancy Inc.
  *
  * This software is licensed under the GNU LGPL (version 2.1 or later).
  * See the COPYING file in this distribution.
@@ -289,8 +289,7 @@ class ImportPreview : MediaSourceItem {
         bool using_placeholder = (pixbuf == null);
         if (pixbuf == null) {
             if (placeholder_preview == null) {
-                placeholder_preview = AppWindow.get_instance().render_icon(Gtk.Stock.MISSING_IMAGE, 
-                    Gtk.IconSize.DIALOG, null);
+                placeholder_preview = get_placeholder_pixbuf();
                 placeholder_preview = scale_pixbuf(placeholder_preview, MAX_SCALE,
                     Gdk.InterpType.BILINEAR, true);
             }
@@ -339,14 +338,22 @@ class ImportPreview : MediaSourceItem {
                 uint64 filesize = get_import_source().get_filesize();
                 // unlikely to be a problem, but what the hay
                 if (filesize <= int64.MAX) {
-                    if (LibraryPhoto.global.has_basename_filesize_duplicate(
-                        get_import_source().get_filename(), (int64) filesize)) {
+                    PhotoID duplicated_photo_id = LibraryPhoto.global.get_basename_filesize_duplicate(
+                                get_import_source().get_filename(), (int64) filesize);
+
+                    if (duplicated_photo_id.is_valid()) {
+                        // Check exposure timestamp
+                        LibraryPhoto duplicated_photo = LibraryPhoto.global.fetch(duplicated_photo_id);
+                        time_t photo_exposure_time = photo_import_source.get_exposure_time();
+                        time_t duplicated_photo_exposure_time = duplicated_photo.get_exposure_time();
                         
-                        duplicated_file = DuplicatedFile.create_from_photo_id(
-                            LibraryPhoto.global.get_basename_filesize_duplicate(
-                            get_import_source().get_filename(), (int64) filesize));
-                        
-                        return true;
+                        if (photo_exposure_time == duplicated_photo_exposure_time) {
+                            duplicated_file = DuplicatedFile.create_from_photo_id(
+                                LibraryPhoto.global.get_basename_filesize_duplicate(
+                                get_import_source().get_filename(), (int64) filesize));
+
+                            return true;
+                        }
                     }
                 }
             }
@@ -691,7 +698,7 @@ public class ImportPage : CheckerboardPage {
     private string camera_name;
     private VolumeMonitor volume_monitor = null;
     private ImportPage? local_ref = null;
-    private GLib.Icon? icon;
+    private string? icon;
     private ImportPageSearchViewFilter search_filter = new ImportPageSearchViewFilter();
     private HideImportedViewFilter hide_imported_filter = new HideImportedViewFilter();
     private CameraViewTracker tracker;
@@ -707,7 +714,7 @@ public class ImportPage : CheckerboardPage {
         LIBRARY_ERROR
     }
     
-    public ImportPage(GPhoto.Camera camera, string uri, string? display_name = null, GLib.Icon? icon = null) {
+    public ImportPage(GPhoto.Camera camera, string uri, string? display_name = null, string? icon = null) {
         base(_("Camera"));
         this.camera = camera;
         this.uri = uri;
@@ -810,13 +817,15 @@ public class ImportPage : CheckerboardPage {
             toolbar.insert(new Gtk.SeparatorToolItem(), -1);
             
             // Import selected
-            Gtk.ToolButton import_selected_button = new Gtk.ToolButton.from_stock(Resources.IMPORT);
+            Gtk.ToolButton import_selected_button = new Gtk.ToolButton(null, null);
+            import_selected_button.set_icon_name(Resources.IMPORT);
             import_selected_button.set_related_action(get_action("ImportSelected"));
             
             toolbar.insert(import_selected_button, -1);
             
             // Import all
-            Gtk.ToolButton import_all_button = new Gtk.ToolButton.from_stock(Resources.IMPORT_ALL);
+            Gtk.ToolButton import_all_button = new Gtk.ToolButton(null, null);
+            import_all_button.set_icon_name(Resources.IMPORT_ALL);
             import_all_button.set_related_action(get_action("ImportAll"));
             
             toolbar.insert(import_all_button, -1);
@@ -836,13 +845,13 @@ public class ImportPage : CheckerboardPage {
     public override Core.ViewTracker? get_view_tracker() {
         return tracker;
     }
-    
-    // Ticket #3304 - Import page shouldn't display confusing message
-    // prior to import. 
-    // TODO: replace this with approved text for "talking to camera, 
-    // please wait" once new strings are being accepted.
+
     protected override string get_view_empty_message() {
-        return _("Starting import, please wait...");
+        return _("The camera seems to be empty. No photos/videos found to import");
+    }
+
+    protected override string get_filter_no_match_message () {
+        return _("No new photos/videos found on camera");
     }
 
     private static int64 preview_comparator(void *a, void *b) {
@@ -1148,6 +1157,8 @@ public class ImportPage : CheckerboardPage {
         if (busy)
             return RefreshResult.BUSY;
             
+        this.set_page_message (_("Starting import, please wait..."));
+
         update_status(busy, false);
         
         refresh_error = null;
@@ -1268,6 +1279,9 @@ public class ImportPage : CheckerboardPage {
         }
         
         if (refresh_result == GPhoto.Result.OK) {
+            if (import_sources.get_count () == 0) {
+                this.set_page_message (this.get_view_empty_message ());
+            }
             update_status(false, true);
         } else {
             update_status(false, false);
@@ -1736,7 +1750,7 @@ public class ImportPage : CheckerboardPage {
                 photos_string, videos_string, both_string, neither_string);
 
             ImportUI.QuestionParams question = new ImportUI.QuestionParams(
-                question_string, Gtk.Stock.DELETE, _("_Keep"));
+                question_string, Resources.DELETE_LABEL, _("_Keep"));
         
             if (!ImportUI.report_manifest(manifest, false, question))
                 return;

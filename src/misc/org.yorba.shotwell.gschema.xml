@@ -1,4 +1,4 @@
-<schemalist>
+<schemalist gettext-domain="shotwell">
 
 <schema id="org.yorba.shotwell" path="/org/yorba/shotwell/">
     <child name="preferences" schema="org.yorba.shotwell.preferences" />
@@ -35,6 +35,12 @@
         <description>True if the sidebar is to be displayed, false otherwise.</description>
     </key>
     
+    <key name="display-toolbar" type="b">
+        <default>true</default>
+        <summary>display toolbar</summary>
+        <description>True if the bottom toolbar is to be displayed, false otherwise.</description>
+    </key>
+
     <key name="display-search-bar" type="b">
         <default>false</default>
         <summary>display search bar</summary>
@@ -141,6 +147,12 @@
         <default>128</default>
         <summary>photo thumbnail scale</summary>
         <description>The scale of photo thumbnails, ranging from 72 to 360.</description>
+    </key>
+
+    <key name="pin-toolbar-state" type="b">
+        <default>false</default>
+        <summary>pin toolbar state</summary>
+        <description>Pin toolbar in fullscreen, or not.</description>
     </key>
     
     <key name="background-color" type="s">
@@ -317,6 +329,7 @@
     
     <child name="facebook" schema="org.yorba.shotwell.sharing.facebook" />
     <child name="flickr" schema="org.yorba.shotwell.sharing.flickr" />
+    <child name="gallery3" schema="org.yorba.shotwell.sharing.publishing-gallery3" />
     <child name="picasa" schema="org.yorba.shotwell.sharing.picasa" />
     <child name="youtube" schema="org.yorba.shotwell.sharing.youtube" />
 </schema>
@@ -420,7 +433,7 @@
 <schema id="org.yorba.shotwell.sharing.org-yorba-shotwell-publishing-piwigo" path="/org/yorba/shotwell/sharing/org-yorba-shotwell-publishing-piwigo/">
     <key name="url" type="s">
         <default>""</default>
-        <summary>Piwigio URL</summary>
+        <summary>Piwigo URL</summary>
         <description>URL of the Piwigo server.</description>
     </key>
     
@@ -479,17 +492,55 @@
     </key>
 </schema>
 
-<schema id="org.yorba.shotwell.sharing.youtube" path="/org/yorba/shotwell/sharing/youtube/">
-    <key name="user-name" type="s">
+<schema id="org.yorba.shotwell.sharing.publishing-gallery3" path="/org/yorba/shotwell/sharing/gallery3/">
+    <key name="username" type="s">
         <default>""</default>
         <summary>username</summary>
-        <description>YouTube username for the currently logged in session, if any</description>
+        <description>Gallery3 username</description>
     </key>
-    
-    <key name="auth-token" type="s">
+
+    <key name="api-key" type="s">
         <default>""</default>
-        <summary>authentication token</summary>
-        <description>YouTube authentication token for the currently logged in session, if any</description>
+        <summary>API key</summary>
+        <description>Gallery3 API key</description>
+    </key>
+
+    <key name="url" type="s">
+        <default>""</default>
+        <summary>URL</summary>
+        <description>Gallery3 site URL</description>
+    </key>
+
+    <key name="last-album" type="s">
+        <default>""</default>
+        <summary>last album</summary>
+        <description>The name of the last album the user published photos to, if any</description>
+    </key>
+
+    <key name="strip-metadata" type="b">
+        <default>false</default>
+        <summary>remove sensitive info from uploads</summary>
+        <description>Indicates whether images being uploaded to Gallery3 should have their metadata removed first</description>
+    </key>
+
+    <key name="scaling-constraint-id" type="i">
+        <default>0</default>
+        <summary>scaling constraint of uploaded picture</summary>
+        <description>The scaling constraint ID of the picture to be uploaded</description>
+    </key>
+
+    <key name="scaling-pixels" type="i">
+        <default>1024</default>
+        <summary>pixels of the major axis uploaded picture</summary>
+        <description>The pixels of the major axis of the picture to be uploaded; used only if scaling-constraint-id is an appropriate value</description>
+    </key>
+</schema>
+
+<schema id="org.yorba.shotwell.sharing.youtube" path="/org/yorba/shotwell/sharing/youtube/">
+    <key name="refresh-token" type="s">
+        <default>""</default>
+        <summary>refresh token</summary>
+        <description>The OAuth token used to refresh the YouTube session for the currently logged in user, if any.</description>
     </key>
 </schema>
 
@@ -605,7 +656,7 @@
         <summary>enable piwigo publishing plugin</summary>
         <description>True if the Piwigo publishing plugin is enabled, false otherwise</description>
     </key>
-    
+
     <key name="publishing-yandex-fotki" type="b">
         <default>false</default>
         <summary>enable yandex publishing plugin</summary>
@@ -616,6 +667,18 @@
         <default>false</default>
         <summary>enable tumblr publishing plugin</summary>
         <description>True if the Tumblr publishing plugin is enabled, false otherwise</description>
+    </key>
+
+    <key name="publishing-rajce" type="b">
+        <default>false</default>
+        <summary>enable rajce publishing plugin</summary>
+        <description>True if the Rajce publishing plugin is enabled, false otherwise</description>
+    </key>
+    
+    <key name="publishing-gallery3" type="b">
+        <default>false</default>
+        <summary>enable gallery3 publishing plugin</summary>
+        <description>True if the Gallery3 publishing plugin is enabled, false otherwise</description>
     </key>
 
     <key name="dataimports-fspot" type="b">

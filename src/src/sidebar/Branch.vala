@@ -1,4 +1,4 @@
-/* Copyright 2011-2013 Yorba Foundation
+/* Copyright 2016 Software Freedom Conservancy Inc.
  *
  * This software is licensed under the GNU Lesser General Public License
  * (version 2.1 or later).  See the COPYING file in this distribution.
@@ -48,16 +48,13 @@ public class Sidebar.Branch : Object {
             this.comparator = comparator;
         }
         
-        private static int comparator_wrapper(void *a, void *b) {
-            if (a == b)
+        private static int comparator_wrapper(Node anode, Node bnode) {
+            if (anode == bnode)
                 return 0;
             
-            Node *anode = (Node *) a;
-            Node *bnode = (Node *) b;
+            assert(anode.parent == bnode.parent);
             
-            assert(anode->parent == bnode->parent);
-            
-            return anode->parent.comparator(anode->entry, bnode->entry);
+            return anode.parent.comparator(anode.entry, bnode.entry);
         }
         
         public bool has_children() {
@@ -68,7 +65,7 @@ public class Sidebar.Branch : Object {
             child.parent = this;
 
             if (children == null)
-                children = new FixedTreeSet<Node>(comparator_wrapper);
+                children = new Gee.TreeSet<Node>(comparator_wrapper);
             
             bool added = children.add(child);
             assert(added);
@@ -77,9 +74,9 @@ public class Sidebar.Branch : Object {
         public void remove_child(Node child) {
             assert(children != null);
             
-            Gee.SortedSet<Node> new_children = new FixedTreeSet<Node>(comparator_wrapper);
+            Gee.SortedSet<Node> new_children = new Gee.TreeSet<Node>(comparator_wrapper);
             
-            // For similar reasons as in reorder_child(), can't rely on TreeSet to locate this
+            // For similar reasons as in reorder_child(), can't rely on Gee.TreeSet to locate this
             // node because we need reference equality.
             bool found = false;
             foreach (Node c in children) {
@@ -146,7 +143,7 @@ public class Sidebar.Branch : Object {
             // called or the set is manually iterated over and removed via the Iterator -- a
             // tree search is performed and the child will not be found.  Only easy solution is
             // to rebuild a new SortedSet and see if the child has moved.
-            Gee.SortedSet<Node> new_children = new FixedTreeSet<Node>(comparator_wrapper);
+            Gee.SortedSet<Node> new_children = new Gee.TreeSet<Node>(comparator_wrapper);
             bool added = new_children.add_all(children);
             assert(added);
             
@@ -162,7 +159,7 @@ public class Sidebar.Branch : Object {
             if (children == null)
                 return;
             
-            Gee.SortedSet<Node> reordered = new FixedTreeSet<Node>(comparator_wrapper);
+            Gee.SortedSet<Node> reordered = new Gee.TreeSet<Node>(comparator_wrapper);
             reordered.add_all(children);
             children = reordered;
             

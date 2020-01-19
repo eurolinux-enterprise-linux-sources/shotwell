@@ -1,4 +1,4 @@
-/* Copyright 2011-2013 Yorba Foundation
+/* Copyright 2016 Software Freedom Conservancy Inc.
  *
  * This software is licensed under the GNU Lesser General Public License
  * (version 2.1 or later).  See the COPYING file in this distribution.
@@ -6,7 +6,7 @@
 
 namespace Db {
 
-public static const string IN_MEMORY_NAME = ":memory:";
+public const string IN_MEMORY_NAME = ":memory:";
 
 private string? filename = null;
 
@@ -339,6 +339,16 @@ private VerifyResult upgrade_database(int input_version) {
     }
     
     version = 19;
+    
+    // 
+    // Version 20:
+    // * No change to database schema but fixing issue #6541 ("Saved searches should be aware of
+    //   comments") added a new enumeration value that is stored in the SavedSearchTable. The
+    //   presence of this heretofore unseen enumeration value will cause prior versions of
+    //   Shotwell to yarf, so we bump the version here to ensure this doesn't happen
+    //
+    
+    version = 20;
     
     //
     // Finalize the upgrade process

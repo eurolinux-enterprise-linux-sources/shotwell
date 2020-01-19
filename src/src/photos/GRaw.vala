@@ -1,4 +1,4 @@
-/* Copyright 2010-2013 Yorba Foundation
+/* Copyright 2016 Software Freedom Conservancy Inc.
  *
  * This software is licensed under the GNU Lesser General Public License
  * (version 2.1 or later).  See the COPYING file in this distribution.
@@ -19,12 +19,6 @@ public enum Colorspace {
     WIDE = 3,
     PROPHOTO = 4,
     XYZ = 5
-}
-
-public enum DocMode {
-    STANDARD = 0,
-    GRAYSCALE = 1,
-    GRAYSCALE_NO_WHITE_BALANCE = 2
 }
 
 public errordomain Exception {
@@ -131,7 +125,8 @@ public class ProcessedImage {
         // to be decoded before being useful.  This will throw an error if the format is not
         // supported
         try {
-            pixbuf = new Gdk.Pixbuf.from_stream(new MemoryInputStream.from_data(image.data, null),
+            var bytes = new Bytes.static (image.data);
+            pixbuf = new Gdk.Pixbuf.from_stream(new MemoryInputStream.from_bytes(bytes),
                 null);
         } catch (Error err) {
             throw new Exception.UNSUPPORTED_THUMBNAIL(err.message);
@@ -165,10 +160,6 @@ public class Processor {
     
     public void adjust_sizes_info_only() throws Exception {
         throw_exception("adjust_sizes_info_only", proc.adjust_sizes_info_only());
-    }
-    
-    public void document_mode_processing() throws Exception {
-        throw_exception("document_mode_processing", proc.document_mode_processing());
     }
     
     public unowned LibRaw.ImageOther get_image_other() {
@@ -244,7 +235,6 @@ public class Processor {
         // threshold
         output_params->half_size = half_size;
         // four_color_rgb
-        output_params->document_mode = GRaw.DocMode.STANDARD;
         output_params->highlight = GRaw.HighlightMode.CLIP;
         output_params->use_auto_wb = true;
         output_params->use_camera_wb = true;

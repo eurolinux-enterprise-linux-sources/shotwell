@@ -1,111 +1,109 @@
 Name:           shotwell
-Version:        0.14.1
-Release:        5%{?dist}
+Version:        0.24.5
+Release:        1%{?dist}
 Summary:        A photo organizer for the GNOME desktop
 
-Group:          Applications/Multimedia
 # LGPLv2+ for the code
 # CC-BY-SA for some of the icons
 License:        LGPLv2+ and CC-BY-SA
-URL:            http://www.yorba.org/shotwell/
-#VCS:           git:git://yorba.org/shotwell
-Source0:        http://www.yorba.org/download/shotwell/0.14/shotwell-%{version}.tar.xz
-# http://redmine.yorba.org/issues/3379
-Source1:        shotwell-icons.tar.bz2
-# http://redmine.yorba.org/issues/7558
-Source2:        shotwell.1
-# Fix installed prefix detection when invoked as /bin/shotwell
-# https://bugzilla.redhat.com/show_bug.cgi?id=812652 and
-# http://redmine.yorba.org/issues/5181
-Patch0:         shotwell-usrmove.patch
+URL:            https://wiki.gnome.org/Apps/Shotwell
+Source0:        https://download.gnome.org/sources/shotwell/0.24/shotwell-%{version}.tar.xz
 
-Patch1:		translations.patch
-
-BuildRequires:  vala-devel >= 0.18.0
+BuildRequires:  vala-devel >= 0.20.1
 BuildRequires:  desktop-file-utils
+BuildRequires:  libappstream-glib
 BuildRequires:  gettext
+BuildRequires:  itstool
 BuildRequires:  pkgconfig(atk)
 BuildRequires:  pkgconfig(gdk-3.0)
 BuildRequires:  pkgconfig(gdk-x11-3.0)
-BuildRequires:  pkgconfig(gee-1.0)
-BuildRequires:  pkgconfig(gexiv2)
-BuildRequires:  pkgconfig(gio-unix-2.0)
-BuildRequires:  pkgconfig(glib-2.0)
-BuildRequires:  pkgconfig(gmodule-2.0)
-BuildRequires:  pkgconfig(gstreamer-1.0)
-BuildRequires:  pkgconfig(gstreamer-base-1.0)
-BuildRequires:  pkgconfig(gstreamer-pbutils-1.0)
-BuildRequires:  pkgconfig(gstreamer-plugins-base-1.0)
-BuildRequires:  pkgconfig(gtk+-3.0)
-BuildRequires:  pkgconfig(gudev-1.0)
+BuildRequires:  pkgconfig(gee-0.8) >= 0.8.5
+BuildRequires:  pkgconfig(gexiv2) >= 0.4.90
+BuildRequires:  pkgconfig(gio-unix-2.0) >= 2.20
+BuildRequires:  pkgconfig(glib-2.0) >= 2.30.0
+BuildRequires:  pkgconfig(gmodule-2.0) >= 2.24.0
+BuildRequires:  pkgconfig(gnome-doc-utils)
+BuildRequires:  pkgconfig(gstreamer-1.0) >= 1.0.0
+BuildRequires:  pkgconfig(gstreamer-base-1.0) >= 1.0.0
+BuildRequires:  pkgconfig(gstreamer-plugins-base-1.0) >= 1.0.0
+BuildRequires:  pkgconfig(gstreamer-pbutils-1.0) >= 1.0.0
+BuildRequires:  pkgconfig(gtk+-3.0) >= 3.12.2
+BuildRequires:  pkgconfig(gudev-1.0) >= 145
 BuildRequires:  pkgconfig(json-glib-1.0)
-BuildRequires:  pkgconfig(libexif) >= 0.4.90
-BuildRequires:  pkgconfig(libgphoto2)
-BuildRequires:  pkgconfig(libraw)
-BuildRequires:  pkgconfig(libsoup-2.4)
-BuildRequires:  pkgconfig(libxml-2.0)
-BuildRequires:  pkgconfig(sqlite3)
-BuildRequires:  pkgconfig(webkitgtk-3.0)
+BuildRequires:  pkgconfig(libexif) >= 0.6.16
+BuildRequires:  pkgconfig(libgphoto2) >= 2.4.2
+BuildRequires:  pkgconfig(libraw) >= 0.13.2
+BuildRequires:  pkgconfig(libsoup-2.4) >= 2.26.0
+BuildRequires:  pkgconfig(libxml-2.0) >= 2.6.32
+BuildRequires:  pkgconfig(sqlite3) >= 3.5.9
+BuildRequires:  pkgconfig(webkit2gtk-4.0) >= 2.6.3
 
 # Needed by the publishing plugins
-BuildRequires:  pkgconfig(rest-0.7)
+BuildRequires:  pkgconfig(rest-0.7) >= 0.7
 
 # used by shotwell-settings-migrator
 Requires:       dconf
 
 %description
-Shotwell is a new open source photo organizer designed for the GNOME desktop
-environment. It allows you to import photos from your camera, view and edit
-them, and share them with others.
+Shotwell is an easy-to-use, fast photo organizer designed for the GNOME
+desktop.  It allows you to import photos from your camera or disk, organize
+them by date and subject matter, even ratings.  It also offers basic photo
+editing, like crop, red-eye correction, color adjustments, and straighten.
+Shotwell's non-destructive photo editor does not alter your master photos,
+making it easy to experiment and correct errors.
 
 
 %prep
 %setup -q
-%patch0 -p1 -b .usrmove
-%patch1 -p1 -b .translations
 
 
 %build
-./configure \
-  --prefix=%{_prefix} \
-  --lib=%{_lib} \
+%configure \
   --disable-schemas-compile \
-  --disable-icon-update
-echo CFLAGS=%{optflags} >> configure.mk
-make %{?_smp_mflags}
+  --disable-silent-rules \
+  --disable-static
+# --disable-rpath to configure doesn't seem to work
+sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' libtool
+sed -i 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' libtool
+%make_build
 
 
 %install
-export XDG_DISABLE_MAKEFILE_UPDATES=1
 # otherwise gettext always returns English text regardless of LANGUAGE asked
 export LANG=en_US.utf8
-make install DESTDIR=$RPM_BUILD_ROOT
+%make_install
 
-desktop-file-validate $RPM_BUILD_ROOT%{_datadir}/applications/shotwell.desktop
-desktop-file-validate $RPM_BUILD_ROOT%{_datadir}/applications/shotwell-viewer.desktop
+# Remove libtool .la files
+find $RPM_BUILD_ROOT -name '*.la' -delete
 
-# put hi-res icons in place
-(
-  cd $RPM_BUILD_ROOT%{_datadir}/icons/hicolor
-  rm -rf 16x16 24x24 scalable
-  tar xf %{SOURCE1}
-)
-
-# install man page
-mkdir -p $RPM_BUILD_ROOT%{_mandir}/man1
-cp -p %{SOURCE2} $RPM_BUILD_ROOT%{_mandir}/man1
+# Update the screenshot shown in the software center
+#
+# NOTE: It would be *awesome* if this file was pushed upstream.
+#
+# See http://people.freedesktop.org/~hughsient/appdata/#screenshots for more details.
+#
+appstream-util replace-screenshots %{buildroot}%{_datadir}/appdata/shotwell.appdata.xml \
+  https://raw.githubusercontent.com/hughsie/fedora-appstream/master/screenshots-extra/shotwell/a.png \
+  https://raw.githubusercontent.com/hughsie/fedora-appstream/master/screenshots-extra/shotwell/b.png \
+  https://raw.githubusercontent.com/hughsie/fedora-appstream/master/screenshots-extra/shotwell/c.png \
+  https://raw.githubusercontent.com/hughsie/fedora-appstream/master/screenshots-extra/shotwell/d.png
 
 %find_lang %{name} --with-gnome
-%find_lang %{name}-extras
-cat %{name}-extras.lang >> %{name}.lang
+
+
+%check
+desktop-file-validate %{buildroot}%{_datadir}/applications/shotwell.desktop
+desktop-file-validate %{buildroot}%{_datadir}/applications/shotwell-viewer.desktop
 
 
 %post
+/sbin/ldconfig
 update-desktop-database &>/dev/null || :
 touch --no-create %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %postun
+/sbin/ldconfig
 update-desktop-database &> /dev/null || :
 if [ $1 -eq 0 ] ; then
   touch --no-create %{_datadir}/icons/hicolor &>/dev/null
@@ -120,21 +118,28 @@ gtk-update-icon-cache --quiet %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %files -f %{name}.lang
-%doc README COPYING MAINTAINERS NEWS THANKS AUTHORS
+%license COPYING
+%doc README NEWS THANKS AUTHORS
 %{_bindir}/shotwell
-%{_bindir}/shotwell-video-thumbnailer
 %{_libdir}/shotwell
+%{_libdir}/libshotwell-plugin-common.so.*
+%exclude %{_libdir}/libshotwell-plugin-common.so
 %{_libexecdir}/shotwell
 %{_datadir}/shotwell
 %{_datadir}/applications/shotwell.desktop
 %{_datadir}/applications/shotwell-viewer.desktop
-%{_datadir}/GConf/gsettings/shotwell.convert
+%{_datadir}/appdata/shotwell.appdata.xml
 %{_datadir}/glib-2.0/schemas/*.xml
 %{_datadir}/icons/hicolor/*/apps/shotwell.png
+%{_datadir}/icons/hicolor/symbolic/apps/shotwell-symbolic.svg
 %{_mandir}/man1/*
 
 
 %changelog
+* Tue Jan 31 2017 Kalev Lember <klember@redhat.com> - 0.24.5-1
+- Update to 0.24.5
+- Resolves: #1387046
+
 * Fri Jan 24 2014 Daniel Mach <dmach@redhat.com> - 0.14.1-5
 - Mass rebuild 2014-01-24
 

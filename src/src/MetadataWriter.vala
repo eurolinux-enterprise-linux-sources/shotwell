@@ -1,4 +1,4 @@
-/* Copyright 2010-2013 Yorba Foundation
+/* Copyright 2016 Software Freedom Conservancy Inc.
  *
  * This software is licensed under the GNU Lesser General Public License
  * (version 2.1 or later).  See the COPYING file in this distribution.
@@ -23,6 +23,8 @@ public class MetadataWriter : Object {
         public Photo.ReimportMasterState reimport_master_state = null;
         public Photo.ReimportEditableState reimport_editable_state = null;
         public Error? err = null;
+        public bool wrote_master = false;
+        public bool wrote_editable = false;
         
         public CommitJob(MetadataWriter owner, LibraryPhoto photo, Gee.Set<string>? keywords) {
             base (owner, owner.on_update_completed, new Cancellable(), owner.on_update_cancelled);
@@ -58,6 +60,8 @@ public class MetadataWriter : Object {
                     LibraryMonitor.unblacklist_file(photo.get_master_file());
                 }
             }
+            
+            wrote_master = true;
         }
         
         private void commit_editable() throws Error {
@@ -75,6 +79,8 @@ public class MetadataWriter : Object {
                     LibraryMonitor.unblacklist_file(photo.get_editable_file());
                 }
             }
+            
+            wrote_editable = true;
         }
         
         private bool update_metadata(PhotoMetadata metadata, bool skip_orientation = false) {
@@ -159,6 +165,7 @@ public class MetadataWriter : Object {
     private bool enabled = false;
     private HashTimedQueue<LibraryPhoto> dirty;
     private Gee.HashMap<LibraryPhoto, CommitJob> pending = new Gee.HashMap<LibraryPhoto, CommitJob>();
+    private Gee.HashSet<CommitJob> pending_cancel = new Gee.HashSet<CommitJob>();
     private Gee.HashSet<string> interested_photo_details = new Gee.HashSet<string>();
     private LibraryPhoto? ignore_photo_alteration = null;
     private uint outstanding_total = 0;
@@ -572,7 +579,10 @@ public class MetadataWriter : Object {
         bool cancelled = false;
         
         if (pending.has_key(photo)) {
-            pending.get(photo).cancel();
+            CommitJob j = (CommitJob) pending.get(photo);
+            pending_cancel.add(j);
+            j.cancel();
+            pending.unset(photo);
             cancelled = true;
         }
         
@@ -604,6 +614,10 @@ public class MetadataWriter : Object {
                 keywords.add(tag.get_name());
         }
         
+        // check if there is already a job for that photo. if yes, cancel it.
+        if (pending.has_key(photo))
+            cancel_job(photo);
+
         CommitJob job = new CommitJob(this, photo, keywords);
         pending.set(photo, job);
         
@@ -617,10 +631,21 @@ public class MetadataWriter : Object {
     private void on_update_completed(BackgroundJob j) {
         CommitJob job = (CommitJob) j;
         
-        if (job.err != null)
-            warning("Unable to update metadata for %s: %s", job.photo.to_string(), job.err.message);
-        else
-            message("Completed writing metadata for %s", job.photo.to_string());
+        if (job.err != null) {
+            warning("Unable to write metadata to %s: %s", job.photo.to_string(), job.err.message);
+        } else {
+            if (job.wrote_master)
+                message("Completed writing metadata to %s", job.photo.get_master_file().get_path());
+            else
+                message("Unable to write metadata to %s", job.photo.get_master_file().get_path());
+            
+            if (job.photo.get_editable_file() != null) {
+                if (job.wrote_editable)
+                    message("Completed writing metadata to %s", job.photo.get_editable_file().get_path());
+                else
+                    message("Unable to write metadata to %s", job.photo.get_editable_file().get_path());
+            }
+        }
         
         bool removed = pending.unset(job.photo);
         assert(removed);
@@ -666,7 +691,7 @@ public class MetadataWriter : Object {
     }
     
     private void on_update_cancelled(BackgroundJob j) {
-        bool removed = pending.unset(((CommitJob) j).photo);
+        bool removed = pending_cancel.remove((CommitJob) j);
         assert(removed);
         
         count_cancelled_work(1, true);

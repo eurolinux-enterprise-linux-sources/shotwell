@@ -1,4 +1,4 @@
-/* Copyright 2010-2013 Yorba Foundation
+/* Copyright 2016 Software Freedom Conservancy Inc.
  *
  * This software is licensed under the GNU LGPL (version 2.1 or later).
  * See the COPYING file in this distribution.
@@ -513,7 +513,8 @@ public class CustomPrintTab : Gtk.Fixed {
         if (length == -1)
             length = (int) text.length;
 
-        string decimal_point = Intl.localeconv().decimal_point;
+        unowned string decimal_point = Posix.nl_langinfo (Posix.NLItem.RADIXCHAR);
+
         bool contains_decimal_point = sender.get_text().contains(decimal_point);
 
         string new_text = "";

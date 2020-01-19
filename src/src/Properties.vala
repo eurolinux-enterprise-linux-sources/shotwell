@@ -1,16 +1,15 @@
-/* Copyright 2009-2013 Yorba Foundation
+/* Copyright 2016 Software Freedom Conservancy Inc.
  *
  * This software is licensed under the GNU LGPL (version 2.1 or later).
  * See the COPYING file in this distribution.
  */
 
-private abstract class Properties : Gtk.Table {
+private abstract class Properties : Gtk.Grid {
     uint line_count = 0;
 
     public Properties() {
         row_spacing = 0;
         column_spacing = 6;
-        set_homogeneous(false);
     }
 
     protected void add_line(string label_text, string info_text, bool multi_line = false) {
@@ -49,13 +48,12 @@ private abstract class Properties : Gtk.Table {
             info = (Gtk.Widget) info_label;
         }
 
-        attach(label, 0, 1, line_count, line_count + 1, Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
+        attach(label, 0, (int) line_count, 1, 1);
 
         if (multi_line) {
-            attach(info, 1, 2, line_count, line_count + 1, Gtk.AttachOptions.EXPAND | Gtk.AttachOptions.FILL,
-                Gtk.AttachOptions.EXPAND | Gtk.AttachOptions.FILL, 0, 0);
+            attach(info, 1, (int) line_count, 1, 2);
         } else {
-            attach_defaults(info, 1, 2, line_count, line_count + 1);
+            attach(info, 1, (int) line_count, 1, 1);
         }
 
         line_count++;
@@ -455,8 +453,6 @@ private class BasicProperties : Properties {
 
 private class ExtendedPropertiesWindow : Gtk.Dialog {
     private ExtendedProperties properties = null;
-    private const int FRAME_BORDER = 6;
-    private Gtk.Button close_button;
 
     private class ExtendedProperties : Properties {
         private const string NO_VALUE = "";
@@ -521,7 +517,7 @@ private class ExtendedPropertiesWindow : Gtk.Dialog {
             if (source == null)
                 return;
             
-            if (source is PhotoSource || source is PhotoImportSource) {
+            if (source is MediaSource) {
                 MediaSource media = (MediaSource) source;
                 file_path = media.get_master_file().get_path();
                 development_path = media.get_file().get_path();
@@ -634,13 +630,15 @@ private class ExtendedPropertiesWindow : Gtk.Dialog {
     }
 
     public ExtendedPropertiesWindow(Gtk.Window owner) {
+        bool use_header;
+        Gtk.Settings.get_default ().get ("gtk-dialogs-use-header", out use_header);
+        Object(use_header_bar: use_header ? 1 : 0);
+        
         add_events(Gdk.EventMask.BUTTON_PRESS_MASK | Gdk.EventMask.KEY_PRESS_MASK);
         focus_on_map = true;
         set_accept_focus(true);
         set_can_focus(true);
         set_title(_("Extended Information"));
-        set_size_request(300,-1);
-        set_default_size(520, -1);
         set_position(Gtk.WindowPosition.CENTER);
         set_transient_for(owner);
         set_type_hint(Gdk.WindowTypeHint.DIALOG);
@@ -650,20 +648,8 @@ private class ExtendedPropertiesWindow : Gtk.Dialog {
         properties = new ExtendedProperties();
         Gtk.Alignment alignment = new Gtk.Alignment(0.5f,0.5f,1,1);
         alignment.add(properties);
-        alignment.set_padding(4, 4, 4, 4);
+        alignment.set_border_width(3);
         ((Gtk.Box) get_content_area()).add(alignment);
-        close_button = new Gtk.Button.from_stock(Gtk.Stock.CLOSE);
-        close_button.clicked.connect(on_close_clicked);
-    
-        Gtk.Alignment action_alignment = new Gtk.Alignment(1, 0.5f, 1, 1);
-        action_alignment.add(close_button);
-        ((Gtk.Container) get_action_area()).add(action_alignment);
-        
-        set_has_resize_grip(false);
-    }
-
-    ~ExtendedPropertiesWindow() {
-        close_button.clicked.disconnect(on_close_clicked);
     }
 
     public override bool button_press_event(Gdk.EventButton event) {
@@ -674,10 +660,6 @@ private class ExtendedPropertiesWindow : Gtk.Dialog {
         begin_move_drag((int) event.button, (int) event.x_root, (int) event.y_root, event.time);
 
         return true;
-    }
-
-    private void on_close_clicked() {
-        hide();
     }
 
     public override bool key_press_event(Gdk.EventKey event) {

@@ -1,4 +1,4 @@
-/* Copyright 2010-2013 Yorba Foundation
+/* Copyright 2016 Software Freedom Conservancy Inc.
  *
  * This software is licensed under the GNU LGPL (version 2.1 or later).
  * See the COPYING file in this distribution.
@@ -347,7 +347,7 @@ public abstract class MediaSourceCollection : DatabaseSourceCollection {
         file_hash, file_equal);
     private Gee.MultiMap<ImportID?, MediaSource> import_rolls =
         new Gee.TreeMultiMap<ImportID?, MediaSource>(ImportID.compare_func);
-    private FixedTreeSet<ImportID?> sorted_import_ids = new FixedTreeSet<ImportID?>(ImportID.compare_func);
+    private Gee.TreeSet<ImportID?> sorted_import_ids = new Gee.TreeSet<ImportID?>(ImportID.compare_func);
     private Gee.Set<MediaSource> flagged = new Gee.HashSet<MediaSource>();
     
     // This signal is fired when MediaSources are added to the collection due to a successful import.
@@ -400,8 +400,8 @@ public abstract class MediaSourceCollection : DatabaseSourceCollection {
     
     public static void count_media(Gee.Collection<MediaSource> media, out int photo_count,
         out int video_count) {
-        Gee.ArrayList<MediaSource> photos = new Gee.ArrayList<MediaSource>();
-        Gee.ArrayList<MediaSource> videos = new Gee.ArrayList<MediaSource>();
+        var photos = new Gee.ArrayList<LibraryPhoto>();
+        var videos = new Gee.ArrayList<Video>();
         
         filter_media(media, photos, videos);
         

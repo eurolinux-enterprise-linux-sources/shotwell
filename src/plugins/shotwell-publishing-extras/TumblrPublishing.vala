@@ -6,10 +6,6 @@
  */
 
 
-using Publishing.Extras;
-
-
-extern string hmac_sha1(string key, string message);
 public class TumblrService : Object, Spit.Pluggable, Spit.Publishing.Service {
    private const string ICON_FILENAME = "tumblr.png";
 
@@ -17,7 +13,9 @@ public class TumblrService : Object, Spit.Pluggable, Spit.Publishing.Service {
     
     public TumblrService(GLib.File resource_directory) {
         if (icon_pixbuf_set == null)
-            icon_pixbuf_set = Resources.load_icon_set(resource_directory.get_child(ICON_FILENAME));
+            icon_pixbuf_set =
+                Resources.load_from_resource(Resources.RESOURCE_PATH + "/" +
+                        ICON_FILENAME);
     }
 
     public int get_pluggable_interface(int min_host_interface, int max_host_interface) {
@@ -35,7 +33,7 @@ public class TumblrService : Object, Spit.Pluggable, Spit.Publishing.Service {
     
     public void get_info(ref Spit.PluggableInfo info) {
         info.authors = "Jeroen Arnoldus";
-        info.copyright = _t("Copyright 2012 BJA Electronics");
+        info.copyright = _("Copyright 2012 BJA Electronics");
         info.translators = Resources.TRANSLATORS;
         info.version = _VERSION;
         info.website_name = Resources.WEBSITE_NAME;
@@ -61,7 +59,7 @@ public class TumblrService : Object, Spit.Pluggable, Spit.Publishing.Service {
 namespace Publishing.Tumblr {
 
 internal const string SERVICE_NAME = "Tumblr";
-internal const string ENDPOINT_URL = "http://www.tumblr.com/";
+internal const string ENDPOINT_URL = "https://www.tumblr.com/";
 internal const string API_KEY = "NdXvXQuKVccOsCOj0H4k9HUJcbcjDBYSo2AkaHzXFECHGNuP9k";
 internal const string API_SECRET = "BN0Uoig0MwbeD27OgA0IwYlp3Uvonyfsrl9pf1cnnMj1QoEUvi";
 internal const string ENCODE_RFC_3986_EXTRA = "!*'();:@&=+$,/?%#[] \\";
@@ -104,9 +102,9 @@ public class TumblrPublisher : Spit.Publishing.Publisher, GLib.Object {
     private SizeEntry[] create_sizes() {
         SizeEntry[] result = new SizeEntry[0];
 
-        result += new SizeEntry(_t("500 x 375 pixels"), 500);
-        result += new SizeEntry(_t("1024 x 768 pixels"), 1024);
-        result += new SizeEntry(_t("1280 x 853 pixels"), 1280);
+        result += new SizeEntry(_("500 x 375 pixels"), 500);
+        result += new SizeEntry(_("1024 x 768 pixels"), 1024);
+        result += new SizeEntry(_("1280 x 853 pixels"), 1280);
 //Larger images make no sense for Tumblr
 //        result += new SizeEntry(_("2048 x 1536 pixels"), 2048);
 //        result += new SizeEntry(_("4096 x 3072 pixels"), 4096);
@@ -310,7 +308,7 @@ public class TumblrPublisher : Spit.Publishing.Publisher, GLib.Object {
             
             if (split_pair.length != 2)
                 host.post_error(new Spit.Publishing.PublishingError.MALFORMED_RESPONSE(
-                    _t("'%s' isn't a valid response to an OAuth authentication request")));
+                    _("“%s” isn't a valid response to an OAuth authentication request"), response));
 
             if (split_pair[0] == "oauth_token")
                 oauth_token = split_pair[1];
@@ -320,7 +318,7 @@ public class TumblrPublisher : Spit.Publishing.Publisher, GLib.Object {
         
         if (oauth_token == null || oauth_token_secret == null)
             host.post_error(new Spit.Publishing.PublishingError.MALFORMED_RESPONSE(
-                _t("'%s' isn't a valid response to an OAuth authentication request")));
+                _("“%s” isn't a valid response to an OAuth authentication request"), response));
         
         session.set_access_phase_credentials(oauth_token, oauth_token_secret);
     }
@@ -468,7 +466,7 @@ public class TumblrPublisher : Spit.Publishing.Publisher, GLib.Object {
 	    	debug("ACTION: add publishable");
             sorted_list.add(p);
         }
-        sorted_list.sort((CompareFunc) tumblr_date_time_compare_func);
+        sorted_list.sort(tumblr_date_time_compare_func);
 		string blog_url = this.blogs[get_persistent_default_blog()].url;
     
         Uploader uploader = new Uploader(session, sorted_list.to_array(),blog_url);
@@ -558,7 +556,7 @@ public class TumblrPublisher : Spit.Publishing.Publisher, GLib.Object {
             return;
         
         if (was_started)
-            error(_t("TumblrPublisher: start( ): can't start; this publisher is not restartable."));
+            error(_("TumblrPublisher: start( ): can't start; this publisher is not restartable."));
         
         debug("TumblrPublisher: starting interaction.");
         
@@ -586,8 +584,8 @@ internal class AuthenticationPane : Spit.Publishing.DialogPane, Object {
         INTRO,
         FAILED_RETRY_USER
     }
-    private static string INTRO_MESSAGE = _t("Enter the username and password associated with your Tumblr account.");
-    private static string FAILED_RETRY_USER_MESSAGE = _t("Username and/or password invalid. Please try again");
+    private static string INTRO_MESSAGE = _("Enter the username and password associated with your Tumblr account.");
+    private static string FAILED_RETRY_USER_MESSAGE = _("Username and/or password invalid. Please try again");
 
     private Gtk.Box pane_widget = null;
     private Gtk.Builder builder;
@@ -600,12 +598,9 @@ internal class AuthenticationPane : Spit.Publishing.DialogPane, Object {
     public AuthenticationPane(TumblrPublisher publisher, Mode mode = Mode.INTRO) {
         this.pane_widget = new Gtk.Box(Gtk.Orientation.VERTICAL, 0);
 
-        File ui_file = publisher.get_host().get_module_file().get_parent().
-            get_child("tumblr_authentication_pane.glade");
-        
         try {
             builder = new Gtk.Builder();
-            builder.add_from_file(ui_file.get_path());
+            builder.add_from_resource (Resources.RESOURCE_PATH + "/tumblr_authentication_pane.ui");
             builder.connect_signals(null);
             Gtk.Alignment align = builder.get_object("alignment") as Gtk.Alignment;
             
@@ -616,7 +611,7 @@ internal class AuthenticationPane : Spit.Publishing.DialogPane, Object {
                     break;
 
                 case Mode.FAILED_RETRY_USER:
-                    message_label.set_markup("<b>%s</b>\n\n%s".printf(_t(
+                    message_label.set_markup("<b>%s</b>\n\n%s".printf(_(
                         "Invalid User Name or Password"), FAILED_RETRY_USER_MESSAGE));
                     break;
             }
@@ -636,7 +631,7 @@ internal class AuthenticationPane : Spit.Publishing.DialogPane, Object {
             align.reparent(pane_widget);
             publisher.get_host().set_dialog_default_widget(login_button);
         } catch (Error e) {
-            warning(_t("Could not load UI: %s"), e.message);
+            warning(_("Could not load UI: %s"), e.message);
         }
     }
     
@@ -659,10 +654,8 @@ internal class AuthenticationPane : Spit.Publishing.DialogPane, Object {
     }
     
     private void update_login_button_sensitivity() {
-        login_button.set_sensitive(
-            !is_string_empty(username_entry.get_text()) &&
-            !is_string_empty(password_entry.get_text())
-        );
+        login_button.set_sensitive(username_entry.text_length > 0 &&
+                                   password_entry.text_length > 0);
     }
     
     public Gtk.Widget get_widget() {
@@ -720,12 +713,11 @@ internal class PublishingOptionsPane : Spit.Publishing.DialogPane, GLib.Object {
 		this.media_type = media_type;
 		this.sizes = sizes;
 		this.blogs=blogs;
-        File ui_file = publisher.get_host().get_module_file().get_parent().
-            get_child("tumblr_publishing_options_pane.glade");
-        
+
         try {
 			builder = new Gtk.Builder();
-			builder.add_from_file(ui_file.get_path());
+			builder.add_from_resource (Resources.RESOURCE_PATH +
+                    "/tumblr_publishing_options_pane.ui");
 			builder.connect_signals(null);
 
 			// pull in the necessary widgets from the glade file
@@ -739,7 +731,7 @@ internal class PublishingOptionsPane : Spit.Publishing.DialogPane, GLib.Object {
 			blog_label = (Gtk.Label) this.builder.get_object("blog_label");
 
 
-			string upload_label_text = _t("You are logged into Tumblr as %s.\n\n").printf(this.username);
+			string upload_label_text = _("You are logged into Tumblr as %s.\n\n").printf(this.username);
 			upload_info_label.set_label(upload_label_text);
 
 			populate_blog_combo();
@@ -757,7 +749,7 @@ internal class PublishingOptionsPane : Spit.Publishing.DialogPane, GLib.Object {
 			logout_button.clicked.connect(on_logout_clicked);
 			publish_button.clicked.connect(on_publish_clicked);
         } catch (Error e) {
-			warning(_t("Could not load UI: %s"), e.message);
+			warning(_("Could not load UI: %s"), e.message);
         }
     }
 
@@ -872,7 +864,7 @@ internal class AccessTokenFetchTransaction : Transaction {
 
 internal class UserInfoFetchTransaction : Transaction {
     public UserInfoFetchTransaction(Session session) {
-        base.with_uri(session, "http://api.tumblr.com/v2/user/info",
+        base.with_uri(session, "https://api.tumblr.com/v2/user/info",
             Publishing.RESTSupport.HttpMethod.POST);
     }
 }
@@ -903,7 +895,7 @@ internal class UploadTransaction : Publishing.RESTSupport.UploadTransaction {
 
     public UploadTransaction(Session session,Spit.Publishing.Publishable publishable, string blog_url)  {
 		debug("Init upload transaction");
-        base.with_endpoint_url(session, publishable,"http://api.tumblr.com/v2/blog/%s/post".printf(blog_url) );
+        base.with_endpoint_url(session, publishable,"https://api.tumblr.com/v2/blog/%s/post".printf(blog_url) );
         this.session = session;
 
     }
@@ -957,18 +949,13 @@ internal class UploadTransaction : Publishing.RESTSupport.UploadTransaction {
 			string[] keywords = base.publishable.get_publishing_keywords();
 			string tags = "";
 			if (keywords != null) {
-				foreach (string tag in keywords) {
-				if (!is_string_empty(tags)) {
-					tags += ",";
-				}
-				tags += tag;
-				}
+                tags = string.joinv (",", keywords);
 			}
 			add_argument("tags", Soup.URI.encode(tags, ENCODE_RFC_3986_EXTRA));
 
         } catch (FileError e) {
             throw new Spit.Publishing.PublishingError.LOCAL_FILE_ERROR(
-                _t("A temporary file needed for publishing is unavailable"));
+                _("A temporary file needed for publishing is unavailable"));
 
 		}
 
@@ -995,7 +982,7 @@ internal class UploadTransaction : Publishing.RESTSupport.UploadTransaction {
 
         // TODO: there must be a better way to iterate over a map
         Gee.MapIterator<string, string> i = base.message_headers.map_iterator();
-        bool cont = i.first();
+        bool cont = i.next();
         while(cont) {
             outbound_message.request_headers.append(i.get_key(), i.get_value());
             cont = i.next();
@@ -1108,7 +1095,7 @@ internal class Session : Publishing.RESTSupport.Session {
         debug("signing key = '%s'", signing_key);
 
         // compute the signature
-        string signature = hmac_sha1(signing_key, signature_base_string);
+        string signature = Publishing.RESTSupport.hmac_sha1(signing_key, signature_base_string);
         debug("signature = '%s'", signature);
         signature = Soup.URI.encode(signature, ENCODE_RFC_3986_EXTRA);
 

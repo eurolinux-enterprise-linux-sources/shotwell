@@ -1,4 +1,4 @@
-/* Copyright 2009-2013 Yorba Foundation
+/* Copyright 2016 Software Freedom Conservancy Inc.
  *
  * This software is licensed under the GNU LGPL (version 2.1 or later).
  * See the COPYING file in this distribution.
@@ -17,7 +17,8 @@ public enum ImportResult {
     DISK_FAILURE,
     DISK_FULL,
     CAMERA_ERROR,
-    FILE_WRITE_ERROR;
+    FILE_WRITE_ERROR,
+    PIXBUF_CORRUPT_IMAGE;
     
     public string to_string() {
         switch (this) {
@@ -59,6 +60,9 @@ public enum ImportResult {
             
             case FILE_WRITE_ERROR:
                 return _("File write error");
+
+            case PIXBUF_CORRUPT_IMAGE:
+                return _("Corrupt image file");
             
             default:
                 return _("Imported failed (%d)").printf((int) this);
@@ -123,6 +127,23 @@ public enum ImportResult {
                 return ImportResult.FILE_ERROR;
         } else if (err is GPhotoError) {
             return ImportResult.CAMERA_ERROR;
+        } else if (err is Gdk.PixbufError) {
+            Gdk.PixbufError pixbuferr = (Gdk.PixbufError) err;
+
+            if (pixbuferr is Gdk.PixbufError.CORRUPT_IMAGE)
+                return ImportResult.PIXBUF_CORRUPT_IMAGE;
+            else if (pixbuferr is Gdk.PixbufError.INSUFFICIENT_MEMORY)
+                return default_result;
+            else if (pixbuferr is Gdk.PixbufError.BAD_OPTION)
+                return default_result;
+            else if (pixbuferr is Gdk.PixbufError.UNKNOWN_TYPE)
+                return ImportResult.UNSUPPORTED_FORMAT;
+            else if (pixbuferr is Gdk.PixbufError.UNSUPPORTED_OPERATION)
+                return default_result;
+            else if (pixbuferr is Gdk.PixbufError.FAILED)
+                return default_result;
+            else
+                return default_result;
         }
         
         return default_result;
@@ -294,6 +315,7 @@ public class ImportManifest {
     public Gee.List<BatchImportResult> skipped_files = new Gee.ArrayList<BatchImportResult>();
     public Gee.List<BatchImportResult> aborted = new Gee.ArrayList<BatchImportResult>();
     public Gee.List<BatchImportResult> already_imported = new Gee.ArrayList<BatchImportResult>();
+    public Gee.List<BatchImportResult> corrupt_files = new Gee.ArrayList<BatchImportResult>();
     public Gee.List<BatchImportResult> all = new Gee.ArrayList<BatchImportResult>();
     
     public ImportManifest(Gee.List<BatchImportJob>? prefailed = null,
@@ -355,6 +377,10 @@ public class ImportManifest {
                 write_failed.add(batch_result);
             break;
             
+            case ImportResult.PIXBUF_CORRUPT_IMAGE:
+                corrupt_files.add(batch_result);
+            break;
+            
             default:
                 failed.add(batch_result);
             break;
@@ -405,7 +431,7 @@ public class BatchImport : Object {
     private Gee.HashMap<string, File> imported_full_md5_table = new Gee.HashMap<string, File>();
 #endif
     private uint throbber_id = 0;
-    private int max_outstanding_import_jobs = Workers.thread_per_cpu_minus_one();
+    private uint max_outstanding_import_jobs = Workers.thread_per_cpu_minus_one();
     private bool untrash_duplicates = true;
     private bool mark_duplicates_online = true;
     
@@ -810,12 +836,42 @@ public class BatchImport : Object {
                     prepared_file.full_md5);
                 assert(duplicate_ids.length > 0);
                 
-                DuplicatedFile duplicated_file =
+                DuplicatedFile? duplicated_file =
                     DuplicatedFile.create_from_video_id(duplicate_ids[0]);
+                
+                ImportResult result_code = ImportResult.PHOTO_EXISTS;
+                if (mark_duplicates_online) {
+                    Video? dupe_video =
+                        (Video) Video.global.get_offline_bin().fetch_by_master_file(prepared_file.file);
+                    if (dupe_video == null)
+                        dupe_video = (Video) Video.global.get_offline_bin().fetch_by_md5(prepared_file.full_md5);
                     
+                    if(dupe_video != null) {
+                        debug("duplicate video found offline, marking as online: %s",
+                            prepared_file.file.get_path());
+                        
+                        dupe_video.set_master_file(prepared_file.file);
+                        dupe_video.mark_online();
+                        
+                        duplicated_file = null;
+                        
+                        manifest.imported.add(dupe_video);
+                        report_progress(dupe_video.get_filesize());
+                        file_import_complete();
+                        
+                        result_code = ImportResult.SUCCESS;
+                    }
+                }
+                
                 import_result = new BatchImportResult(prepared_file.job, prepared_file.file, 
                     prepared_file.file.get_path(), prepared_file.file.get_path(), duplicated_file,
-                    ImportResult.PHOTO_EXISTS);
+                    result_code);
+                
+                if (result_code == ImportResult.SUCCESS) {
+                    manifest.add_result(import_result);
+                    
+                    continue;
+                }
             }
             
             if (get_in_current_import(prepared_file) != null) {

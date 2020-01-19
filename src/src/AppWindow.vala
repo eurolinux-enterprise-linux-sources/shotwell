@@ -1,4 +1,4 @@
-/* Copyright 2009-2013 Yorba Foundation
+/* Copyright 2016 Software Freedom Conservancy Inc.
  *
  * This software is licensed under the GNU LGPL (version 2.1 or later).
  * See the COPYING file in this distribution.
@@ -9,14 +9,15 @@ public class FullscreenWindow : PageWindow {
     public const int TOOLBAR_DISMISSAL_SEC = 2;
     public const int TOOLBAR_CHECK_DISMISSAL_MSEC = 500;
     
-    private Gtk.Window toolbar_window = new Gtk.Window(Gtk.WindowType.POPUP);
-    private Gtk.ToolButton close_button = new Gtk.ToolButton.from_stock(Gtk.Stock.LEAVE_FULLSCREEN);
-    private Gtk.ToggleToolButton pin_button = new Gtk.ToggleToolButton.from_stock(Resources.PIN_TOOLBAR);
+    private Gtk.Overlay overlay = new Gtk.Overlay();
+    private Gtk.Toolbar toolbar = null;
+    private Gtk.ToolButton close_button = new Gtk.ToolButton(null, null);
+    private Gtk.ToggleToolButton pin_button = new Gtk.ToggleToolButton();
     private bool is_toolbar_shown = false;
     private bool waiting_for_invoke = false;
     private time_t left_toolbar_time = 0;
     private bool switched_to = false;
-    private bool is_toolbar_dismissal_enabled = true;
+    private bool is_toolbar_dismissal_enabled;
 
     public FullscreenWindow(Page page) {
         set_current_page(page);
@@ -45,16 +46,26 @@ public class FullscreenWindow : PageWindow {
         move(monitor.x, monitor.y);
         
         set_border_width(0);
+
+        // restore pin state
+        is_toolbar_dismissal_enabled = Config.Facade.get_instance().get_pin_toolbar_state();
         
+        pin_button.set_icon_name("pin-toolbar");
         pin_button.set_label(_("Pin Toolbar"));
         pin_button.set_tooltip_text(_("Pin the toolbar open"));
+        pin_button.set_active(!is_toolbar_dismissal_enabled);
         pin_button.clicked.connect(update_toolbar_dismissal);
         
+        close_button.set_icon_name("view-restore");
         close_button.set_tooltip_text(_("Leave fullscreen"));
         close_button.clicked.connect(on_close);
         
-        Gtk.Toolbar toolbar = page.get_toolbar();
+        toolbar = page.get_toolbar();
         toolbar.set_show_arrow(false);
+        toolbar.valign = Gtk.Align.END;
+        toolbar.halign = Gtk.Align.CENTER;
+        toolbar.expand = false;
+        toolbar.opacity = Resources.TRANSIENT_WINDOW_OPACITY;
 
         if (page is SlideshowPage) {
             // slideshow page doesn't own toolbar to hide it, subscribe to signal instead
@@ -69,14 +80,9 @@ public class FullscreenWindow : PageWindow {
 
         toolbar.insert(close_button, -1);
         
-        // set up toolbar along bottom of screen
-        toolbar_window.set_screen(get_screen());
-        toolbar_window.set_border_width(0);
-        toolbar_window.add(toolbar);
-        
-        toolbar_window.realize.connect(on_toolbar_realized);
-        
-        add(page);
+        add(overlay);
+        overlay.add(page);
+        overlay.add_overlay (toolbar);
 
         // call to set_default_size() saves one repaint caused by changing
         // size from default to full screen. In slideshow mode, this change
@@ -92,6 +98,9 @@ public class FullscreenWindow : PageWindow {
         
         // start off with toolbar invoked, as a clue for the user
         invoke_toolbar();
+
+        // Toolbar steals keyboard focus from page, put it back again
+        page.grab_focus ();
     }
 
     public void disable_toolbar_dismissal() {
@@ -125,10 +134,10 @@ public class FullscreenWindow : PageWindow {
     private Gtk.ActionEntry[] create_actions() {
         Gtk.ActionEntry[] actions = new Gtk.ActionEntry[0];
         
-        Gtk.ActionEntry leave_fullscreen = { "LeaveFullscreen", Gtk.Stock.LEAVE_FULLSCREEN,
+        Gtk.ActionEntry leave_fullscreen = { "LeaveFullscreen", Resources.LEAVE_FULLSCREEN_LABEL,
             TRANSLATABLE, "F11", TRANSLATABLE, on_close };
-        leave_fullscreen.label = _("Leave _Fullscreen");
-        leave_fullscreen.tooltip = _("Leave fullscreen");
+        leave_fullscreen.label = Resources.LEAVE_FULLSCREEN_LABEL;
+        leave_fullscreen.tooltip = Resources.LEAVE_FULLSCREEN_LABEL;
         actions += leave_fullscreen;
 
         return actions;
@@ -141,22 +150,23 @@ public class FullscreenWindow : PageWindow {
             
             return true;
         }
-
-        // Make sure this event gets propagated to the underlying window...
-        AppWindow.get_instance().key_press_event(event);
-
-        // ...then let the base class take over
-        return (base.key_press_event != null) ? base.key_press_event(event) : false;
+        
+        // propagate to this (fullscreen) window respecting "stop propagation" result...
+        if (base.key_press_event != null && base.key_press_event(event))
+            return true;
+        
+        // ... then propagate to the underlying window hidden behind this fullscreen one
+        return AppWindow.get_instance().key_press_event(event);
     }
     
     private void on_close() {
+        Config.Facade.get_instance().set_pin_toolbar_state(is_toolbar_dismissal_enabled);
         hide_toolbar();
-        toolbar_window = null;
         
         AppWindow.get_instance().end_fullscreen();
     }
     
-    public void close() {
+    public new void close() {
         on_close();
     }
     
@@ -205,7 +215,7 @@ public class FullscreenWindow : PageWindow {
         devmgr.get_client_pointer().get_position(null, null, out py);
         
         int wy;
-        toolbar_window.get_window().get_geometry(null, out wy, null, null);
+        toolbar.get_window().get_geometry(null, out wy, null, null);
 
         return (py >= wy);
     }
@@ -224,26 +234,8 @@ public class FullscreenWindow : PageWindow {
         return false;
     }
     
-    private void on_toolbar_realized() {
-        Gtk.Requisition req;
-        toolbar_window.get_preferred_size(null, out req);
-        
-        // place the toolbar in the center of the monitor along the bottom edge
-        Gdk.Rectangle monitor = get_monitor_geometry();
-        int tx = monitor.x + (monitor.width - req.width) / 2;
-        if (tx < 0)
-            tx = 0;
-
-        int ty = monitor.y + monitor.height - req.height;
-        if (ty < 0)
-            ty = 0;
-            
-        toolbar_window.move(tx, ty);
-        toolbar_window.set_opacity(Resources.TRANSIENT_WINDOW_OPACITY);
-    }
-
     private void invoke_toolbar() {
-        toolbar_window.show_all();
+        toolbar.show_all();
 
         is_toolbar_shown = true;
         
@@ -252,9 +244,6 @@ public class FullscreenWindow : PageWindow {
     
     private bool on_check_toolbar_dismissal() {
         if (!is_toolbar_shown)
-            return false;
-        
-        if (toolbar_window == null)
             return false;
         
         // if dismissal is disabled, keep open but keep checking
@@ -288,7 +277,7 @@ public class FullscreenWindow : PageWindow {
     }
     
     private void hide_toolbar() {
-        toolbar_window.hide();
+        toolbar.hide();
         is_toolbar_shown = false;
     }
 }
@@ -441,11 +430,7 @@ public abstract class AppWindow : PageWindow {
         instance = this;
 
         title = Resources.APP_TITLE;
-        
-        GLib.List<Gdk.Pixbuf> pixbuf_list = new GLib.List<Gdk.Pixbuf>();
-        foreach (string resource in Resources.APP_ICONS)
-            pixbuf_list.append(Resources.get_icon(resource, 0));
-        set_default_icon_list(pixbuf_list);
+        set_default_icon_name("shotwell");
 
         // restore previous size and maximization state
         if (this is LibraryWindow) {
@@ -481,27 +466,35 @@ public abstract class AppWindow : PageWindow {
         
         ui.ensure_update();
         add_accel_group(ui.get_accel_group());
+        
+        Gtk.CssProvider provider = new Gtk.CssProvider();
+        try {
+            provider.load_from_data(Resources.CUSTOM_CSS, -1);
+            Gtk.StyleContext.add_provider_for_screen(Gdk.Screen.get_default(), provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+        } catch (Error err) {
+            debug("Unable to load custom CSS: %s", err.message);
+        }
     }
     
     private Gtk.ActionEntry[] create_common_actions() {
         Gtk.ActionEntry[] actions = new Gtk.ActionEntry[0];
         
-        Gtk.ActionEntry quit = { "CommonQuit", Gtk.Stock.QUIT, TRANSLATABLE, "<Ctrl>Q",
+        Gtk.ActionEntry quit = { "CommonQuit", Resources.QUIT_LABEL, TRANSLATABLE, "<Ctrl>Q",
             TRANSLATABLE, on_quit };
-        quit.label = _("_Quit");
+        quit.label = Resources.QUIT_LABEL;
         actions += quit;
 
-        Gtk.ActionEntry about = { "CommonAbout", Gtk.Stock.ABOUT, TRANSLATABLE, null,
+        Gtk.ActionEntry about = { "CommonAbout", Resources.ABOUT_LABEL, TRANSLATABLE, null,
             TRANSLATABLE, on_about };
-        about.label = _("_About");
+        about.label = Resources.ABOUT_LABEL;
         actions += about;
 
-        Gtk.ActionEntry fullscreen = { "CommonFullscreen", Gtk.Stock.FULLSCREEN,
+        Gtk.ActionEntry fullscreen = { "CommonFullscreen", Resources.FULLSCREEN_LABEL,
             TRANSLATABLE, "F11", TRANSLATABLE, on_fullscreen };
-        fullscreen.label = _("Fulls_creen");
+        fullscreen.label = Resources.FULLSCREEN_LABEL;
         actions += fullscreen;
 
-        Gtk.ActionEntry help_contents = { "CommonHelpContents", Gtk.Stock.HELP,
+        Gtk.ActionEntry help_contents = { "CommonHelpContents", Resources.HELP_LABEL,
             TRANSLATABLE, "F1", TRANSLATABLE, on_help_contents };
         help_contents.label = _("_Contents");
         actions += help_contents;
@@ -516,22 +509,22 @@ public abstract class AppWindow : PageWindow {
         help_report_problem.label = _("_Report a Problem...");
         actions += help_report_problem;
 
-        Gtk.ActionEntry undo = { "CommonUndo", Gtk.Stock.UNDO, TRANSLATABLE, "<Ctrl>Z",
+        Gtk.ActionEntry undo = { "CommonUndo", Resources.UNDO_MENU, TRANSLATABLE, "<Ctrl>Z",
             TRANSLATABLE, on_undo };
         undo.label = Resources.UNDO_MENU;
         actions += undo;
         
-        Gtk.ActionEntry redo = { "CommonRedo", Gtk.Stock.REDO, TRANSLATABLE, "<Ctrl><Shift>Z",
+        Gtk.ActionEntry redo = { "CommonRedo", Resources.REDO_MENU, TRANSLATABLE, "<Ctrl><Shift>Z",
             TRANSLATABLE, on_redo };
         redo.label = Resources.REDO_MENU;
         actions += redo;
 
-        Gtk.ActionEntry jump_to_file = { "CommonJumpToFile", Gtk.Stock.JUMP_TO, TRANSLATABLE, 
+        Gtk.ActionEntry jump_to_file = { "CommonJumpToFile", Resources.JUMP_TO_FILE_MENU, TRANSLATABLE, 
             "<Ctrl><Shift>M", TRANSLATABLE, on_jump_to_file };
         jump_to_file.label = Resources.JUMP_TO_FILE_MENU;
         actions += jump_to_file;
         
-        Gtk.ActionEntry select_all = { "CommonSelectAll", Gtk.Stock.SELECT_ALL, TRANSLATABLE,
+        Gtk.ActionEntry select_all = { "CommonSelectAll", Resources.SELECT_ALL_MENU, TRANSLATABLE,
             "<Ctrl>A", TRANSLATABLE, on_select_all };
         select_all.label = Resources.SELECT_ALL_MENU;
         actions += select_all;
@@ -557,7 +550,7 @@ public abstract class AppWindow : PageWindow {
         return fullscreen_window;
     }
 
-    public static Gtk.Builder create_builder(string glade_filename = "shotwell.glade", void *user = null) {
+    public static Gtk.Builder create_builder(string glade_filename = "shotwell.ui", void *user = null) {
         Gtk.Builder builder = new Gtk.Builder();
         try {
             builder.add_from_file(AppDirs.get_resources_dir().get_child("ui").get_child(
@@ -678,9 +671,9 @@ public abstract class AppWindow : PageWindow {
             "version", Resources.APP_VERSION,
             "comments", get_app_role(),
             "copyright", Resources.COPYRIGHT,
-            "website", Resources.YORBA_URL,
+            "website", Resources.HOME_URL,
             "license", Resources.LICENSE,
-            "website-label", _("Visit the Yorba web site"),
+            "website-label", _("Visit the Shotwell web site"),
             "authors", Resources.AUTHORS,
             "logo", Resources.get_icon(Resources.ICON_ABOUT_LOGO, -1),
             "translator-credits", _("translator-credits"),

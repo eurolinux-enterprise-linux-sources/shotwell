@@ -1,4 +1,4 @@
-/* Copyright 2009-2013 Yorba Foundation
+/* Copyright 2016 Software Freedom Conservancy Inc.
  *
  * This software is licensed under the GNU LGPL (version 2.1 or later).
  * See the COPYING file in this distribution.
@@ -32,10 +32,11 @@ public bool confirm_delete_saved_search(SavedSearch search) {
 public bool confirm_warn_developer_changed(int number) {
     Gtk.MessageDialog dialog = new Gtk.MessageDialog.with_markup(AppWindow.get_instance(),
         Gtk.DialogFlags.MODAL, Gtk.MessageType.WARNING, Gtk.ButtonsType.NONE,
-        "<span weight=\"bold\" size=\"larger\">%s</span>".printf(ngettext("Switching developers will undo all changes you have made to this photo in Shotwell",
-        "Switching developers will undo all changes you have made to these photos in Shotwell", number)));
+        "<span weight=\"bold\" size=\"larger\">%s</span>",
+        ngettext("Switching developers will undo all changes you have made to this photo in Shotwell",
+        "Switching developers will undo all changes you have made to these photos in Shotwell", number));
 
-    dialog.add_buttons(Gtk.Stock.CANCEL, Gtk.ResponseType.CANCEL);
+    dialog.add_buttons(Resources.CANCEL_LABEL, Gtk.ResponseType.CANCEL);
     dialog.add_buttons(_("_Switch Developer"), Gtk.ResponseType.YES);
     
     int response = dialog.run();
@@ -58,8 +59,8 @@ public File? choose_file(string current_file_basename) {
         _("Export Video") : _("Export Photo");
         
     Gtk.FileChooserDialog chooser = new Gtk.FileChooserDialog(file_chooser_title,
-        AppWindow.get_instance(), Gtk.FileChooserAction.SAVE, Gtk.Stock.CANCEL, 
-        Gtk.ResponseType.CANCEL, Gtk.Stock.SAVE, Gtk.ResponseType.ACCEPT, null);
+        AppWindow.get_instance(), Gtk.FileChooserAction.SAVE, Resources.CANCEL_LABEL, 
+        Gtk.ResponseType.CANCEL, Resources.SAVE_LABEL, Gtk.ResponseType.ACCEPT, null);
     chooser.set_do_overwrite_confirmation(true);
     chooser.set_current_folder(current_export_dir.get_path());
     chooser.set_current_name(current_file_basename);
@@ -87,8 +88,8 @@ public File? choose_dir(string? user_title = null) {
         user_title = _("Export Photos");
 
     Gtk.FileChooserDialog chooser = new Gtk.FileChooserDialog(user_title,
-        AppWindow.get_instance(), Gtk.FileChooserAction.SELECT_FOLDER, Gtk.Stock.CANCEL, 
-        Gtk.ResponseType.CANCEL, Gtk.Stock.OK, Gtk.ResponseType.ACCEPT, null);
+        AppWindow.get_instance(), Gtk.FileChooserAction.SELECT_FOLDER, Resources.CANCEL_LABEL, 
+        Gtk.ResponseType.CANCEL, Resources.OK_LABEL, Gtk.ResponseType.ACCEPT, null);
     chooser.set_current_folder(current_export_dir.get_path());
     chooser.set_local_only(false);
     
@@ -157,7 +158,7 @@ public class ExportDialog : Gtk.Dialog {
     private static ExportFormatParameters current_parameters = ExportFormatParameters.current();
     private static int current_scale = DEFAULT_SCALE;
     
-    private Gtk.Table table = new Gtk.Table(0, 0, false);
+    private Gtk.Grid table = new Gtk.Grid();
     private Gtk.ComboBoxText quality_combo;
     private Gtk.ComboBoxText constraint_combo;
     private Gtk.ComboBoxText format_combo;
@@ -168,6 +169,10 @@ public class ExportDialog : Gtk.Dialog {
     private bool in_insert = false;
     
     public ExportDialog(string title) {
+        bool use_header;
+        Gtk.Settings.get_default ().get ("gtk-dialogs-use-header", out use_header);
+        Object (use_header_bar: use_header ? 1 : 0);
+        
         this.title = title;
         resizable = false;
 
@@ -198,7 +203,6 @@ public class ExportDialog : Gtk.Dialog {
 
         pixels_entry = new Gtk.Entry();
         pixels_entry.set_max_length(6);
-        pixels_entry.set_size_request(60, -1);
         pixels_entry.set_text("%d".printf(current_scale));
         
         // register after preparation to avoid signals during init
@@ -218,24 +222,24 @@ public class ExportDialog : Gtk.Dialog {
         add_label(_("_Scaling constraint:"), 0, 2, constraint_combo);
         add_control(constraint_combo, 1, 2);
 
-        Gtk.Label pixels_label = new Gtk.Label.with_mnemonic(_(" _pixels"));
-        pixels_label.set_mnemonic_widget(pixels_entry);
-        
-        Gtk.Box pixels_box = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 0);
-        pixels_box.pack_start(pixels_entry, false, false, 0);
-        pixels_box.pack_end(pixels_label, false, false, 0);
-        add_control(pixels_box, 1, 3);
+        add_label(_("_Pixels:"), 0, 3, pixels_entry);
+        add_control(pixels_entry, 1, 3);
         
         export_metadata = new Gtk.CheckButton.with_label(_("Export metadata"));
         add_control(export_metadata, 1, 4);
         export_metadata.active = true;
         
+        table.set_row_spacing(5);
+        table.set_column_spacing(5);
+        table.set_border_width(3);
+        
         ((Gtk.Box) get_content_area()).add(table);
         
         // add buttons to action area
-        add_button(Gtk.Stock.CANCEL, Gtk.ResponseType.CANCEL);
-        ok_button = add_button(Gtk.Stock.OK, Gtk.ResponseType.OK);
-
+        add_button(Resources.CANCEL_LABEL, Gtk.ResponseType.CANCEL);
+        ok_button = add_button(Resources.OK_LABEL, Gtk.ResponseType.OK);
+        set_default_response(Gtk.ResponseType.OK);
+        
         ok_button.set_can_default(true);
         ok_button.has_default = true;
         set_default(ok_button);
@@ -269,7 +273,8 @@ public class ExportDialog : Gtk.Dialog {
     
     private PhotoFileFormat get_specified_format() {
         int index = format_combo.get_active();
-        assert(index >= NUM_SPECIAL_FORMATS);
+        if (index < NUM_SPECIAL_FORMATS)
+            index = NUM_SPECIAL_FORMATS;
 
         index -= NUM_SPECIAL_FORMATS;
         PhotoFileFormat[] writeable_formats = PhotoFileFormat.get_writeable();
@@ -349,7 +354,7 @@ public class ExportDialog : Gtk.Dialog {
     }
     
     private void add_label(string text, int x, int y, Gtk.Widget? widget = null) {
-        Gtk.Alignment left_aligned = new Gtk.Alignment(0.0f, 0.5f, 0, 0);
+        Gtk.Alignment left_aligned = new Gtk.Alignment(1, 0.5f, 0, 0);
         
         Gtk.Label new_label = new Gtk.Label.with_mnemonic(text);
         new_label.set_use_underline(true);
@@ -359,16 +364,14 @@ public class ExportDialog : Gtk.Dialog {
         
         left_aligned.add(new_label);
         
-        table.attach(left_aligned, x, x + 1, y, y + 1, Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 
-            10, 5);
+        table.attach(left_aligned, x, y, 1, 1);
     }
     
     private void add_control(Gtk.Widget widget, int x, int y) {
-        Gtk.Alignment left_aligned = new Gtk.Alignment(0, 0.5f, 0, 0);
+        Gtk.Alignment left_aligned = new Gtk.Alignment(0, 0.5f, 1, 0);
         left_aligned.add(widget);
         
-        table.attach(left_aligned, x, x + 1, y, y + 1, Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL,
-            10, 5);
+        table.attach(left_aligned, x, y, 1, 1);
     }
     
     private void on_constraint_changed() {
@@ -614,6 +617,21 @@ public string create_result_report_from_manifest(ImportManifest manifest) {
             builder.append(current_file_summary);
         }
     }
+
+    //
+    // Photos/Videos Not Imported Because GDK Pixbuf Library Identified them as Corrupt
+    //
+    if (manifest.corrupt_files.size > 0) {
+        builder.append(_("Photos/Videos Not Imported Because Files Are Corrupt:")
+             + "\n\n");
+        
+        foreach (BatchImportResult result in manifest.corrupt_files) {
+            current_file_summary = result.src_identifier + "\n\t" + _("error message:") + " |" +
+                result.errmsg + "|\n\n";
+
+            builder.append(current_file_summary);
+        }
+    }
     
     //
     // Photos/Videos Not Imported for Other Reasons
@@ -723,6 +741,29 @@ public bool report_manifest(ImportManifest manifest, bool show_dest_id,
         
         message += generate_import_failure_list(manifest.camera_failed, show_dest_id);
     }
+
+    if (manifest.corrupt_files.size > 0) {
+        if (message.length > 0)
+            message += "\n";
+        
+        string photos_message = (ngettext("1 photo failed to import because it was corrupt:\n",
+            "%d photos failed to import because they were corrupt:\n",
+            manifest.corrupt_files.size)).printf(manifest.corrupt_files.size);
+        string videos_message = (ngettext("1 video failed to import because it was corrupt:\n",
+            "%d videos failed to import because they were corrupt:\n",
+            manifest.corrupt_files.size)).printf(manifest.corrupt_files.size);
+        string both_message = (ngettext("1 photo/video failed to import because it was corrupt:\n",
+            "%d photos/videos failed to import because they were corrupt:\n",
+            manifest.corrupt_files.size)).printf(manifest.corrupt_files.size);
+        string neither_message = (ngettext("1 file failed to import because it was corrupt:\n",
+            "%d files failed to import because it was corrupt:\n",
+            manifest.corrupt_files.size)).printf(manifest.corrupt_files.size);
+        
+        message += get_media_specific_string(manifest.corrupt_files, photos_message, videos_message,
+            both_message, neither_message);
+        
+        message += generate_import_failure_list(manifest.corrupt_files, show_dest_id);
+    }
     
     if (manifest.skipped_photos.size > 0) {
         if (message.length > 0)
@@ -795,7 +836,7 @@ public bool report_manifest(ImportManifest manifest, bool show_dest_id,
     }
     
     int total = manifest.success.size + manifest.failed.size + manifest.camera_failed.size
-        + manifest.skipped_photos.size + manifest.skipped_files.size
+        + manifest.skipped_photos.size + manifest.skipped_files.size + manifest.corrupt_files.size
         + manifest.already_imported.size + manifest.aborted.size + manifest.write_failed.size;
     assert(total == manifest.all.size);
     
@@ -813,7 +854,7 @@ public bool report_manifest(ImportManifest manifest, bool show_dest_id,
         Gtk.Widget save_results_button = dialog.add_button(ImportUI.SAVE_RESULTS_BUTTON_NAME,
             ImportUI.SAVE_RESULTS_RESPONSE_ID);
         save_results_button.set_visible(manifest.success.size < manifest.all.size);
-        Gtk.Widget ok_button = dialog.add_button(Gtk.STOCK_OK, Gtk.ResponseType.OK);
+        Gtk.Widget ok_button = dialog.add_button(Resources.OK_LABEL, Gtk.ResponseType.OK);
         dialog.set_default(ok_button);
         
         Gtk.Window dialog_parent = (Gtk.Window) dialog.get_parent();
@@ -852,7 +893,7 @@ public bool report_manifest(ImportManifest manifest, bool show_dest_id,
 internal void save_import_results(Gtk.Window? chooser_dialog_parent, string results_log) {
     Gtk.FileChooserDialog chooser_dialog = new Gtk.FileChooserDialog(
         ImportUI.SAVE_RESULTS_FILE_CHOOSER_TITLE, chooser_dialog_parent, Gtk.FileChooserAction.SAVE,
-        Gtk.Stock.CANCEL, Gtk.ResponseType.CANCEL, Gtk.Stock.SAVE, Gtk.ResponseType.ACCEPT, null);
+        Resources.CANCEL_LABEL, Gtk.ResponseType.CANCEL, Resources.SAVE_AS_LABEL, Gtk.ResponseType.ACCEPT, null);
     chooser_dialog.set_do_overwrite_confirmation(true);
     chooser_dialog.set_current_folder(Environment.get_home_dir());
     chooser_dialog.set_current_name("Shotwell Import Log.txt");
@@ -1023,14 +1064,16 @@ public class EntryMultiCompletion : Gtk.EntryCompletion {
     }
 }
 
-public class SetBackgroundSlideshowDialog {
-    private Gtk.Dialog dialog;
-    private Gtk.Label delay_value_label;
-    private Gtk.Scale delay_scale;
-    private int delay_value = 0;
-    
-    public SetBackgroundSlideshowDialog() {
-        Gtk.Builder builder = AppWindow.create_builder("set_background_dialog.glade", this);
+public abstract class SetBackgroundDialog {
+    protected Gtk.Dialog dialog;
+    protected Gtk.CheckButton desktop_background_button;
+    protected Gtk.CheckButton screensaver_button;
+    protected Gtk.Button ok_button;
+    // the checkbuttons themselves are initialized to these values
+    protected bool desktop = true;
+    protected bool screensaver = false;
+
+    public SetBackgroundDialog(Gtk.Builder builder) {
         
         dialog = builder.get_object("dialog1") as Gtk.Dialog;
         dialog.set_type_hint(Gdk.WindowTypeHint.DIALOG);
@@ -1038,13 +1081,69 @@ public class SetBackgroundSlideshowDialog {
         dialog.set_transient_for(AppWindow.get_instance());
         dialog.set_default_response(Gtk.ResponseType.OK);
         
+        desktop_background_button = builder.get_object("desktop_background_checkbox") as Gtk.CheckButton;
+        desktop_background_button.active = desktop;
+        desktop_background_button.toggled.connect(on_checkbox_clicked);
+        screensaver_button = builder.get_object("screensaver_checkbox") as Gtk.CheckButton;
+        screensaver_button.active = screensaver;
+        screensaver_button.toggled.connect(on_checkbox_clicked);
+        
+        ok_button = builder.get_object("ok_button") as Gtk.Button;
+    }
+    
+    protected void on_checkbox_clicked() {
+        desktop = desktop_background_button.active;
+        screensaver = screensaver_button.active;
+
+        if (!desktop && !screensaver) {
+            ok_button.sensitive = false;
+        } else {
+            ok_button.sensitive = true;
+        }
+    }
+    
+    protected bool execute_base() {
+        dialog.show_all();
+        bool result = dialog.run() == Gtk.ResponseType.OK;
+        dialog.destroy();
+        
+        return result;
+    }
+}
+
+public class SetBackgroundPhotoDialog : SetBackgroundDialog {
+    
+    public SetBackgroundPhotoDialog() {
+        Gtk.Builder builder = AppWindow.create_builder("set_background_dialog.ui", this);
+        base(builder);
+    }
+    
+    public bool execute(out bool desktop_background, out bool screensaver) {
+        bool result = execute_base();
+        
+        desktop_background = this.desktop;
+        screensaver = this.screensaver;
+        
+        return result;
+    }
+}
+
+public class SetBackgroundSlideshowDialog : SetBackgroundDialog {
+    private Gtk.Label delay_value_label;
+    private Gtk.Scale delay_scale;
+    private int delay_value = 0;
+    
+    public SetBackgroundSlideshowDialog() {
+        Gtk.Builder builder = AppWindow.create_builder("set_background_slideshow_dialog.ui", this);
+        base(builder);
+        
         delay_value_label = builder.get_object("delay_value_label") as Gtk.Label;
         
         delay_scale = builder.get_object("delay_scale") as Gtk.Scale;
         delay_scale.value_changed.connect(on_delay_scale_value_changed);
         delay_scale.adjustment.value = 50;
     }
-
+    
     private void on_delay_scale_value_changed() {
         double value = delay_scale.adjustment.value;
         
@@ -1072,15 +1171,13 @@ public class SetBackgroundSlideshowDialog {
         
         delay_value_label.label = text;
     }
-
-    public bool execute(out int delay_value) {
-        dialog.show_all();
-        
-        bool result = dialog.run() == Gtk.ResponseType.OK;
-        
-        dialog.destroy();
+    
+    public bool execute(out int delay_value, out bool desktop_background, out bool screensaver) {
+        bool result = execute_base();
         
         delay_value = this.delay_value;
+        desktop_background = this.desktop;
+        screensaver = this.screensaver;
         
         return result;
     }
@@ -1096,6 +1193,12 @@ public class TextEntryDialog : Gtk.Dialog {
     private Gtk.Button button2;
     private Gtk.ButtonBox action_area_box;
     
+    public TextEntryDialog() {
+        bool use_header;
+        Gtk.Settings.get_default ().get ("gtk-dialogs-use-header", out use_header);
+        Object (use_header_bar: use_header ? 1 : 0);
+    }
+    
     public void set_builder(Gtk.Builder builder) {
         this.builder = builder;
     }
@@ -1104,7 +1207,6 @@ public class TextEntryDialog : Gtk.Dialog {
         string? initial_text, Gee.Collection<string>? completion_list, string? completion_delimiter) {
         set_title(title);
         set_resizable(true);
-        set_default_size (350, 104);
         set_parent_window(AppWindow.get_instance().get_parent_window());
         set_transient_for(AppWindow.get_instance());
         on_modify_validate = modify_validate;
@@ -1120,8 +1222,8 @@ public class TextEntryDialog : Gtk.Dialog {
         action_area_box = (Gtk.ButtonBox) get_action_area();
         action_area_box.set_layout(Gtk.ButtonBoxStyle.END);
         
-        button1 = (Gtk.Button) add_button(Gtk.Stock.CANCEL, Gtk.ResponseType.CANCEL);
-        button2 = (Gtk.Button) add_button(Gtk.Stock.SAVE, Gtk.ResponseType.OK);
+        button1 = (Gtk.Button) add_button(Resources.CANCEL_LABEL, Gtk.ResponseType.CANCEL);
+        button2 = (Gtk.Button) add_button(Resources.SAVE_LABEL, Gtk.ResponseType.OK);
         set_default_response(Gtk.ResponseType.OK);
         
         if (completion_list != null) { // Textfield with autocompletion
@@ -1166,6 +1268,12 @@ public class MultiTextEntryDialog : Gtk.Dialog {
     private Gtk.Button button2;
     private Gtk.ButtonBox action_area_box;
     
+    public MultiTextEntryDialog() {
+        bool use_header;
+        Gtk.Settings.get_default ().get ("gtk-dialogs-use-header", out use_header);
+        Object (use_header_bar: use_header ? 1 : 0);
+    }
+    
     public void set_builder(Gtk.Builder builder) {
         this.builder = builder;
     }
@@ -1178,12 +1286,6 @@ public class MultiTextEntryDialog : Gtk.Dialog {
         set_transient_for(AppWindow.get_instance());
         on_modify_validate = modify_validate;
         
-        Gtk.Label name_label = builder.get_object("label9") as Gtk.Label;
-        name_label.set_text(label);
-        
-        Gtk.ScrolledWindow scrolled = builder.get_object("scrolledwindow1") as Gtk.ScrolledWindow;
-        scrolled.set_shadow_type (Gtk.ShadowType.ETCHED_IN);
-        
         entry = builder.get_object("textview1") as Gtk.TextView;
         entry.set_wrap_mode (Gtk.WrapMode.WORD);
         entry.buffer = new Gtk.TextBuffer(null);
@@ -1194,8 +1296,9 @@ public class MultiTextEntryDialog : Gtk.Dialog {
         action_area_box = (Gtk.ButtonBox) get_action_area();
         action_area_box.set_layout(Gtk.ButtonBoxStyle.END);
         
-        button1 = (Gtk.Button) add_button(Gtk.Stock.CANCEL, Gtk.ResponseType.CANCEL);
-        button2 = (Gtk.Button) add_button(Gtk.Stock.SAVE, Gtk.ResponseType.OK);
+        button1 = (Gtk.Button) add_button(Resources.CANCEL_LABEL, Gtk.ResponseType.CANCEL);
+        button2 = (Gtk.Button) add_button(Resources.SAVE_LABEL, Gtk.ResponseType.OK);
+        set_default_response(Gtk.ResponseType.OK);
         
         set_has_resize_grip(true);
     }
@@ -1226,7 +1329,9 @@ public class EventRenameDialog : TextEntryDialogMediator {
 
 public class EditTitleDialog : TextEntryDialogMediator {
     public EditTitleDialog(string? photo_title) {
-        base (_("Edit Title"), _("Title:"), photo_title);
+        // Dialog title
+        base (C_("Dialog Title", "Edit Title"),
+            _("Title:"), photo_title);
     }
     
     public virtual string? execute() {
@@ -1239,8 +1344,12 @@ public class EditTitleDialog : TextEntryDialogMediator {
 }
 
 public class EditCommentDialog : MultiTextEntryDialogMediator {
-    public EditCommentDialog(string? photo_comment) {
-        base (_("Edit Comment"), _("Comment:"), photo_comment);
+    public EditCommentDialog(string? comment, bool is_event = false) {
+        string title_tmp = (is_event)
+            // Dialog title
+            ? _("Edit Event Comment")
+            : _("Edit Photo/Video Comment");
+        base(title_tmp, _("Comment:"), comment);
     }
     
     public virtual string? execute() {
@@ -1256,11 +1365,11 @@ public class EditCommentDialog : MultiTextEntryDialogMediator {
 // Gtk.ResponseType.CANCEL.
 public Gtk.ResponseType remove_from_library_dialog(Gtk.Window owner, string title,
     string user_message, int count) {
-    string trash_action = ngettext("_Trash File", "_Trash Files", count);
+    string trash_action = ngettext("Remove and _Trash File", "Remove and _Trash Files", count);
     
     Gtk.MessageDialog dialog = new Gtk.MessageDialog(owner, Gtk.DialogFlags.MODAL,
         Gtk.MessageType.WARNING, Gtk.ButtonsType.CANCEL, "%s", user_message);
-    dialog.add_button(_("Only _Remove"), Gtk.ResponseType.NO);
+    dialog.add_button(_("_Remove From Library"), Gtk.ResponseType.NO);
     dialog.add_button(trash_action, Gtk.ResponseType.YES);
 
     // This dialog was previously created outright; we now 'hijack' 
@@ -1376,7 +1485,7 @@ public class ProgressDialog : Gtk.Window {
         vbox_bar.pack_start(progress_bar, true, false, 0);
         
         if (cancellable != null) {
-            cancel_button = new Gtk.Button.from_stock(Gtk.Stock.CANCEL);
+            cancel_button = new Gtk.Button.with_mnemonic(Resources.CANCEL_LABEL);
             cancel_button.clicked.connect(on_cancel);
             delete_event.connect(on_window_closed);
         }
@@ -1470,7 +1579,7 @@ public class ProgressDialog : Gtk.Window {
         return keep_going;
     }
     
-    public void close() {
+    public new void close() {
 #if UNITY_SUPPORT
         //UnityProgressBar: reset
         uniprobar.reset();
@@ -1547,12 +1656,16 @@ public class AdjustDateTimeDialog : Gtk.Dialog {
         bool contains_video = false, bool only_video = false) {
         assert(source != null);
 
+        bool use_header;
+        Gtk.Settings.get_default ().get ("gtk-dialogs-use-header", out use_header);
+        Object(use_header_bar: use_header ? 1 : 0);
+        
         set_modal(true);
         set_resizable(false);
         set_transient_for(AppWindow.get_instance());
 
-        add_buttons(Gtk.Stock.CANCEL, Gtk.ResponseType.CANCEL,
-                    Gtk.Stock.OK, Gtk.ResponseType.OK);
+        add_buttons(Resources.CANCEL_LABEL, Gtk.ResponseType.CANCEL,
+                    Resources.OK_LABEL, Gtk.ResponseType.OK);
         set_title(Resources.ADJUST_DATE_TIME_LABEL);
 
         calendar = new Gtk.Calendar();
@@ -1568,13 +1681,16 @@ public class AdjustDateTimeDialog : Gtk.Dialog {
 
         hour.output.connect(on_spin_button_output);
         hour.set_width_chars(2);  
+        hour.set_max_width_chars(2);
 
         minute = new Gtk.SpinButton.with_range(0, 59, 1);
         minute.set_width_chars(2);
+        minute.set_max_width_chars(2);
         minute.output.connect(on_spin_button_output);
 
         second = new Gtk.SpinButton.with_range(0, 59, 1);
         second.set_width_chars(2);
+        second.set_max_width_chars(2);
         second.output.connect(on_spin_button_output);
 
         system = new Gtk.ComboBoxText();
@@ -1583,14 +1699,14 @@ public class AdjustDateTimeDialog : Gtk.Dialog {
         system.append_text(_("24 Hr"));
         system.changed.connect(on_time_system_changed);
 
-        Gtk.Box clock = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 0);
+        Gtk.Box clock = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 3);
 
-        clock.pack_start(hour, false, false, 3);
-        clock.pack_start(new Gtk.Label(":"), false, false, 3); // internationalize?
-        clock.pack_start(minute, false, false, 3);
-        clock.pack_start(new Gtk.Label(":"), false, false, 3);
-        clock.pack_start(second, false, false, 3);
-        clock.pack_start(system, false, false, 3);
+        clock.pack_start(hour, false, false, 0);
+        clock.pack_start(new Gtk.Label(":"), false, false, 0); // internationalize?
+        clock.pack_start(minute, false, false, 0);
+        clock.pack_start(new Gtk.Label(":"), false, false, 0);
+        clock.pack_start(second, false, false, 0);
+        clock.pack_start(system, false, false, 0);
 
         set_default_response(Gtk.ResponseType.OK);
         
@@ -1618,15 +1734,15 @@ public class AdjustDateTimeDialog : Gtk.Dialog {
         modify_originals_check_button.sensitive = (!only_video) &&
             (!Config.Facade.get_instance().get_commit_metadata_to_masters() && display_options);
 
-        Gtk.Box time_content = new Gtk.Box(Gtk.Orientation.VERTICAL, 0);
+        Gtk.Box time_content = new Gtk.Box(Gtk.Orientation.VERTICAL, 5);
 
-        time_content.pack_start(calendar, true, false, 3);
-        time_content.pack_start(clock, true, false, 3);
+        time_content.pack_start(calendar, true, false, 0);
+        time_content.pack_start(clock, true, false, 0);
 
         if (display_options) {
-            time_content.pack_start(relativity_radio_button, true, false, 3);
-            time_content.pack_start(batch_radio_button, true, false, 3);
-            time_content.pack_start(modify_originals_check_button, true, false, 3);
+            time_content.pack_start(relativity_radio_button, true, false, 0);
+            time_content.pack_start(batch_radio_button, true, false, 0);
+            time_content.pack_start(modify_originals_check_button, true, false, 0);
         }
 
         Gdk.Pixbuf preview = null;
@@ -1639,26 +1755,26 @@ public class AdjustDateTimeDialog : Gtk.Dialog {
         }
         
         Gtk.Box image_content = new Gtk.Box(Gtk.Orientation.VERTICAL, 0);
+        image_content.set_valign(Gtk.Align.START);
+        image_content.set_homogeneous(true);
         Gtk.Image image = (preview != null) ? new Gtk.Image.from_pixbuf(preview) : new Gtk.Image();
         original_time_label = new Gtk.Label(null);
-        image_content.pack_start(image, true, false, 3);
-        image_content.pack_start(original_time_label, true, false, 3);
+        image_content.pack_start(image, true, false, 0);
+        image_content.pack_start(original_time_label, true, false, 0);
 
-        Gtk.Box hbox = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 0);
-        hbox.pack_start(image_content, true, false, 6);
-        hbox.pack_start(time_content, true, false, 6);
+        Gtk.Box hbox = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 10);
+        hbox.set_border_width(3);
+        hbox.pack_start(image_content, true, false, 0);
+        hbox.pack_start(time_content, true, false, 0);
 
         Gtk.Alignment hbox_alignment = new Gtk.Alignment(0.5f, 0.5f, 0, 0);
-        hbox_alignment.set_padding(6, 3, 6, 6);
         hbox_alignment.add(hbox);
 
-        ((Gtk.Box) get_content_area()).pack_start(hbox_alignment, true, false, 6);
+        ((Gtk.Box) get_content_area()).pack_start(hbox_alignment, true, false, 0);
 
         notification = new Gtk.Label("");
         notification.set_line_wrap(true);
         notification.set_justify(Gtk.Justification.CENTER);
-        notification.set_size_request(-1, -1);
-        notification.set_padding(12, 6);
 
         ((Gtk.Box) get_content_area()).pack_start(notification, true, true, 0);
         
@@ -1678,8 +1794,8 @@ public class AdjustDateTimeDialog : Gtk.Dialog {
         calendar.select_day(time.day);
 
         if (Config.Facade.get_instance().get_use_24_hour_time()) {
-            hour.set_value(time.hour);
             system.set_active(TimeSystem.24HR);
+            hour.set_value(time.hour);
         } else {
             int AMPM_hour = time.hour % 12;
             hour.set_value((AMPM_hour == 0) ? 12 : AMPM_hour);
@@ -1859,7 +1975,9 @@ public abstract class TagsDialog : TextEntryDialogMediator {
 
 public class AddTagsDialog : TagsDialog {
     public AddTagsDialog() {
-        base (Resources.ADD_TAGS_TITLE, _("Tags (separated by commas):"));
+        var title = GLib.dpgettext2 (null, "Dialog Title",
+                Resources.ADD_TAGS_TITLE);
+        base (title, _("Tags (separated by commas):"));
     }
 
     public string[]? execute() {
@@ -1897,7 +2015,7 @@ public class ModifyTagsDialog : TagsDialog {
 
         Gee.Collection<Tag> terminal_tags = Tag.get_terminal_tags(source_tags);
         
-        Gee.SortedSet<string> tag_basenames = new FixedTreeSet<string>();
+        Gee.SortedSet<string> tag_basenames = new Gee.TreeSet<string>();
         foreach (Tag tag in terminal_tags)
             tag_basenames.add(HierarchicalTagUtilities.get_basename(tag.get_path()));
         
@@ -1965,7 +2083,7 @@ public class WelcomeDialog : Gtk.Dialog {
     public WelcomeDialog(Gtk.Window owner) {
         import_meta_host = new Spit.DataImports.WelcomeImportMetaHost(this);
         bool show_system_pictures_import = is_system_pictures_import_possible();
-        Gtk.Widget ok_button = add_button(Gtk.Stock.OK, Gtk.ResponseType.OK);
+        Gtk.Widget ok_button = add_button(Resources.OK_LABEL, Gtk.ResponseType.OK);
         set_title(_("Welcome!"));
         set_resizable(false);
         set_type_hint(Gdk.WindowTypeHint.DIALOG);
@@ -1979,7 +2097,7 @@ public class WelcomeDialog : Gtk.Dialog {
         secondary_text.set_markup("<span weight=\"normal\">%s</span>".printf(
             _("To get started, import photos in any of these ways:")));
         secondary_text.set_alignment(0, 0.5f);
-        Gtk.Image image = new Gtk.Image.from_pixbuf(Resources.get_icon(Resources.ICON_APP, 50));
+        var image = new Gtk.Image.from_icon_name ("shotwell", Gtk.IconSize.DIALOG);
         
         Gtk.Box header_text = new Gtk.Box(Gtk.Orientation.VERTICAL, 0);
         header_text.pack_start(primary_text, false, false, 5);
@@ -2164,7 +2282,6 @@ public class PreferencesDialog {
     private Gee.ArrayList<PathFormat> path_formats = new Gee.ArrayList<PathFormat>();
     private GLib.DateTime example_date = new GLib.DateTime.local(2009, 3, 10, 18, 16, 11);
     private Gtk.CheckButton lowercase;
-    private Gtk.Button close_button;
     private Plugins.ManifestWidgetMediator plugins_mediator = new Plugins.ManifestWidgetMediator();
     private Gtk.ComboBoxText default_raw_developer_combo;
 
@@ -2172,6 +2289,12 @@ public class PreferencesDialog {
         builder = AppWindow.create_builder();
         
         dialog = builder.get_object("preferences_dialog") as Gtk.Dialog;
+        bool use_header;
+        Gtk.Settings.get_default ().get ("gtk-dialogs-use-header", out use_header);
+        if (!use_header) {
+            Gtk.Widget null_titlebar = null;
+            dialog.set_titlebar (null_titlebar);
+        }
         dialog.set_parent_window(AppWindow.get_instance().get_parent_window());
         dialog.set_transient_for(AppWindow.get_instance());
         dialog.delete_event.connect(on_delete);
@@ -2187,8 +2310,6 @@ public class PreferencesDialog {
         bg_color_slider.button_press_event.connect(on_bg_color_reset);
 
         library_dir_button = builder.get_object("library_dir_button") as Gtk.FileChooserButton;
-        
-        close_button = builder.get_object("close_button") as Gtk.Button;
         
         photo_editor_combo = builder.get_object("external_photo_editor_combo") as Gtk.ComboBox;
         raw_editor_combo = builder.get_object("external_raw_editor_combo") as Gtk.ComboBox;
@@ -2207,7 +2328,7 @@ public class PreferencesDialog {
             pattern_help.set_markup("<a href=\"" + Resources.DIR_PATTERN_URI_SYSWIDE + "\">" + _("(Help)") + "</a>");
         } else {
             // We're being run from the build directory; we'll have to handle clicks to this
-            // link manually ourselves, due to a limitation ghelp: URIs.
+            // link manually ourselves, due to a limitation of help: URIs.
             pattern_help.set_markup("<a href=\"dummy:\">" + _("(Help)") + "</a>");
             pattern_help.activate_link.connect(on_local_pattern_help);
         }
@@ -2272,7 +2393,7 @@ public class PreferencesDialog {
     // the help viewer and specify the full path to the subsection we want...
     private bool on_local_pattern_help(string ignore) {
         try {
-            Resources.launch_help(AppWindow.get_instance().get_screen(), "?other-files");
+            Resources.launch_help(AppWindow.get_instance().get_screen(), "other-files.page");
         } catch (Error e) {
             message("Unable to launch help: %s", e.message);
         }
@@ -2462,20 +2583,19 @@ public class PreferencesDialog {
          if (is_string_empty(example) && !is_string_empty(dir_pattern_entry.text)) {
             // Invalid pattern.
             dir_pattern_example.set_text(_("Invalid pattern"));
-            dir_pattern_entry.set_icon_from_stock(Gtk.EntryIconPosition.SECONDARY, Gtk.Stock.DIALOG_ERROR);
+            dir_pattern_entry.set_icon_from_icon_name(Gtk.EntryIconPosition.SECONDARY, "dialog-error");
             dir_pattern_entry.set_icon_activatable(Gtk.EntryIconPosition.SECONDARY, false);
             set_allow_closing(false);
          } else {
             // Valid pattern.
             dir_pattern_example.set_text(example);
-            dir_pattern_entry.set_icon_from_stock(Gtk.EntryIconPosition.SECONDARY, null);
+            dir_pattern_entry.set_icon_from_icon_name(Gtk.EntryIconPosition.SECONDARY, null);
             set_allow_closing(true);
          }
     }
     
     private void set_allow_closing(bool allow) {
         dialog.set_deletable(allow);
-        close_button.set_sensitive(allow);
         allow_closing = allow;
     }
     

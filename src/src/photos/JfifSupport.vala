@@ -1,4 +1,4 @@
-/* Copyright 2010-2013 Yorba Foundation
+/* Copyright 2016 Software Freedom Conservancy Inc.
  *
  * This software is licensed under the GNU LGPL (version 2.1 or later).
  * See the COPYING file in this distribution.
@@ -51,7 +51,7 @@ public class JfifFileFormatDriver : PhotoFileFormatDriver {
 
 public class JfifFileFormatProperties : PhotoFileFormatProperties {
     private static string[] KNOWN_EXTENSIONS = {
-        "jpg", "jpeg", "jpe"
+        "jpg", "jpeg", "jpe", "thm"
     };
 
     private static string[] KNOWN_MIME_TYPES = {
@@ -102,11 +102,14 @@ public class JfifSniffer : GdkSniffer {
         base (file, options);
     }
     
-    public override DetectedPhotoInformation? sniff() throws Error {
+    public override DetectedPhotoInformation? sniff(out bool is_corrupted) throws Error {
+        // Rely on GdkSniffer to detect corruption
+        is_corrupted = false;
+        
         if (!Jpeg.is_jpeg(file))
             return null;
         
-        DetectedPhotoInformation? detected = base.sniff();
+        DetectedPhotoInformation? detected = base.sniff(out is_corrupted);
         if (detected == null)
             return null;
         

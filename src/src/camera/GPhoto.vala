@@ -1,4 +1,4 @@
-/* Copyright 2009-2013 Yorba Foundation
+/* Copyright 2016 Software Freedom Conservancy Inc.
  *
  * This software is licensed under the GNU LGPL (version 2.1 or later).
  * See the COPYING file in this distribution.
@@ -24,8 +24,6 @@ namespace GPhoto {
         
         public virtual void idle() {
         }
-
-#if WITH_GPHOTO_25
 
         public virtual void error(string text, void *data) {
         }
@@ -75,57 +73,6 @@ namespace GPhoto {
             progress_stop();
         }
 
-#else
-
-        public virtual void error(string format, void *va_list) {
-        }
-
-        public virtual void status(string format, void *va_list) {
-        }
-
-        public virtual void message(string format, void *va_list) {
-        }
-
-        public virtual void progress_start(float target, string format, void *va_list) {
-        }
-
-        public virtual void progress_update(float current) {
-        }
-
-        public virtual void progress_stop() {
-        }
-
-        private void on_idle(Context context) {
-            idle();
-        }
-
-        private void on_error(Context context, string format, void *va_list) {
-            error(format, va_list);
-        }
-
-        private void on_status(Context context, string format, void *va_list) {
-            status(format, va_list);
-        }
-
-        private void on_message(Context context, string format, void *va_list) {
-            message(format, va_list);
-        }
-
-        private uint on_progress_start(Context context, float target, string format, void *va_list) {
-            progress_start(target, format, va_list);
-            
-            return 0;
-        }
-
-        private void on_progress_update(Context context, uint id, float current) {
-            progress_update(current);
-        }
-
-        private void on_progress_stop(Context context, uint id) {
-            progress_stop();
-        }
-
-#endif
     }
     
     public class SpinIdleWrapper : ContextWrapper {
@@ -137,23 +84,16 @@ namespace GPhoto {
             
             spin_event_loop();
         }
-#if WITH_GPHOTO_25  
+
         public override void progress_update(float current, void *data) {
             base.progress_update(current, data);
 
             spin_event_loop();
         }
-#else
-        public override void progress_update(float current) {
-            base.progress_update(current);
-
-            spin_event_loop();
-        }
-#endif
     }
 
     // For CameraFileInfoFile, CameraFileInfoPreview, and CameraStorageInformation.  See:
-    // http://trac.yorba.org/ticket/1851
+    // http://redmine.yorba.org/issues/1851
     // https://bugzilla.redhat.com/show_bug.cgi?id=585676
     // https://sourceforge.net/tracker/?func=detail&aid=3000198&group_id=8874&atid=108874
     public const int MAX_FILENAME_LENGTH = 63;
@@ -174,13 +114,56 @@ namespace GPhoto {
         
         return true;
     }
+
+    // Libgphoto will in some instances refuse to get metadata from a camera, but the camera is accessable as a
+    // filesystem.  In these cases shotwell can access the file directly. See:
+    // http://redmine.yorba.org/issues/2959
+    public PhotoMetadata? get_fallback_metadata(Camera camera, Context context, string folder, string filename) {
+        GPhoto.CameraStorageInformation *sifs = null;
+        int count = 0;
+        camera.get_storageinfo(&sifs, out count, context);
+        
+        GPhoto.PortInfo port_info;
+        camera.get_port_info(out port_info);
+        
+        string path;
+        port_info.get_path(out path);
+        
+        string prefix = "disk:";
+        if(path.has_prefix(prefix))
+            path = path[prefix.length:path.length];
+        else
+            return null;
+        
+        PhotoMetadata? metadata = new PhotoMetadata();
+        try {
+            metadata.read_from_file(File.new_for_path(path + folder + "/" + filename));
+        } catch {
+            metadata = null;
+        }
+        
+        return metadata;
+    }
     
     public Gdk.Pixbuf? load_preview(Context context, Camera camera, string folder, string filename,
         out uint8[] raw, out size_t raw_length) throws Error {
-        raw = load_file_into_buffer(context, camera, folder, filename, GPhoto.CameraFileType.PREVIEW);
+        raw = null;
+        raw_length = 0;
+        
+        try {
+            raw = load_file_into_buffer(context, camera, folder, filename, GPhoto.CameraFileType.PREVIEW);
+        } catch {
+            PhotoMetadata metadata = get_fallback_metadata(camera, context, folder, filename);
+            if(null == metadata)
+                return null;
+            if(0 == metadata.get_preview_count())
+                return null;
+            PhotoPreview? preview = metadata.get_preview(metadata.get_preview_count() - 1);
+            raw = preview.flatten();
+        }
+        
         if (raw == null) {
             raw_length = 0;
-            
             return null;
         }
         
@@ -201,8 +184,7 @@ namespace GPhoto {
         }
         
         MemoryInputStream mins = new MemoryInputStream.from_data(raw, null);
-        
-        return new Gdk.Pixbuf.from_stream(mins, null);
+        return new Gdk.Pixbuf.from_stream_at_scale(mins, ImportPreview.MAX_SCALE, ImportPreview.MAX_SCALE, true, null);
     }
     
     public Gdk.Pixbuf? load_image(Context context, Camera camera, string folder, string filename) 
@@ -234,8 +216,13 @@ namespace GPhoto {
     
     public PhotoMetadata? load_metadata(Context context, Camera camera, string folder, string filename)
         throws Error {
-        uint8[] camera_raw = load_file_into_buffer(context, camera, folder, filename,
-            GPhoto.CameraFileType.EXIF);
+        uint8[] camera_raw = null;
+        try {
+            camera_raw = load_file_into_buffer(context, camera, folder, filename, GPhoto.CameraFileType.EXIF);
+        } catch {
+            return get_fallback_metadata(camera, context, folder, filename);
+        }
+        
         if (camera_raw == null || camera_raw.length == 0)
             return null;
         

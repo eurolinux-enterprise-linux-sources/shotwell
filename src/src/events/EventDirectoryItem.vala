@@ -1,4 +1,4 @@
-/* Copyright 2011-2013 Yorba Foundation
+/* Copyright 2016 Software Freedom Conservancy Inc.
  *
  * This software is licensed under the GNU Lesser General Public License
  * (version 2.1 or later).  See the COPYING file in this distribution.
@@ -56,8 +56,17 @@ class EventDirectoryItem : CheckerboardItem {
     private static Gdk.Pixbuf get_paul_lynde(MediaSource media, Gdk.Rectangle paul_lynde) throws Error {
         Gdk.Pixbuf pixbuf = media.get_preview_pixbuf(squared_scaling);
         
+        Dimensions thumbnail_dimensions = Dimensions.for_pixbuf(pixbuf);
+        
+        if (thumbnail_dimensions.width > 2 * paul_lynde.width ||
+            thumbnail_dimensions.height > paul_lynde.height * 2 ) {
+            LibraryPhoto photo = (LibraryPhoto) media;
+            pixbuf = photo.get_pixbuf(squared_scaling);
+            thumbnail_dimensions = Dimensions.for_pixbuf(pixbuf);
+        }
+        
         // to catch rounding errors in the two algorithms
-        paul_lynde = clamp_rectangle(paul_lynde, Dimensions.for_pixbuf(pixbuf));
+        paul_lynde = clamp_rectangle(paul_lynde, thumbnail_dimensions);
         
         // crop the center square
         return new Gdk.Pixbuf.subpixbuf(pixbuf, paul_lynde.x, paul_lynde.y, paul_lynde.width,

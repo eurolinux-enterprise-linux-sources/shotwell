@@ -1,4 +1,4 @@
-/* Copyright 2011-2013 Yorba Foundation
+/* Copyright 2016 Software Freedom Conservancy Inc.
  *
  * This software is licensed under the GNU Lesser General Public License
  * (version 2.1 or later).  See the COPYING file in this distribution.
@@ -20,11 +20,11 @@ public struct PhotoID {
     public bool is_valid() {
         return (id != INVALID);
     }
-    
-    public static uint hash(void *a) {
-        return int64_hash(&((PhotoID *) a)->id);
+
+    public uint hash() {
+        return int64_hash(id);
     }
-    
+
     public static bool equal(void *a, void *b) {
         return ((PhotoID *) a)->id == ((PhotoID *) b)->id;
     }
@@ -59,14 +59,9 @@ public struct ImportID {
         return (id != INVALID);
     }
     
-    public static int compare_func(void *a, void *b) {
-        int64 cmp = comparator(a, b);
-        if (cmp < 0)
-            return -1;
-        else if (cmp > 0)
-            return 1;
-        else
-            return 0;
+    public static int compare_func(ImportID? a, ImportID? b) {
+        assert (a != null && b != null);
+        return (int) (a.id - b.id);
     }
     
     public static int64 comparator(void *a, void *b) {
@@ -162,6 +157,40 @@ public class PhotoTable : DatabaseTable {
         res2 = stmt2.step();
         if (res2 != Sqlite.DONE)
             fatal("create photo table", res2);
+
+        // These are for duplicate searches
+        // https://bugzilla.gnome.org/show_bug.cgi?id=742670
+        //
+        // 1) index on md5,file_format
+        res = db.prepare_v2 ("DROP INDEX IF EXISTS PhotoTableMD5Format", -1, out stmt);
+        assert (res == Sqlite.OK);
+        res = stmt.step ();
+        if (res != Sqlite.DONE) {
+            DatabaseTable.warning ("Failed to drop old PhotoTable index", res);
+        }
+
+        res = db.prepare_v2 ("CREATE INDEX IF NOT EXISTS PhotoTableMD5FormatV2 on PhotoTable(md5, file_format)", -1, out stmt);
+        assert (res == Sqlite.OK);
+        res = stmt.step ();
+        if (res != Sqlite.DONE) {
+            DatabaseTable.warning ("Failed to create index on md5 and file_format", res);
+        }
+
+        // 2) index on thumbnail_md5,file_format
+        res = db.prepare_v2 ("CREATE INDEX IF NOT EXISTS PhotoTableThumbnailMD5Format on PhotoTable(thumbnail_md5, file_format)", -1, out stmt);
+        assert (res == Sqlite.OK);
+        res = stmt.step ();
+        if (res != Sqlite.DONE) {
+            DatabaseTable.warning ("Failed to create index on md5 and file_format", res);
+        }
+
+        // 3) index on thumbnail_md5,md5
+        res = db.prepare_v2 ("CREATE INDEX IF NOT EXISTS PhotoTableThumbnailMD5MD5 on PhotoTable(thumbnail_md5, md5)", -1, out stmt);
+        assert (res == Sqlite.OK);
+        res = stmt.step ();
+        if (res != Sqlite.DONE) {
+            DatabaseTable.warning ("Failed to create index on thumbnail_md5 and md5", res);
+        }
 
         set_table_name("PhotoTable");
     }
@@ -763,8 +792,7 @@ public class PhotoTable : DatabaseTable {
             if (!keyfile.load_from_data(trans, trans.length, KeyFileFlags.NONE))
                 return null;
             
-            Gee.HashMap<string, KeyValueMap> map = new Gee.HashMap<string, KeyValueMap>(str_hash,
-                str_equal, direct_equal);
+            Gee.HashMap<string, KeyValueMap> map = new Gee.HashMap<string, KeyValueMap>();
             
             string[] objects = keyfile.get_groups();
             foreach (string object in objects) {
@@ -892,14 +920,15 @@ public class PhotoTable : DatabaseTable {
                 sql += " OR ((";
             first = false;
             
-            if (thumbnail_md5 != null)
-                sql += " thumbnail_md5=?";
-            
             if (md5 != null) {
-                if (thumbnail_md5 == null)
-                    sql += " md5=?";
+                sql += " md5=?";
+
+            }
+            if (thumbnail_md5 != null) {
+                if (md5 == null)
+                    sql += " thumbnail_md5=?";
                 else
-                    sql += " OR md5=?";
+                    sql += " OR (md5 IS NULL AND thumbnail_md5=?)";
             }
             
             sql += ")";

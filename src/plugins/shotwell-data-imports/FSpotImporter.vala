@@ -1,4 +1,4 @@
-/* Copyright 2009-2013 Yorba Foundation
+/* Copyright 2016 Software Freedom Conservancy Inc.
  *
  * This software is licensed under the GNU Lesser General Public License
  * (version 2.1 or later).  See the COPYING file in this distribution.
@@ -13,7 +13,9 @@ public class FSpotService : Object, Spit.Pluggable, Spit.DataImports.Service {
         // initialize the database layer
         DataImports.FSpot.Db.init();
         if (icon_pixbuf_set == null)
-            icon_pixbuf_set = Resources.load_icon_set(resource_directory.get_child(ICON_FILENAME));
+            icon_pixbuf_set =
+                Resources.load_from_resource("/org/gnome/Shotwell/Imports/"
+                        + ICON_FILENAME);
     }
     
     public int get_pluggable_interface(int min_host_interface, int max_host_interface) {
@@ -31,7 +33,7 @@ public class FSpotService : Object, Spit.Pluggable, Spit.DataImports.Service {
 
     public void get_info(ref Spit.PluggableInfo info) {
         info.authors = "Bruno Girin";
-        info.copyright = _("Copyright 2009-2013 Yorba Foundation");
+        info.copyright = _("Copyright 2016 Software Freedom Conservancy Inc.");
         info.translators = Resources.TRANSLATORS;
         info.version = _VERSION;
         info.website_name = Resources.WEBSITE_NAME;
@@ -94,6 +96,7 @@ public class FSpotImportableItem : Spit.DataImports.ImportableMediaItem, GLib.Ob
     private FSpotImportableRating rating;
     private string folder_path;
     private string filename;
+    private time_t? date_time;
     
     public FSpotImportableItem(
         DataImports.FSpot.Db.FSpotPhotoRow photo_row,
@@ -109,6 +112,7 @@ public class FSpotImportableItem : Spit.DataImports.ImportableMediaItem, GLib.Ob
         this.roll_row = roll_row;
         this.tags = tags;
         this.event = event;
+        this.date_time = photo_row.time;
         if (photo_row.rating > 0)
             this.rating = new FSpotImportableRating(photo_row.rating);
         else if (is_hidden)
@@ -165,6 +169,10 @@ public class FSpotImportableItem : Spit.DataImports.ImportableMediaItem, GLib.Ob
     
     public Spit.DataImports.ImportableRating get_rating() {
         return rating;
+    }
+
+    public time_t? get_exposure_time() {
+        return date_time;
     }
     
     private string decode_url(string url) {
@@ -246,8 +254,8 @@ public class FSpotImportableEvent : Spit.DataImports.ImportableEvent, GLib.Objec
 }
 
 public class FSpotImportableRating : Spit.DataImports.ImportableRating, GLib.Object {
-    public static const int REJECTED = -1;
-    public static const int UNRATED = 0;
+    public const int REJECTED = -1;
+    public const int UNRATED = 0;
     
     private int rating_value;
     

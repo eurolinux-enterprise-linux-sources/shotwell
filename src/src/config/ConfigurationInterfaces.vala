@@ -1,4 +1,4 @@
-/* Copyright 2009-2013 Yorba Foundation
+/* Copyright 2016 Software Freedom Conservancy Inc.
  *
  * This software is licensed under the GNU LGPL (version 2.1 or later).
  * See the COPYING file in this distribution.
@@ -25,6 +25,8 @@ public enum ConfigurableProperty {
     COMMIT_METADATA_TO_MASTERS,
     DESKTOP_BACKGROUND_FILE,
     DESKTOP_BACKGROUND_MODE,
+    SCREENSAVER_FILE,
+    SCREENSAVER_MODE,
     DIRECTORY_PATTERN,
     DIRECTORY_PATTERN_CUSTOM,
     DIRECT_WINDOW_HEIGHT,
@@ -34,6 +36,7 @@ public enum ConfigurableProperty {
     DISPLAY_EVENT_COMMENTS,
     DISPLAY_EXTENDED_PROPERTIES,
     DISPLAY_SIDEBAR,
+    DISPLAY_TOOLBAR,
     DISPLAY_SEARCH_BAR,
     DISPLAY_PHOTO_RATINGS,
     DISPLAY_PHOTO_TAGS,
@@ -59,6 +62,7 @@ public enum ConfigurableProperty {
     LIBRARY_WINDOW_WIDTH,
     MODIFY_ORIGINALS,
     PHOTO_THUMBNAIL_SCALE,
+    PIN_TOOLBAR_STATE,
     PRINTING_CONTENT_HEIGHT,
     PRINTING_CONTENT_LAYOUT,
     PRINTING_CONTENT_PPI,
@@ -100,6 +104,12 @@ public enum ConfigurableProperty {
             case DESKTOP_BACKGROUND_MODE:
                 return "DESKTOP_BACKGROUND_MODE";
                 
+            case SCREENSAVER_FILE:
+                return "SCREENSAVER_FILE";
+                
+            case SCREENSAVER_MODE:
+                return "SCREENSAVER_MODE";
+                
             case DIRECTORY_PATTERN:
                 return "DIRECTORY_PATTERN";
                 
@@ -123,6 +133,9 @@ public enum ConfigurableProperty {
                 
             case DISPLAY_SIDEBAR:
                 return "DISPLAY_SIDEBAR";
+
+            case DISPLAY_TOOLBAR:
+                return "DISPLAY_TOOLBAR";
                 
             case DISPLAY_SEARCH_BAR:
                 return "DISPLAY_SEARCH_BAR";
@@ -201,6 +214,9 @@ public enum ConfigurableProperty {
                 
             case PHOTO_THUMBNAIL_SCALE:
                 return "PHOTO_THUMBNAIL_SCALE";
+                
+            case PIN_TOOLBAR_STATE:
+                return "PIN_TOOLBAR_STATE";
                 
             case PRINTING_CONTENT_HEIGHT:
                 return "PRINTING_CONTENT_HEIGHT";
@@ -457,6 +473,30 @@ public abstract class ConfigurationFacade : Object {
     }
 
     //
+    // screensaver background
+    //
+    public virtual string get_screensaver() {
+        try {
+            return get_engine().get_string_property(ConfigurableProperty.SCREENSAVER_FILE);
+        } catch (ConfigurationError err) {
+            on_configuration_error(err);
+
+            return "";
+        }
+    }
+
+    public virtual void set_screensaver(string filename) {
+        try {
+            get_engine().set_string_property(ConfigurableProperty.SCREENSAVER_FILE,
+                filename);
+            get_engine().set_string_property(ConfigurableProperty.SCREENSAVER_MODE,
+                "zoom");
+        } catch (ConfigurationError err) {
+            on_configuration_error(err);
+        }
+    }
+
+    //
     // directory pattern
     //
     public virtual string? get_directory_pattern() {
@@ -594,6 +634,28 @@ public abstract class ConfigurationFacade : Object {
         }
     }
     
+
+    //
+    // display toolbar
+    //
+    public virtual bool get_display_toolbar() {
+        try {
+            return get_engine().get_bool_property(ConfigurableProperty.DISPLAY_TOOLBAR);
+        } catch (ConfigurationError err) {
+            on_configuration_error(err);
+
+            return false;
+        }
+    }
+
+    public virtual void set_display_toolbar(bool display) {
+        try {
+            get_engine().set_bool_property(ConfigurableProperty.DISPLAY_TOOLBAR, display);
+        } catch (ConfigurationError err) {
+            on_configuration_error(err);
+        }
+    }
+
     //
     // display search & filter toolbar
     //
@@ -900,7 +962,27 @@ public abstract class ConfigurationFacade : Object {
             on_configuration_error(err);
         }
     }
+    
+    //
+    // pin toolbar state
+    //
+    public virtual bool get_pin_toolbar_state() {
+        try {
+            return get_engine().get_bool_property(ConfigurableProperty.PIN_TOOLBAR_STATE);
+        } catch (ConfigurationError err) {
+            on_configuration_error(err);
+            return false;
+        }
+    }
 
+    public virtual void set_pin_toolbar_state(bool state) {
+        try {
+            get_engine().set_bool_property(ConfigurableProperty.PIN_TOOLBAR_STATE, state);
+        } catch (ConfigurationError err) {
+            on_configuration_error(err);
+        }
+    }
+    
     //
     // last crop height
     //

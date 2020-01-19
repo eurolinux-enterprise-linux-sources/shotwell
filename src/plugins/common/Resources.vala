@@ -1,4 +1,4 @@
-/* Copyright 2011-2013 Yorba Foundation
+/* Copyright 2016 Software Freedom Conservancy Inc.
  *
  * This software is licensed under the GNU Lesser General Public License
  * (version 2.1 or later).  See the COPYING file in this distribution.
@@ -6,8 +6,11 @@
 
 namespace Resources {
 
-public const string WEBSITE_NAME = _("Visit the Yorba web site");
-public const string WEBSITE_URL = "http://www.yorba.org";
+[CCode (cname = "PLUGIN_RESOURCE_PATH")]
+public extern const string RESOURCE_PATH;
+
+public const string WEBSITE_NAME = _("Visit the Shotwell home page");
+public const string WEBSITE_URL = "https://wiki.gnome.org/Apps/Shotwell";
 
 public const string LICENSE = """
 Shotwell is free software; you can redistribute it and/or modify it under the 
@@ -42,12 +45,29 @@ public Gdk.Pixbuf[]? load_icon_set(GLib.File? icon_file) {
         warning("couldn't load icon set from %s.", icon_file.get_path());
     }
     
-    if (icon_file != null) {
+    if (icon != null) {
         Gdk.Pixbuf[] icon_pixbuf_set = new Gdk.Pixbuf[0];
         icon_pixbuf_set += icon;
         return icon_pixbuf_set;
     }
     
+    return null;
+}
+
+public Gdk.Pixbuf[]? load_from_resource (string resource_path) {
+    Gdk.Pixbuf? icon = null;
+    try {
+        icon = new Gdk.Pixbuf.from_resource (resource_path);
+    } catch (Error error) {
+        warning ("Couldn't load icon set from %s", resource_path);
+    }
+
+    if (icon != null) {
+        Gdk.Pixbuf[] icon_pixbuf_set = new Gdk.Pixbuf[0];
+        icon_pixbuf_set += icon;
+        return icon_pixbuf_set;
+    }
+
     return null;
 }
 

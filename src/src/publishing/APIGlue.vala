@@ -1,4 +1,4 @@
-/* Copyright 2011-2013 Yorba Foundation
+/* Copyright 2016 Software Freedom Conservancy Inc.
  *
  * This software is licensed under the GNU Lesser General Public License
  * (version 2.1 or later).  See the COPYING file in this distribution.
@@ -36,7 +36,11 @@ public class MediaSourcePublishableWrapper : Spit.Publishing.Publishable, GLib.O
         param_string.set(PARAM_STRING_BASENAME, wrapped.get_basename());
         param_string.set(PARAM_STRING_TITLE, wrapped.get_title());
         param_string.set(PARAM_STRING_COMMENT, wrapped.get_comment());
-        param_string.set(PARAM_STRING_EVENTCOMMENT, wrapped.get_event().get_comment());
+        
+        if (wrapped.get_event() != null)
+            param_string.set(PARAM_STRING_EVENTCOMMENT, wrapped.get_event().get_comment());
+        else
+            param_string.set(PARAM_STRING_EVENTCOMMENT, "");
     }
 
     public GLib.File serialize_for_publishing(int content_major_axis,
